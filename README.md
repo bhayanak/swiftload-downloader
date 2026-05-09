@@ -181,4 +181,4 @@ If the server file has changed since the download started, gdown warns and resta
 
 ## License
 
-MIT License
+[MIT](LICENSE)

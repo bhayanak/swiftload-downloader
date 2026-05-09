@@ -1,6 +1,6 @@
 module github.com/bhayanak/gdown
 
-go 1.25.5
+go 1.22
 
 require (
 	fyne.io/fyne/v2 v2.7.3

@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        go-version: ['1.22']
+        go-version: ['stable']
     steps:
       - uses: actions/checkout@v4
 
@@ -33,16 +33,20 @@ jobs:
         run: go mod download
 
       - name: Vet
-        run: go vet ./...
+        run: go vet ./pkg/... ./cmd/gdown/...
 
       - name: Build CLI
-        run: go build -o bin/gdown ./cmd/gdown
+        run: go build -o bin/gdown${{ runner.os == 'Windows' && '.exe' || '' }} ./cmd/gdown
 
       - name: Test
-        run: go test ./pkg/... -v -count=1 -race -coverprofile=coverage.out
+        run: go test ./pkg/... -v -count=1 -race -cover
+
+      - name: Test with coverage (Linux only)
+        if: runner.os == 'Linux'
+        run: go test ./pkg/... -count=1 -coverprofile=coverage.out -covermode=atomic
 
       - name: Upload coverage
-        if: matrix.os == 'ubuntu-latest'
+        if: runner.os == 'Linux'
         uses: actions/upload-artifact@v4
         with:
           name: coverage
@@ -54,7 +58,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        go-version: ['1.22']
+        go-version: ['stable']
     steps:
       - uses: actions/checkout@v4
 
@@ -80,4 +84,4 @@ jobs:
         run: go mod download
 
       - name: Build GUI
-        run: go build -o bin/gdown-gui ./cmd/gdown-gui
+        run: go build -o bin/gdown-gui${{ runner.os == 'Windows' && '.exe' || '' }} ./cmd/gdown-gui
