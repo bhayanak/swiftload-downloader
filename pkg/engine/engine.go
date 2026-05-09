@@ -15,7 +15,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/yadava/gdown/pkg/util"
+	"github.com/bhayanak/gdown/pkg/util"
 )
 
 const (
@@ -36,14 +36,51 @@ type Download struct {
 // Call Start() to begin downloading.
 func NewDownload(cfg DownloadConfig) *Download {
 	cfg.Defaults()
-	transport := util.NewTransport(cfg.Workers, cfg.BufSize, cfg.UseProxy)
-	client := util.NewHTTPClient(transport)
+	transport := util.NewTransport(cfg.Workers, cfg.BufSize, cfg.UseProxy, cfg.ProxyURL)
+
+	// Merge default browser-like headers with any user-supplied headers.
+	headers := cfg.Headers
+	if headers == nil {
+		headers = make(http.Header)
+	}
+	if headers.Get("User-Agent") == "" {
+		headers.Set("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36")
+	}
+	if headers.Get("Accept") == "" {
+		headers.Set("Accept", "*/*")
+	}
+	if headers.Get("Accept-Language") == "" {
+		headers.Set("Accept-Language", "en-US,en;q=0.9")
+	}
+
+	client := &http.Client{
+		Timeout:   0,
+		Transport: &headerTransport{base: transport, headers: headers},
+	}
 
 	return &Download{
 		cfg:      cfg,
 		client:   client,
 		progress: newProgressTracker(0),
 	}
+}
+
+// headerTransport wraps an http.RoundTripper and injects default headers
+// into every outgoing request (unless already set by the caller).
+type headerTransport struct {
+	base    http.RoundTripper
+	headers http.Header
+}
+
+func (t *headerTransport) RoundTrip(req *http.Request) (*http.Response, error) {
+	for k, vs := range t.headers {
+		if req.Header.Get(k) == "" {
+			for _, v := range vs {
+				req.Header.Add(k, v)
+			}
+		}
+	}
+	return t.base.RoundTrip(req)
 }
 
 // OnProgress registers a callback that fires periodically with download progress.
@@ -128,13 +165,16 @@ func (d *Download) parallelDownload(ctx context.Context) error {
 	}
 	resp.Body.Close()
 
+	// Use the final URL after redirects for chunk downloads.
+	downloadURL := resp.Request.URL.String()
+
 	size, parseErr := strconv.ParseInt(resp.Header.Get("Content-Length"), 10, 64)
 	if parseErr != nil || size <= 0 {
-		return serialDownload(ctx, d.client, d.cfg.URL, d.cfg.OutputPath, d.cfg.BufSize, d.progress)
+		return serialDownload(ctx, d.client, downloadURL, d.cfg.OutputPath, d.cfg.BufSize, d.progress)
 	}
 
 	if !strings.EqualFold(resp.Header.Get("Accept-Ranges"), "bytes") {
-		return serialDownload(ctx, d.client, d.cfg.URL, d.cfg.OutputPath, d.cfg.BufSize, d.progress)
+		return serialDownload(ctx, d.client, downloadURL, d.cfg.OutputPath, d.cfg.BufSize, d.progress)
 	}
 
 	d.progress.totalSize = size
@@ -156,8 +196,12 @@ func (d *Download) parallelDownload(ctx context.Context) error {
 	if state != nil && state.isResumable(etag, lastModified, size) {
 		resuming = true
 		d.progress.setDownloaded(state.totalDownloaded())
+		// Use resolved URL from state if available.
+		if state.URL != "" {
+			downloadURL = state.URL
+		}
 	} else {
-		state = newResumeState(d.cfg.URL, d.cfg.OutputPath, size, etag, lastModified, workers)
+		state = newResumeState(downloadURL, d.cfg.OutputPath, size, etag, lastModified, workers)
 	}
 
 	// Open or create the output file.
@@ -218,7 +262,7 @@ func (d *Download) parallelDownload(ctx context.Context) error {
 			defer wg.Done()
 			chunkDownloaded := &d.progress.downloaded
 			err := downloadChunkWithRetry(
-				ctx, d.client, d.cfg.URL, file,
+				ctx, d.client, downloadURL, file,
 				startOffset, chunk.End,
 				d.cfg.Retries, d.cfg.BufSize,
 				chunkDownloaded,

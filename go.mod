@@ -1,4 +1,4 @@
-module github.com/yadava/gdown
+module github.com/bhayanak/gdown
 
 go 1.25.5
 

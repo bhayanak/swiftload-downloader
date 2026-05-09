@@ -1,6 +1,6 @@
 package main
 
-import "github.com/yadava/gdown/internal/gui"
+import "github.com/bhayanak/gdown/internal/gui"
 
 func main() {
 	app := gui.NewApp()

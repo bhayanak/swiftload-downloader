@@ -21,6 +21,7 @@ type DownloadConfig struct {
 	BufSize      int64         // bytes per read buffer; 0 = default
 	SpeedLimit   int64         // bytes/sec, 0 = unlimited
 	UseProxy     bool
+	ProxyURL     string        // explicit proxy URL (overrides env when set)
 	Checksum     string        // expected hash (optional)
 	ChecksumAlgo string        // "md5", "sha256"
 	Headers      http.Header   // custom request headers

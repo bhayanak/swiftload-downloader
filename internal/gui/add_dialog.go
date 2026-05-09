@@ -8,7 +8,7 @@ import (
 	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/widget"
 
-	"github.com/yadava/gdown/pkg/engine"
+	"github.com/bhayanak/gdown/pkg/engine"
 )
 
 // ShowAddDialog shows a dialog to add a new download URL.
@@ -25,6 +25,9 @@ func ShowAddDialog(mw *MainWindow) {
 	workersEntry := widget.NewEntry()
 	workersEntry.SetText("16")
 
+	checksumEntry := widget.NewEntry()
+	checksumEntry.SetPlaceHolder("Optional: paste expected hash for verification")
+
 	// Use a variable to hold dialog reference so OnSubmit can close it.
 	var d dialog.Dialog
 
@@ -34,6 +37,7 @@ func ShowAddDialog(mw *MainWindow) {
 			{Text: "Save as", Widget: outputEntry},
 			{Text: "Mode", Widget: parallelCheck},
 			{Text: "Workers", Widget: workersEntry},
+			{Text: "Checksum", Widget: checksumEntry},
 		},
 		OnSubmit: func() {
 			url := strings.TrimSpace(urlEntry.Text)
@@ -59,10 +63,19 @@ func ShowAddDialog(mw *MainWindow) {
 			}
 
 			cfg := engine.DownloadConfig{
-				URL:        url,
-				OutputPath: output,
-				Workers:    workers,
-				Parallel:   parallelCheck.Checked,
+				URL:          url,
+				OutputPath:   output,
+				Workers:      workers,
+				Parallel:     parallelCheck.Checked,
+				BufSize:      int64(mw.settings.BufSizeMB) * 1024 * 1024,
+				UseProxy:     mw.settings.ProxyMode == "environment",
+				ProxyURL:     "",
+				Checksum:     strings.TrimSpace(checksumEntry.Text),
+				ChecksumAlgo: mw.settings.ChecksumAlgo,
+			}
+			if mw.settings.ProxyMode == "manual" && mw.settings.ProxyURL != "" {
+				cfg.UseProxy = true
+				cfg.ProxyURL = mw.settings.ProxyURL
 			}
 
 			row := NewDownloadRow(mw, cfg)

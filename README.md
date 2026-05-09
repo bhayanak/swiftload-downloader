@@ -5,11 +5,11 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/yadava/gdown/actions/workflows/ci.yml"><img src="https://github.com/yadava/gdown/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <a href="https://goreportcard.com/report/github.com/yadava/gdown"><img src="https://goreportcard.com/badge/github.com/yadava/gdown" alt="Go Report Card"></a>
-  <a href="https://pkg.go.dev/github.com/yadava/gdown"><img src="https://pkg.go.dev/badge/github.com/yadava/gdown.svg" alt="Go Reference"></a>
-  <a href="https://github.com/yadava/gdown/releases"><img src="https://img.shields.io/github/v/release/yadava/gdown" alt="Release"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/yadava/gdown" alt="License"></a>
+  <a href="https://github.com/bhayanak/swiftload-downloader/actions/workflows/ci.yml"><img src="https://github.com/bhayanak/swiftload-downloader/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://goreportcard.com/report/github.com/bhayanak/swiftload-downloader"><img src="https://goreportcard.com/badge/github.com/bhayanak/swiftload-downloader" alt="Go Report Card"></a>
+  <a href="https://pkg.go.dev/github.com/bhayanak/swiftload-downloader"><img src="https://pkg.go.dev/badge/github.com/bhayanak/swiftload-downloader.svg" alt="Go Reference"></a>
+  <a href="https://github.com/bhayanak/swiftload-downloader/releases"><img src="https://img.shields.io/github/v/release/bhayanak/swiftload-downloader" alt="Release"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/bhayanak/swiftload-downloader" alt="License"></a>
   <img src="https://img.shields.io/badge/Go-1.22+-00ADD8?logo=go&logoColor=white" alt="Go Version">
 </p>
 
@@ -51,13 +51,13 @@ The download engine is a **library** with zero stdout I/O — it communicates vi
 ### CLI (Go developers)
 
 ```bash
-go install github.com/yadava/gdown/cmd/gdown@latest
+go install github.com/bhayanak/gdown/cmd/gdown@latest
 ```
 
 ### Build from source
 
 ```bash
-git clone https://github.com/yadava/gdown.git
+git clone https://github.com/bhayanak/gdown.git
 cd gdown
 
 # Build both CLI and GUI

@@ -9,9 +9,9 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/bhayanak/gdown/pkg/engine"
+	"github.com/bhayanak/gdown/pkg/util"
 	"github.com/spf13/cobra"
-	"github.com/yadava/gdown/pkg/engine"
-	"github.com/yadava/gdown/pkg/util"
 )
 
 var version = "2.0.0"
@@ -28,7 +28,7 @@ var rootCmd = &cobra.Command{
 	Long: `gdown is a fast, reliable download manager with parallel chunked
 downloading, resume capability, and retry support.
 
-Install via: go install github.com/yadava/gdown/cmd/gdown@latest`,
+Install via: go install github.com/bhayanak/gdown/cmd/gdown@latest`,
 }
 
 func init() {

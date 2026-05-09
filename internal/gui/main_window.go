@@ -1,10 +1,15 @@
 package gui
 
 import (
+	"fmt"
+	"net/url"
 	"sync"
 
 	"fyne.io/fyne/v2"
+	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/dialog"
+	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
 )
 
@@ -46,6 +51,10 @@ func NewMainWindow(a fyne.App) *MainWindow {
 		}),
 		widget.NewButton("⚙ Settings", func() {
 			ShowSettingsDialog(mw)
+		}),
+		layout.NewSpacer(),
+		widget.NewButton("ℹ About", func() {
+			showAboutDialog(mw)
 		}),
 	)
 
@@ -131,7 +140,7 @@ func (mw *MainWindow) cancelAll() {
 }
 
 func (mw *MainWindow) updateStatusBar() {
-	var downloading, paused, completed int
+	var downloading, paused, completed, failed int
 	for _, row := range mw.downloads {
 		switch row.status {
 		case rowStatusDownloading:
@@ -140,9 +149,63 @@ func (mw *MainWindow) updateStatusBar() {
 			paused++
 		case rowStatusCompleted:
 			completed++
+		case rowStatusFailed:
+			failed++
 		}
 	}
-	mw.statusBar.SetText(
-		fmtf("Total: %d downloading, %d paused, %d completed", downloading, paused, completed),
-	)
+	msg := fmtf("Total: %d downloading, %d paused, %d completed", downloading, paused, completed)
+	if failed > 0 {
+		msg += fmtf(", %d failed", failed)
+	}
+	mw.statusBar.SetText(msg)
+}
+
+// refreshStatusBar is safe to call from any goroutine (must be called inside fyne.Do).
+func (mw *MainWindow) refreshStatusBar() {
+	mw.mu.Lock()
+	defer mw.mu.Unlock()
+	mw.updateStatusBar()
+}
+
+const appVersion = "2.0.0"
+
+func showAboutDialog(mw *MainWindow) {
+	var logoImg *canvas.Image
+	if data, err := iconFS.ReadFile("assets/icon.png"); err == nil {
+		res := fyne.NewStaticResource("icon.png", data)
+		logoImg = canvas.NewImageFromResource(res)
+		logoImg.SetMinSize(fyne.NewSize(128, 128))
+		logoImg.FillMode = canvas.ImageFillContain
+	}
+
+	name := widget.NewLabelWithStyle("Swiftload Downloader", fyne.TextAlignCenter, fyne.TextStyle{Bold: true})
+	ver := widget.NewLabelWithStyle(fmt.Sprintf("Version %s", appVersion), fyne.TextAlignCenter, fyne.TextStyle{})
+	dev := widget.NewLabelWithStyle("Developer: Bhayanak", fyne.TextAlignCenter, fyne.TextStyle{})
+
+	link := widget.NewHyperlink("github.com/bhayanak/swiftload-downloader", nil)
+	if parsed, err := url.Parse("https://github.com/bhayanak/swiftload-downloader"); err == nil {
+		link.URL = parsed
+	}
+	link.Alignment = fyne.TextAlignCenter
+
+	license := widget.NewLabelWithStyle("License: MIT", fyne.TextAlignCenter, fyne.TextStyle{Italic: true})
+
+	items := []fyne.CanvasObject{
+		widget.NewSeparator(),
+		name,
+		ver,
+		widget.NewSeparator(),
+		dev,
+		link,
+		widget.NewSeparator(),
+		license,
+	}
+	if logoImg != nil {
+		items = append([]fyne.CanvasObject{logoImg}, items...)
+	}
+
+	content := container.NewVBox(items...)
+	d := dialog.NewCustom("About Swiftload", "Close", content, mw.window)
+	d.Resize(fyne.NewSize(350, 400))
+	d.Show()
 }
