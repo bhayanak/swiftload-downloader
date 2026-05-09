@@ -1,0 +1,53 @@
+version: 2
+
+project_name: gdown
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: gdown-cli
+    main: ./cmd/gdown
+    binary: gdown
+    ldflags:
+      - -s -w -X main.version={{.Version}}
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    env:
+      - CGO_ENABLED=0
+
+archives:
+  - id: cli-archives
+    builds:
+      - gdown-cli
+    format: tar.gz
+    format_overrides:
+      - goos: windows
+        format: zip
+    name_template: "gdown_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+
+checksum:
+  name_template: "checksums.txt"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^ci:"
+      - "^chore:"
+
+release:
+  github:
+    owner: yadava
+    name: gdown
+  draft: true
+  prerelease: auto
+  name_template: "gdown v{{.Version}}"
