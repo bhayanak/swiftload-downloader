@@ -149,6 +149,23 @@ The GUI provides:
 
 ---
 
+## Screenshots
+
+<p align="center">
+  <img src="assets/1.png" alt="Swiftload Downloader" width="500">
+</p>
+<p align="center">
+  <img src="assets/2.png" alt="Swiftload Downloader" width="500">
+</p>
+<p align="center">
+  <img src="assets/3.png" alt="Swiftload Downloader" width="500">
+</p>
+<p align="center">
+  <img src="assets/4.png" alt="Swiftload Downloader" width="500">
+</p>
+
+---
+
 ## Resume Capability
 
 gdown saves download progress to a `.gdown.json` sidecar file:
