@@ -13,8 +13,8 @@ import (
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
 
-	"github.com/bhayanak/gdown/pkg/engine"
-	"github.com/bhayanak/gdown/pkg/util"
+	"github.com/bhayanak/swiftload-downloader/pkg/engine"
+	"github.com/bhayanak/swiftload-downloader/pkg/util"
 )
 
 type rowStatus int

@@ -15,7 +15,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/bhayanak/gdown/pkg/util"
+	"github.com/bhayanak/swiftload-downloader/pkg/util"
 )
 
 const (

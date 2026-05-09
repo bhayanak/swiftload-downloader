@@ -51,14 +51,14 @@ The download engine is a **library** with zero stdout I/O — it communicates vi
 ### CLI (Go developers)
 
 ```bash
-go install github.com/bhayanak/gdown/cmd/gdown@latest
+go install github.com/bhayanak/swiftload-downloader/cmd/gdown@latest
 ```
 
 ### Build from source
 
 ```bash
-git clone https://github.com/bhayanak/gdown.git
-cd gdown
+git clone https://github.com/bhayanak/swiftload-downloader.git
+cd swiftload-downloader
 
 # Build both CLI and GUI
 make build

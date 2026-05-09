@@ -47,7 +47,7 @@ changelog:
 release:
   github:
     owner: bhayanak
-    name: gdown
+    name: swiftload-downloader
   draft: true
   prerelease: auto
   name_template: "gdown v{{.Version}}"

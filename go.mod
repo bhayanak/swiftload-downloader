@@ -1,4 +1,4 @@
-module github.com/bhayanak/gdown
+module github.com/bhayanak/swiftload-downloader
 
 go 1.22
 

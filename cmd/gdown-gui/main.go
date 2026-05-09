@@ -1,6 +1,6 @@
 package main
 
-import "github.com/bhayanak/gdown/internal/gui"
+import "github.com/bhayanak/swiftload-downloader/internal/gui"
 
 func main() {
 	app := gui.NewApp()

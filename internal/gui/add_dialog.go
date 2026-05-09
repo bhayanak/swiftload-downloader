@@ -8,7 +8,7 @@ import (
 	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/widget"
 
-	"github.com/bhayanak/gdown/pkg/engine"
+	"github.com/bhayanak/swiftload-downloader/pkg/engine"
 )
 
 // ShowAddDialog shows a dialog to add a new download URL.
