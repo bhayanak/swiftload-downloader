@@ -48,6 +48,10 @@ The download engine is a **library** with zero stdout I/O — it communicates vi
 
 ## Installation
 
+### From github releases
+
+Go to [releases](https://github.com/bhayanak/swiftload-downloader/releases) and download cli or gui according to your Operating System version.
+
 ### CLI (Go developers)
 
 ```bash
