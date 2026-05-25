@@ -156,16 +156,23 @@ The GUI provides:
 ## Screenshots
 
 <p align="center">
-  <img src="assets/1.png" alt="Swiftload Downloader" width="500">
+  Comparison with browser(normal) download, same system same connection:
 </p>
 <p align="center">
-  <img src="assets/2.png" alt="Swiftload Downloader" width="500">
+  <img src="assets/5.png" alt="Swiftload Downloader" width="900">
+</p>
+
+<p align="center">
+  <img src="assets/1.png" alt="Swiftload Downloader" width="900">
 </p>
 <p align="center">
-  <img src="assets/3.png" alt="Swiftload Downloader" width="500">
+  <img src="assets/2.png" alt="Swiftload Downloader" width="900">
 </p>
 <p align="center">
-  <img src="assets/4.png" alt="Swiftload Downloader" width="500">
+  <img src="assets/3.png" alt="Swiftload Downloader" width="900">
+</p>
+<p align="center">
+  <img src="assets/4.png" alt="Swiftload Downloader" width="900">
 </p>
 
 ---
