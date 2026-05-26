@@ -78,13 +78,13 @@ func ShowAddDialog(mw *MainWindow) {
 				cfg.ProxyURL = mw.settings.ProxyURL
 			}
 
-			row := NewDownloadRow(mw, cfg)
-			mw.AddDownloadRow(row)
-
-			// Close the dialog after adding.
+			// Close the dialog first.
 			if d != nil {
 				d.Hide()
 			}
+
+			// Check if this file already exists on disk or in history.
+			mw.startDownloadWithDuplicateCheck(cfg)
 		},
 	}
 

@@ -91,6 +91,19 @@ func (hs *HistoryStore) Remove(id string) {
 	hs.requestSave()
 }
 
+// FindByOutputPath returns the first entry matching the output path, or nil.
+func (hs *HistoryStore) FindByOutputPath(path string) *HistoryEntry {
+	hs.mu.Lock()
+	defer hs.mu.Unlock()
+	for i := range hs.entries {
+		if hs.entries[i].OutputPath == path {
+			e := hs.entries[i]
+			return &e
+		}
+	}
+	return nil
+}
+
 // Stop shuts down the background save loop and forces a final save.
 func (hs *HistoryStore) Stop() {
 	close(hs.stopCh)

@@ -13,6 +13,8 @@ import (
 	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
+
+	"github.com/bhayanak/swiftload-downloader/pkg/engine"
 )
 
 // MainWindow is the primary application window with the download list.
@@ -309,7 +311,61 @@ func ShowDeleteDialog(mw *MainWindow, row *DownloadRow) {
 	d.Show()
 }
 
-const appVersion = "2.0.0"
+// startDownloadWithDuplicateCheck checks if the output file already exists
+// (on disk or in history) and prompts the user before redownloading.
+func (mw *MainWindow) startDownloadWithDuplicateCheck(cfg engine.DownloadConfig) {
+	existing := mw.history.FindByOutputPath(cfg.OutputPath)
+	fileOnDisk := false
+	if _, err := os.Stat(cfg.OutputPath); err == nil {
+		fileOnDisk = true
+	}
+
+	if existing != nil || fileOnDisk {
+		var msg string
+		switch {
+		case existing != nil && existing.Status == "completed" && fileOnDisk:
+			msg = fmt.Sprintf("File \"%s\" is already downloaded.\nDo you want to redownload it?", filenameFromPath(cfg.OutputPath))
+		case existing != nil && existing.Status == "completed" && !fileOnDisk:
+			msg = fmt.Sprintf("File \"%s\" was previously downloaded but no longer exists on disk.\nDo you want to redownload it?", filenameFromPath(cfg.OutputPath))
+		case fileOnDisk:
+			msg = fmt.Sprintf("File \"%s\" already exists on disk.\nDo you want to overwrite it?", filenameFromPath(cfg.OutputPath))
+		default:
+			msg = fmt.Sprintf("A download for \"%s\" already exists (status: %s).\nDo you want to start a new download?", filenameFromPath(cfg.OutputPath), existing.Status)
+		}
+
+		dialog.ShowConfirm("File Already Exists", msg, func(yes bool) {
+			if yes {
+				// Remove old history entry to avoid duplicates in the list.
+				if existing != nil {
+					mw.removeRowByHistoryID(existing.ID)
+					mw.history.Remove(existing.ID)
+				}
+				row := NewDownloadRow(mw, cfg)
+				mw.AddDownloadRow(row)
+			}
+		}, mw.window)
+		return
+	}
+
+	row := NewDownloadRow(mw, cfg)
+	mw.AddDownloadRow(row)
+}
+
+// removeRowByHistoryID removes the download row matching the history ID from the UI list.
+func (mw *MainWindow) removeRowByHistoryID(id string) {
+	mw.mu.Lock()
+	defer mw.mu.Unlock()
+	for i, r := range mw.downloads {
+		if r.historyID == id {
+			r.Cancel()
+			mw.list.Remove(r.container)
+			mw.downloads = append(mw.downloads[:i], mw.downloads[i+1:]...)
+			break
+		}
+	}
+}
+
+const appVersion = "2.2.0"
 
 func showAboutDialog(mw *MainWindow) {
 	var logoImg *canvas.Image
