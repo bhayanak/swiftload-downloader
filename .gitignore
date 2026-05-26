@@ -38,3 +38,7 @@ dist
 # Root-level compiled binaries
 /gdown
 /gdown-gui
+
+# Logs and databases
+.DS_Store
+*.log

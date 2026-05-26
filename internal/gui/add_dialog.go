@@ -26,7 +26,7 @@ func ShowAddDialog(mw *MainWindow) {
 	workersEntry.SetText("16")
 
 	checksumEntry := widget.NewEntry()
-	checksumEntry.SetPlaceHolder("Optional: paste expected hash for verification")
+	checksumEntry.SetPlaceHolder("Optional: paste expected hash for verification (change algorithm from settings)")
 
 	// Use a variable to hold dialog reference so OnSubmit can close it.
 	var d dialog.Dialog

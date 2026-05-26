@@ -3,7 +3,9 @@ package gui
 import (
 	"fmt"
 	"net/url"
+	"os"
 	"sync"
+	"time"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
@@ -15,13 +17,15 @@ import (
 
 // MainWindow is the primary application window with the download list.
 type MainWindow struct {
-	window    fyne.Window
-	app       fyne.App
-	downloads []*DownloadRow
-	list      *fyne.Container
-	mu        sync.Mutex
-	statusBar *widget.Label
-	settings  AppSettings
+	window       fyne.Window
+	app          fyne.App
+	downloads    []*DownloadRow
+	list         *fyne.Container
+	mu           sync.Mutex
+	statusBar    *widget.Label
+	updateBanner *fyne.Container
+	settings     AppSettings
+	history      *HistoryStore
 }
 
 // NewMainWindow creates the main application window.
@@ -34,9 +38,11 @@ func NewMainWindow(a fyne.App) *MainWindow {
 		app:       a,
 		statusBar: widget.NewLabel("Ready — No active downloads"),
 		settings:  LoadSettings(a),
+		history:   NewHistoryStore(a),
 	}
 
 	mw.list = container.NewVBox()
+	mw.updateBanner = container.NewHBox() // initially empty
 
 	// Toolbar.
 	toolbar := container.NewHBox(
@@ -53,6 +59,9 @@ func NewMainWindow(a fyne.App) *MainWindow {
 			ShowSettingsDialog(mw)
 		}),
 		layout.NewSpacer(),
+		widget.NewButton("🔄 Check Update", func() {
+			mw.checkForUpdateManual()
+		}),
 		widget.NewButton("ℹ About", func() {
 			showAboutDialog(mw)
 		}),
@@ -72,17 +81,24 @@ func NewMainWindow(a fyne.App) *MainWindow {
 	scrollable.SetMinSize(fyne.NewSize(880, 350))
 
 	content := container.NewBorder(
-		container.NewVBox(toolbar, header), // top
-		mw.statusBar,                       // bottom
-		nil, nil,                           // left, right
-		scrollable,                         // center
+		container.NewVBox(mw.updateBanner, toolbar, header), // top
+		mw.statusBar, // bottom
+		nil, nil,     // left, right
+		scrollable,   // center
 	)
 
 	w.SetContent(content)
 	w.SetCloseIntercept(func() {
 		mw.cancelAll()
+		mw.history.Stop()
 		w.Close()
 	})
+
+	// Restore previous downloads from history.
+	mw.restoreHistory()
+
+	// Background update check (once per 24h).
+	go mw.checkForUpdateSilent()
 
 	return mw
 }
@@ -167,6 +183,132 @@ func (mw *MainWindow) refreshStatusBar() {
 	mw.updateStatusBar()
 }
 
+// restoreHistory loads previous download entries and renders them as static rows.
+func (mw *MainWindow) restoreHistory() {
+	entries := mw.history.Entries()
+	for _, e := range entries {
+		row := RestoreDownloadRow(mw, e)
+		mw.mu.Lock()
+		mw.downloads = append(mw.downloads, row)
+		mw.list.Add(row.container)
+		mw.mu.Unlock()
+	}
+	mw.mu.Lock()
+	mw.updateStatusBar()
+	mw.mu.Unlock()
+}
+
+// checkForUpdateSilent runs a background check once per 24 hours.
+func (mw *MainWindow) checkForUpdateSilent() {
+	prefs := mw.app.Preferences()
+	lastCheck := prefs.String(prefLastUpdateCk)
+	if lastCheck != "" {
+		if t, err := time.Parse(time.RFC3339, lastCheck); err == nil {
+			if time.Since(t) < updateCheckEvery {
+				return
+			}
+		}
+	}
+	info, err := CheckForUpdate(appVersion)
+	if err != nil || info == nil {
+		return
+	}
+	prefs.SetString(prefLastUpdateCk, time.Now().Format(time.RFC3339))
+	fyne.Do(func() {
+		mw.showUpdateBanner(info)
+	})
+}
+
+// checkForUpdateManual triggers an immediate update check with user feedback.
+func (mw *MainWindow) checkForUpdateManual() {
+	go func() {
+		info, err := CheckForUpdate(appVersion)
+		if err != nil {
+			fyne.Do(func() {
+				dialog.ShowError(fmt.Errorf("update check failed: %w", err), mw.window)
+			})
+			return
+		}
+		if info == nil {
+			fyne.Do(func() {
+				dialog.ShowInformation("Up to Date", fmt.Sprintf("You are running the latest version (%s).", appVersion), mw.window)
+			})
+			return
+		}
+		mw.app.Preferences().SetString(prefLastUpdateCk, time.Now().Format(time.RFC3339))
+		fyne.Do(func() {
+			mw.showUpdateBanner(info)
+		})
+	}()
+}
+
+func (mw *MainWindow) showUpdateBanner(info *ReleaseInfo) {
+	label := widget.NewLabel(fmt.Sprintf("Update available: %s", info.TagName))
+	label.TextStyle = fyne.TextStyle{Bold: true}
+
+	var link *widget.Hyperlink
+	link = widget.NewHyperlink("View Release", nil)
+	if parsed, err := url.Parse(info.HTMLURL); err == nil {
+		link.URL = parsed
+	}
+
+	dismiss := widget.NewButton("✕", func() {
+		mw.updateBanner.RemoveAll()
+		mw.updateBanner.Refresh()
+	})
+
+	mw.updateBanner.RemoveAll()
+	mw.updateBanner.Add(label)
+	mw.updateBanner.Add(link)
+	mw.updateBanner.Add(layout.NewSpacer())
+	mw.updateBanner.Add(dismiss)
+	mw.updateBanner.Refresh()
+}
+
+// ShowDeleteDialog shows a confirmation dialog when removing a download.
+func ShowDeleteDialog(mw *MainWindow, row *DownloadRow) {
+	// Determine if file exists on disk.
+	filePath := row.cfg.OutputPath
+	statusText := "completed"
+	if row.status == rowStatusFailed || row.status == rowStatusPaused || row.status == rowStatusDownloading {
+		statusText = "partial"
+	}
+
+	content := widget.NewLabel(fmt.Sprintf("Remove \"%s\" from downloads?", filenameFromPath(filePath)))
+
+	removeEntryBtn := widget.NewButton("Remove entry only", nil)
+	deleteFileBtn := widget.NewButton("Delete "+statusText+" file from disk", nil)
+	cancelBtn := widget.NewButton("Cancel", nil)
+
+	d := dialog.NewCustomWithoutButtons("Remove Download", container.NewVBox(
+		content,
+		widget.NewSeparator(),
+		removeEntryBtn,
+		deleteFileBtn,
+		cancelBtn,
+	), mw.window)
+
+	removeEntryBtn.OnTapped = func() {
+		row.Cancel()
+		mw.RemoveDownloadRow(row)
+		mw.history.Remove(row.historyID)
+		d.Hide()
+	}
+	deleteFileBtn.OnTapped = func() {
+		row.Cancel()
+		mw.RemoveDownloadRow(row)
+		mw.history.Remove(row.historyID)
+		deleteFileAndResume(filePath)
+		d.Hide()
+	}
+	cancelBtn.OnTapped = func() {
+		d.Hide()
+	}
+
+	d.Resize(fyne.NewSize(400, 200))
+	d.Show()
+}
+
 const appVersion = "2.0.0"
 
 func showAboutDialog(mw *MainWindow) {
@@ -208,4 +350,10 @@ func showAboutDialog(mw *MainWindow) {
 	d := dialog.NewCustom("About Swiftload", "Close", content, mw.window)
 	d.Resize(fyne.NewSize(350, 400))
 	d.Show()
+}
+
+// deleteFileAndResume removes the output file and its .gdown.json resume sidecar.
+func deleteFileAndResume(outputPath string) {
+	_ = os.Remove(outputPath)
+	_ = os.Remove(outputPath + ".gdown.json")
 }

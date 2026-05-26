@@ -1,6 +1,6 @@
 .PHONY: build build-cli build-gui test clean install cross-cli
 
-VERSION ?= 2.0.0
+VERSION ?= 2.1.0
 LDFLAGS := -ldflags "-s -w -X main.version=$(VERSION)"
 
 # ── Build ─────────────────────────────────────────────────────────────────────
