@@ -20,10 +20,14 @@ A robust, cross-platform download manager with both **CLI** and **GUI**, featuri
 ## Features
 
 - **Parallel Downloading** — Splits files into chunks and downloads concurrently for maximum throughput
-- **Resume Interrupted Downloads** — Crash-safe resume via `.gdown.json` metadata with ETag/Last-Modified validation
-- **Automatic Retry** — Each chunk retries independently with exponential backoff; only missing bytes are re-fetched
+- **Multi-Mirror** — Spread chunks across several mirror URLs serving the same file
+- **Resume Interrupted Downloads** — Crash-safe resume via `.gdown.json` metadata with ETag/Last-Modified validation; mid-chunk progress is preserved
+- **Automatic Retry** — Each chunk retries independently with exponential backoff; only missing bytes are re-fetched, and the retry count is surfaced live
+- **Download Queue** — Configurable max-concurrent limit; extra downloads wait in a queue and start automatically
+- **HTTP Basic Auth & Custom Headers** — Download from password-protected sites and send Cookie/Referer/Authorization headers
+- **Speed Limiting** — Cap the download rate per file (e.g. `500k`, `2m`)
 - **Checksum Verification** — Optional MD5/SHA-256 verification after download
-- **Native GUI** — Desktop GUI built with Fyne: add URLs, pause/resume, progress bars, settings
+- **Native GUI** — Modern Fyne desktop GUI: accent theme, status badges, per-row speed graph, hover cards, desktop notifications, and clipboard URL auto-detect
 - **Standalone CLI** — Professional CLI with cobra: subcommands, shell completions, auto-filename detection
 - **Cross-Platform** — Builds for macOS, Linux, and Windows from a single codebase
 - **Proxy Support** — Honors HTTP\_PROXY, HTTPS\_PROXY, NO\_PROXY environment variables
@@ -114,6 +118,13 @@ gdown completion <shell>         # Generate shell completions (bash/zsh/fish)
 | `--proxy` | | false | Use system proxy env vars |
 | `--checksum` | | | Expected hash for verification |
 | `--checksum-algo` | | sha256 | Hash algorithm: md5, sha256 |
+| `--user` | `-u` | | HTTP basic-auth username |
+| `--password` | | | HTTP basic-auth password |
+| `--header` | `-H` | | Custom request header `Key: Value` (repeatable) |
+| `--limit` | | | Max download speed, e.g. `500k`, `2m` (0=unlimited) |
+| `--mirror` | | | Additional mirror URL serving the same file (repeatable) |
+
+The `resume` command also accepts `--user`, `--password`, `--header`, `--limit`, and `--mirror` (credentials are never written to disk, so re-supply them when resuming).
 
 ### Examples
 
@@ -128,8 +139,16 @@ gdown download https://example.com/bigfile.tar.gz -p -w 32
 gdown download https://example.com/release.zip -o release.zip \
   --checksum abc123def456 --checksum-algo sha256
 
-# Resume an interrupted download
-gdown resume file.iso
+# Password-protected site with a custom header and a speed cap
+gdown download https://repo.example.com/file.bin -p \
+  -u alice --password s3cret -H 'Referer: https://repo.example.com' --limit 2m
+
+# Spread chunks across mirrors
+gdown download https://a.example.com/file.iso -p \
+  --mirror https://b.example.com/file.iso --mirror https://c.example.com/file.iso
+
+# Resume an interrupted download (re-supply auth if needed)
+gdown resume file.iso -u alice --password s3cret
 
 # Generate shell completions
 gdown completion zsh > ~/.zsh/completions/_gdown
@@ -146,10 +165,13 @@ Launch the Swiftload GUI:
 ```
 
 The GUI provides:
-- **Add URL** dialog — paste URL, choose output folder, set workers
-- **Download list** — filename, size, progress bar, speed, ETA
-- **Per-download controls** — pause, resume, cancel
-- **Settings** — default download dir, max concurrent, workers, theme
+- **Add URL** dialog — paste URL, choose output folder, set workers, auth, headers, mirrors, and a speed limit
+- **Download list** — filename, status badge, size, progress bar, live speed graph, speed, ETA
+- **Per-download controls** — pause, resume, restart, reveal in file manager, delete
+- **Download queue** — respects the max-concurrent limit; extras wait as "Queued"
+- **Desktop notifications** — optional alert when a download finishes or fails
+- **Clipboard monitor** — optional; offers to add copied http(s) URLs
+- **Settings** — default download dir, max concurrent, workers, theme, notifications, clipboard
 
 ---
 
