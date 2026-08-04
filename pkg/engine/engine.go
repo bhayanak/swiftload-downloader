@@ -13,6 +13,7 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+	"sync/atomic"
 	"time"
 
 	"github.com/bhayanak/swiftload-downloader/pkg/util"
@@ -28,6 +29,7 @@ type Download struct {
 	cfg      DownloadConfig
 	client   *http.Client
 	progress *progressTracker
+	limiter  *rateLimiter
 	cancel   context.CancelFunc
 	mu       sync.Mutex
 }
@@ -55,21 +57,24 @@ func NewDownload(cfg DownloadConfig) *Download {
 
 	client := &http.Client{
 		Timeout:   0,
-		Transport: &headerTransport{base: transport, headers: headers},
+		Transport: &headerTransport{base: transport, headers: headers, username: cfg.Username, password: cfg.Password},
 	}
 
 	return &Download{
 		cfg:      cfg,
 		client:   client,
 		progress: newProgressTracker(0),
+		limiter:  newRateLimiter(cfg.SpeedLimit),
 	}
 }
 
 // headerTransport wraps an http.RoundTripper and injects default headers
-// into every outgoing request (unless already set by the caller).
+// (and optional basic-auth credentials) into every outgoing request.
 type headerTransport struct {
-	base    http.RoundTripper
-	headers http.Header
+	base     http.RoundTripper
+	headers  http.Header
+	username string
+	password string
 }
 
 func (t *headerTransport) RoundTrip(req *http.Request) (*http.Response, error) {
@@ -79,6 +84,9 @@ func (t *headerTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 				req.Header.Add(k, v)
 			}
 		}
+	}
+	if t.username != "" && req.Header.Get("Authorization") == "" {
+		req.SetBasicAuth(t.username, t.password)
 	}
 	return t.base.RoundTrip(req)
 }
@@ -126,7 +134,7 @@ func (d *Download) Start(ctx context.Context) error {
 	if d.cfg.Parallel {
 		err = d.parallelDownload(ctx)
 	} else {
-		err = serialDownload(ctx, d.client, d.cfg.URL, d.cfg.OutputPath, d.cfg.BufSize, d.progress)
+		err = serialDownload(ctx, d.client, d.cfg.URL, d.cfg.OutputPath, d.cfg.BufSize, d.progress, d.limiter)
 	}
 
 	if err != nil {
@@ -170,11 +178,11 @@ func (d *Download) parallelDownload(ctx context.Context) error {
 
 	size, parseErr := strconv.ParseInt(resp.Header.Get("Content-Length"), 10, 64)
 	if parseErr != nil || size <= 0 {
-		return serialDownload(ctx, d.client, downloadURL, d.cfg.OutputPath, d.cfg.BufSize, d.progress)
+		return serialDownload(ctx, d.client, downloadURL, d.cfg.OutputPath, d.cfg.BufSize, d.progress, d.limiter)
 	}
 
 	if !strings.EqualFold(resp.Header.Get("Accept-Ranges"), "bytes") {
-		return serialDownload(ctx, d.client, downloadURL, d.cfg.OutputPath, d.cfg.BufSize, d.progress)
+		return serialDownload(ctx, d.client, downloadURL, d.cfg.OutputPath, d.cfg.BufSize, d.progress, d.limiter)
 	}
 
 	d.progress.totalSize = size
@@ -225,6 +233,21 @@ func (d *Download) parallelDownload(ctx context.Context) error {
 	// Save initial state.
 	_ = saveResumeState(state)
 
+	// Per-chunk atomic progress counters, seeded from any resumed bytes.
+	// These are synced into state.Chunks[i].Downloaded under d.mu before each
+	// save so partial (mid-chunk) progress survives a pause/crash.
+	chunkProgress := make([]int64, len(state.Chunks))
+	for i := range state.Chunks {
+		chunkProgress[i] = state.Chunks[i].Downloaded
+	}
+	syncChunkProgress := func() {
+		for i := range state.Chunks {
+			if !state.Chunks[i].Done {
+				state.Chunks[i].Downloaded = atomic.LoadInt64(&chunkProgress[i])
+			}
+		}
+	}
+
 	// Periodic resume state flusher.
 	flushDone := make(chan struct{})
 	go func() {
@@ -236,6 +259,7 @@ func (d *Download) parallelDownload(ctx context.Context) error {
 				return
 			case <-ticker.C:
 				d.mu.Lock()
+				syncChunkProgress()
 				_ = saveResumeState(state)
 				d.mu.Unlock()
 			}
@@ -249,31 +273,46 @@ func (d *Download) parallelDownload(ctx context.Context) error {
 		return nil // all chunks already done
 	}
 
+	// Build the pool of source URLs: primary first, then any valid mirrors.
+	// Chunks are spread across mirrors round-robin to parallelise across hosts.
+	urls := []string{downloadURL}
+	for _, m := range d.cfg.Mirrors {
+		if s := strings.TrimSpace(m); s != "" {
+			urls = append(urls, s)
+		}
+	}
+
 	errCh := make(chan error, len(chunksToDownload))
 	var wg sync.WaitGroup
 
-	for _, idx := range chunksToDownload {
+	for i, idx := range chunksToDownload {
 		wg.Add(1)
 		chunkIdx := idx
 		chunk := &state.Chunks[chunkIdx]
 		startOffset := chunk.Start + chunk.Downloaded
+		chunkURL := urls[i%len(urls)]
 
 		go func() {
 			defer wg.Done()
-			chunkDownloaded := &d.progress.downloaded
 			err := downloadChunkWithRetry(
-				ctx, d.client, downloadURL, file,
+				ctx, d.client, chunkURL, file,
 				startOffset, chunk.End,
 				d.cfg.Retries, d.cfg.BufSize,
-				chunkDownloaded,
-				nil, // no retry logging callback in library mode
+				&d.progress.downloaded,
+				&chunkProgress[chunkIdx],
+				d.limiter,
+				func(_, _ int64, _, _ int, _ error, _ time.Duration) {
+					d.progress.addRetry()
+				},
 			)
 			if err != nil {
 				errCh <- err
 				return
 			}
 			d.mu.Lock()
-			chunk.Downloaded = chunk.End - chunk.Start + 1
+			full := chunk.End - chunk.Start + 1
+			atomic.StoreInt64(&chunkProgress[chunkIdx], full)
+			chunk.Downloaded = full
 			chunk.Done = true
 			d.mu.Unlock()
 		}()
@@ -289,8 +328,11 @@ func (d *Download) parallelDownload(ctx context.Context) error {
 		errs = append(errs, e)
 	}
 
-	// Final state save.
+	// Final state save (persist any mid-chunk progress on cancel/failure).
+	d.mu.Lock()
+	syncChunkProgress()
 	_ = saveResumeState(state)
+	d.mu.Unlock()
 
 	if len(errs) > 0 {
 		return fmt.Errorf("parallel download failed: %w", errors.Join(errs...))
@@ -331,8 +373,32 @@ func (d *Download) verifyChecksum() error {
 	return nil
 }
 
+// ResumeOption overrides config fields not persisted in the resume state,
+// such as credentials (never written to disk), custom headers, or speed limit.
+type ResumeOption func(*DownloadConfig)
+
+// WithAuth supplies HTTP basic-auth credentials for a resumed download.
+func WithAuth(username, password string) ResumeOption {
+	return func(c *DownloadConfig) { c.Username = username; c.Password = password }
+}
+
+// WithHeaders supplies custom request headers for a resumed download.
+func WithHeaders(h http.Header) ResumeOption {
+	return func(c *DownloadConfig) { c.Headers = h }
+}
+
+// WithSpeedLimit supplies a max download rate (bytes/sec) for a resumed download.
+func WithSpeedLimit(bytesPerSec int64) ResumeOption {
+	return func(c *DownloadConfig) { c.SpeedLimit = bytesPerSec }
+}
+
+// WithMirrors supplies additional mirror URLs for a resumed download.
+func WithMirrors(mirrors []string) ResumeOption {
+	return func(c *DownloadConfig) { c.Mirrors = mirrors }
+}
+
 // ResumeDownload loads existing resume state and resumes the download.
-func ResumeDownload(ctx context.Context, outputPath string, onProgress ProgressFunc) error {
+func ResumeDownload(ctx context.Context, outputPath string, onProgress ProgressFunc, opts ...ResumeOption) error {
 	state, err := loadResumeState(outputPath)
 	if err != nil {
 		return fmt.Errorf("cannot load resume state: %w", err)
@@ -350,6 +416,9 @@ func ResumeDownload(ctx context.Context, outputPath string, onProgress ProgressF
 	if state.Checksum != nil {
 		cfg.Checksum = state.Checksum.Expected
 		cfg.ChecksumAlgo = state.Checksum.Algorithm
+	}
+	for _, opt := range opts {
+		opt(&cfg)
 	}
 
 	dl := NewDownload(cfg)

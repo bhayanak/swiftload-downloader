@@ -1,0 +1,13 @@
+{
+  "decision": "SKIP",
+  "summary": {
+    "total": 0,
+    "structural": 0,
+    "cosmetic": 0,
+    "deleted": 0,
+    "new": 0
+  },
+  "changes": [],
+  "filesToReanalyze": [],
+  "filesToRemove": []
+}

@@ -9,6 +9,7 @@ import (
 // progressTracker manages download progress and notifies callbacks.
 type progressTracker struct {
 	downloaded int64 // atomic
+	retries    int64 // atomic
 	totalSize  int64
 	startTime  time.Time
 	mu         sync.RWMutex
@@ -54,6 +55,10 @@ func (p *progressTracker) setDownloaded(n int64) {
 	atomic.StoreInt64(&p.downloaded, n)
 }
 
+func (p *progressTracker) addRetry() {
+	atomic.AddInt64(&p.retries, 1)
+}
+
 func (p *progressTracker) info() ProgressInfo {
 	downloaded := p.getDownloaded()
 	elapsed := time.Since(p.startTime).Seconds()
@@ -81,6 +86,7 @@ func (p *progressTracker) info() ProgressInfo {
 		ETA:        eta,
 		Status:     p.getStatus(),
 		Percent:    pct,
+		Retries:    int(atomic.LoadInt64(&p.retries)),
 	}
 }
 

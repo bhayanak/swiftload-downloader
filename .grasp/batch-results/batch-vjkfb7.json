@@ -1,0 +1,1691 @@
+{
+  "nodes": [
+    {
+      "id": "file:cmd/gdown/main.go",
+      "type": "file",
+      "name": "main.go",
+      "filePath": "cmd/gdown/main.go",
+      "summary": "",
+      "tags": [
+        "go"
+      ],
+      "complexity": "moderate",
+      "language": "go"
+    },
+    {
+      "id": "function:cmd/gdown/main.go:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "cmd/gdown/main.go",
+      "lineRange": [
+        19,
+        19
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:cmd/gdown/main.go:init",
+      "type": "function",
+      "name": "init",
+      "filePath": "cmd/gdown/main.go",
+      "lineRange": [
+        34,
+        34
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:cmd/gdown/main.go:runDownload",
+      "type": "function",
+      "name": "runDownload",
+      "filePath": "cmd/gdown/main.go",
+      "lineRange": [
+        85,
+        85
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:cmd/gdown/main.go:runResume",
+      "type": "function",
+      "name": "runResume",
+      "filePath": "cmd/gdown/main.go",
+      "lineRange": [
+        138,
+        138
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:cmd/gdown/main.go:cliProgressFunc",
+      "type": "function",
+      "name": "cliProgressFunc",
+      "filePath": "cmd/gdown/main.go",
+      "lineRange": [
+        157,
+        157
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:cmd/gdown/main.go:filenameFromURL",
+      "type": "function",
+      "name": "filenameFromURL",
+      "filePath": "cmd/gdown/main.go",
+      "lineRange": [
+        184,
+        184
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:cmd/gdown-gui/main.go",
+      "type": "file",
+      "name": "main.go",
+      "filePath": "cmd/gdown-gui/main.go",
+      "summary": "",
+      "tags": [
+        "go",
+        "ui"
+      ],
+      "complexity": "simple",
+      "language": "go"
+    },
+    {
+      "id": "function:cmd/gdown-gui/main.go:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "cmd/gdown-gui/main.go",
+      "lineRange": [
+        5,
+        5
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:internal/gui/add_dialog.go",
+      "type": "file",
+      "name": "add_dialog.go",
+      "filePath": "internal/gui/add_dialog.go",
+      "summary": "",
+      "tags": [
+        "go",
+        "ui"
+      ],
+      "complexity": "simple",
+      "language": "go"
+    },
+    {
+      "id": "function:internal/gui/add_dialog.go:ShowAddDialog",
+      "type": "function",
+      "name": "ShowAddDialog",
+      "filePath": "internal/gui/add_dialog.go",
+      "lineRange": [
+        15,
+        15
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/add_dialog.go:guessFilename",
+      "type": "function",
+      "name": "guessFilename",
+      "filePath": "internal/gui/add_dialog.go",
+      "lineRange": [
+        97,
+        97
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/add_dialog.go:parseInt",
+      "type": "function",
+      "name": "parseInt",
+      "filePath": "internal/gui/add_dialog.go",
+      "lineRange": [
+        112,
+        112
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:internal/gui/app.go",
+      "type": "file",
+      "name": "app.go",
+      "filePath": "internal/gui/app.go",
+      "summary": "",
+      "tags": [
+        "go",
+        "ui"
+      ],
+      "complexity": "moderate",
+      "language": "go"
+    },
+    {
+      "id": "function:internal/gui/app.go:NewApp",
+      "type": "function",
+      "name": "NewApp",
+      "filePath": "internal/gui/app.go",
+      "lineRange": [
+        22,
+        22
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/app.go:App.Run",
+      "type": "function",
+      "name": "App.Run",
+      "filePath": "internal/gui/app.go",
+      "lineRange": [
+        42,
+        42
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:internal/gui/app.go:App",
+      "type": "class",
+      "name": "App",
+      "filePath": "internal/gui/app.go",
+      "lineRange": [
+        16,
+        16
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:internal/gui/download_row.go",
+      "type": "file",
+      "name": "download_row.go",
+      "filePath": "internal/gui/download_row.go",
+      "summary": "",
+      "tags": [
+        "go",
+        "ui"
+      ],
+      "complexity": "complex",
+      "language": "go"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:NewDownloadRow",
+      "type": "function",
+      "name": "NewDownloadRow",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        60,
+        60
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:DownloadRow.startDownload",
+      "type": "function",
+      "name": "DownloadRow.startDownload",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        121,
+        121
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:DownloadRow.updateFromProgress",
+      "type": "function",
+      "name": "DownloadRow.updateFromProgress",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        192,
+        192
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:DownloadRow.togglePause",
+      "type": "function",
+      "name": "DownloadRow.togglePause",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        217,
+        217
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:DownloadRow.Pause",
+      "type": "function",
+      "name": "DownloadRow.Pause",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        228,
+        228
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:DownloadRow.Resume",
+      "type": "function",
+      "name": "DownloadRow.Resume",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        248,
+        248
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:DownloadRow.Restart",
+      "type": "function",
+      "name": "DownloadRow.Restart",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        321,
+        321
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:DownloadRow.Cancel",
+      "type": "function",
+      "name": "DownloadRow.Cancel",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        340,
+        340
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:truncate",
+      "type": "function",
+      "name": "truncate",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        350,
+        350
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:DownloadRow.revealOrRedownload",
+      "type": "function",
+      "name": "DownloadRow.revealOrRedownload",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        359,
+        359
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:revealInFinder",
+      "type": "function",
+      "name": "revealInFinder",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        377,
+        377
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:filenameFromPath",
+      "type": "function",
+      "name": "filenameFromPath",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        390,
+        390
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:RestoreDownloadRow",
+      "type": "function",
+      "name": "RestoreDownloadRow",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        400,
+        400
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:fmtf",
+      "type": "function",
+      "name": "fmtf",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        506,
+        506
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:internal/gui/download_row.go:DownloadRow",
+      "type": "class",
+      "name": "DownloadRow",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        36,
+        36
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:internal/gui/history.go",
+      "type": "file",
+      "name": "history.go",
+      "filePath": "internal/gui/history.go",
+      "summary": "",
+      "tags": [
+        "go",
+        "ui"
+      ],
+      "complexity": "complex",
+      "language": "go"
+    },
+    {
+      "id": "function:internal/gui/history.go:NewHistoryStore",
+      "type": "function",
+      "name": "NewHistoryStore",
+      "filePath": "internal/gui/history.go",
+      "lineRange": [
+        37,
+        37
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/history.go:HistoryStore.Entries",
+      "type": "function",
+      "name": "HistoryStore.Entries",
+      "filePath": "internal/gui/history.go",
+      "lineRange": [
+        52,
+        52
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/history.go:HistoryStore.Add",
+      "type": "function",
+      "name": "HistoryStore.Add",
+      "filePath": "internal/gui/history.go",
+      "lineRange": [
+        61,
+        61
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/history.go:HistoryStore.Update",
+      "type": "function",
+      "name": "HistoryStore.Update",
+      "filePath": "internal/gui/history.go",
+      "lineRange": [
+        69,
+        69
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/history.go:HistoryStore.Remove",
+      "type": "function",
+      "name": "HistoryStore.Remove",
+      "filePath": "internal/gui/history.go",
+      "lineRange": [
+        82,
+        82
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/history.go:HistoryStore.FindByOutputPath",
+      "type": "function",
+      "name": "HistoryStore.FindByOutputPath",
+      "filePath": "internal/gui/history.go",
+      "lineRange": [
+        95,
+        95
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/history.go:HistoryStore.Stop",
+      "type": "function",
+      "name": "HistoryStore.Stop",
+      "filePath": "internal/gui/history.go",
+      "lineRange": [
+        108,
+        108
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/history.go:HistoryStore.requestSave",
+      "type": "function",
+      "name": "HistoryStore.requestSave",
+      "filePath": "internal/gui/history.go",
+      "lineRange": [
+        113,
+        113
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/history.go:HistoryStore.saveLoop",
+      "type": "function",
+      "name": "HistoryStore.saveLoop",
+      "filePath": "internal/gui/history.go",
+      "lineRange": [
+        121,
+        121
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/history.go:HistoryStore.load",
+      "type": "function",
+      "name": "HistoryStore.load",
+      "filePath": "internal/gui/history.go",
+      "lineRange": [
+        138,
+        138
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/history.go:HistoryStore.save",
+      "type": "function",
+      "name": "HistoryStore.save",
+      "filePath": "internal/gui/history.go",
+      "lineRange": [
+        148,
+        148
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:internal/gui/history.go:HistoryEntry",
+      "type": "class",
+      "name": "HistoryEntry",
+      "filePath": "internal/gui/history.go",
+      "lineRange": [
+        14,
+        14
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:internal/gui/history.go:HistoryStore",
+      "type": "class",
+      "name": "HistoryStore",
+      "filePath": "internal/gui/history.go",
+      "lineRange": [
+        28,
+        28
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:internal/gui/main_window.go",
+      "type": "file",
+      "name": "main_window.go",
+      "filePath": "internal/gui/main_window.go",
+      "summary": "",
+      "tags": [
+        "go",
+        "ui"
+      ],
+      "complexity": "complex",
+      "language": "go"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:NewMainWindow",
+      "type": "function",
+      "name": "NewMainWindow",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        34,
+        34
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.Show",
+      "type": "function",
+      "name": "MainWindow.Show",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        109,
+        109
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.AddDownloadRow",
+      "type": "function",
+      "name": "MainWindow.AddDownloadRow",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        114,
+        114
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.RemoveDownloadRow",
+      "type": "function",
+      "name": "MainWindow.RemoveDownloadRow",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        123,
+        123
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.pauseAll",
+      "type": "function",
+      "name": "MainWindow.pauseAll",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        136,
+        136
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.resumeAll",
+      "type": "function",
+      "name": "MainWindow.resumeAll",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        144,
+        144
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.cancelAll",
+      "type": "function",
+      "name": "MainWindow.cancelAll",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        152,
+        152
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.updateStatusBar",
+      "type": "function",
+      "name": "MainWindow.updateStatusBar",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        160,
+        160
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.refreshStatusBar",
+      "type": "function",
+      "name": "MainWindow.refreshStatusBar",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        182,
+        182
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.restoreHistory",
+      "type": "function",
+      "name": "MainWindow.restoreHistory",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        189,
+        189
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.checkForUpdateSilent",
+      "type": "function",
+      "name": "MainWindow.checkForUpdateSilent",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        204,
+        204
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.checkForUpdateManual",
+      "type": "function",
+      "name": "MainWindow.checkForUpdateManual",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        225,
+        225
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.showUpdateBanner",
+      "type": "function",
+      "name": "MainWindow.showUpdateBanner",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        247,
+        247
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:ShowDeleteDialog",
+      "type": "function",
+      "name": "ShowDeleteDialog",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        271,
+        271
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.startDownloadWithDuplicateCheck",
+      "type": "function",
+      "name": "MainWindow.startDownloadWithDuplicateCheck",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        316,
+        316
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.removeRowByHistoryID",
+      "type": "function",
+      "name": "MainWindow.removeRowByHistoryID",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        355,
+        355
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:showAboutDialog",
+      "type": "function",
+      "name": "showAboutDialog",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        370,
+        370
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:deleteFileAndResume",
+      "type": "function",
+      "name": "deleteFileAndResume",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        412,
+        412
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:internal/gui/main_window.go:MainWindow",
+      "type": "class",
+      "name": "MainWindow",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        21,
+        21
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:internal/gui/settings.go",
+      "type": "file",
+      "name": "settings.go",
+      "filePath": "internal/gui/settings.go",
+      "summary": "",
+      "tags": [
+        "go",
+        "ui"
+      ],
+      "complexity": "moderate",
+      "language": "go"
+    },
+    {
+      "id": "function:internal/gui/settings.go:LoadSettings",
+      "type": "function",
+      "name": "LoadSettings",
+      "filePath": "internal/gui/settings.go",
+      "lineRange": [
+        38,
+        38
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/settings.go:SaveSettings",
+      "type": "function",
+      "name": "SaveSettings",
+      "filePath": "internal/gui/settings.go",
+      "lineRange": [
+        53,
+        53
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/settings.go:ApplyTheme",
+      "type": "function",
+      "name": "ApplyTheme",
+      "filePath": "internal/gui/settings.go",
+      "lineRange": [
+        66,
+        66
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/settings.go:ShowSettingsDialog",
+      "type": "function",
+      "name": "ShowSettingsDialog",
+      "filePath": "internal/gui/settings.go",
+      "lineRange": [
+        78,
+        78
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/settings.go:parseIntFallback",
+      "type": "function",
+      "name": "parseIntFallback",
+      "filePath": "internal/gui/settings.go",
+      "lineRange": [
+        181,
+        181
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:internal/gui/settings.go:AppSettings",
+      "type": "class",
+      "name": "AppSettings",
+      "filePath": "internal/gui/settings.go",
+      "lineRange": [
+        26,
+        26
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:internal/gui/updater.go",
+      "type": "file",
+      "name": "updater.go",
+      "filePath": "internal/gui/updater.go",
+      "summary": "",
+      "tags": [
+        "go",
+        "ui"
+      ],
+      "complexity": "moderate",
+      "language": "go"
+    },
+    {
+      "id": "function:internal/gui/updater.go:CheckForUpdate",
+      "type": "function",
+      "name": "CheckForUpdate",
+      "filePath": "internal/gui/updater.go",
+      "lineRange": [
+        27,
+        27
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/updater.go:isNewer",
+      "type": "function",
+      "name": "isNewer",
+      "filePath": "internal/gui/updater.go",
+      "lineRange": [
+        51,
+        51
+      ],
+      "summary": "",
+      "tags": [
+        "predicate"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/updater.go:parseVersion",
+      "type": "function",
+      "name": "parseVersion",
+      "filePath": "internal/gui/updater.go",
+      "lineRange": [
+        69,
+        69
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:internal/gui/updater.go:ReleaseInfo",
+      "type": "class",
+      "name": "ReleaseInfo",
+      "filePath": "internal/gui/updater.go",
+      "lineRange": [
+        19,
+        19
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:pkg/engine/chunk.go",
+      "type": "file",
+      "name": "chunk.go",
+      "filePath": "pkg/engine/chunk.go",
+      "summary": "",
+      "tags": [
+        "go"
+      ],
+      "complexity": "moderate",
+      "language": "go"
+    },
+    {
+      "id": "function:pkg/engine/chunk.go:httpStatusError.Error",
+      "type": "function",
+      "name": "httpStatusError.Error",
+      "filePath": "pkg/engine/chunk.go",
+      "lineRange": [
+        125,
+        125
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/chunk.go:httpStatusError.IsPermanent",
+      "type": "function",
+      "name": "httpStatusError.IsPermanent",
+      "filePath": "pkg/engine/chunk.go",
+      "lineRange": [
+        130,
+        130
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:pkg/engine/chunk.go:httpStatusError",
+      "type": "class",
+      "name": "httpStatusError",
+      "filePath": "pkg/engine/chunk.go",
+      "lineRange": [
+        121,
+        121
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:pkg/engine/config.go",
+      "type": "file",
+      "name": "config.go",
+      "filePath": "pkg/engine/config.go",
+      "summary": "",
+      "tags": [
+        "go",
+        "config"
+      ],
+      "complexity": "moderate",
+      "language": "go"
+    },
+    {
+      "id": "function:pkg/engine/config.go:DownloadStatus.String",
+      "type": "function",
+      "name": "DownloadStatus.String",
+      "filePath": "pkg/engine/config.go",
+      "lineRange": [
+        43,
+        43
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/config.go:DownloadConfig.Defaults",
+      "type": "function",
+      "name": "DownloadConfig.Defaults",
+      "filePath": "pkg/engine/config.go",
+      "lineRange": [
+        77,
+        77
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:pkg/engine/config.go:DownloadConfig",
+      "type": "class",
+      "name": "DownloadConfig",
+      "filePath": "pkg/engine/config.go",
+      "lineRange": [
+        16,
+        16
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:pkg/engine/config.go:ProgressInfo",
+      "type": "class",
+      "name": "ProgressInfo",
+      "filePath": "pkg/engine/config.go",
+      "lineRange": [
+        63,
+        63
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:cmd/gdown/main.go",
+      "target": "function:cmd/gdown/main.go:main",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:cmd/gdown/main.go",
+      "target": "function:cmd/gdown/main.go:init",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:cmd/gdown/main.go",
+      "target": "function:cmd/gdown/main.go:runDownload",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:cmd/gdown/main.go",
+      "target": "function:cmd/gdown/main.go:runResume",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:cmd/gdown/main.go",
+      "target": "function:cmd/gdown/main.go:cliProgressFunc",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:cmd/gdown/main.go",
+      "target": "function:cmd/gdown/main.go:filenameFromURL",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:cmd/gdown-gui/main.go",
+      "target": "function:cmd/gdown-gui/main.go:main",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/add_dialog.go",
+      "target": "function:internal/gui/add_dialog.go:ShowAddDialog",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/add_dialog.go",
+      "target": "function:internal/gui/add_dialog.go:guessFilename",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/add_dialog.go",
+      "target": "function:internal/gui/add_dialog.go:parseInt",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/app.go",
+      "target": "function:internal/gui/app.go:NewApp",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/app.go",
+      "target": "function:internal/gui/app.go:App.Run",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/app.go",
+      "target": "class:internal/gui/app.go:App",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:NewDownloadRow",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:DownloadRow.startDownload",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:DownloadRow.updateFromProgress",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:DownloadRow.togglePause",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:DownloadRow.Pause",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:DownloadRow.Resume",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:DownloadRow.Restart",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:DownloadRow.Cancel",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:truncate",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:DownloadRow.revealOrRedownload",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:revealInFinder",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:filenameFromPath",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:RestoreDownloadRow",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:fmtf",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "class:internal/gui/download_row.go:DownloadRow",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/history.go",
+      "target": "function:internal/gui/history.go:NewHistoryStore",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/history.go",
+      "target": "function:internal/gui/history.go:HistoryStore.Entries",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/history.go",
+      "target": "function:internal/gui/history.go:HistoryStore.Add",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/history.go",
+      "target": "function:internal/gui/history.go:HistoryStore.Update",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/history.go",
+      "target": "function:internal/gui/history.go:HistoryStore.Remove",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/history.go",
+      "target": "function:internal/gui/history.go:HistoryStore.FindByOutputPath",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/history.go",
+      "target": "function:internal/gui/history.go:HistoryStore.Stop",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/history.go",
+      "target": "function:internal/gui/history.go:HistoryStore.requestSave",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/history.go",
+      "target": "function:internal/gui/history.go:HistoryStore.saveLoop",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/history.go",
+      "target": "function:internal/gui/history.go:HistoryStore.load",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/history.go",
+      "target": "function:internal/gui/history.go:HistoryStore.save",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/history.go",
+      "target": "class:internal/gui/history.go:HistoryEntry",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/history.go",
+      "target": "class:internal/gui/history.go:HistoryStore",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:NewMainWindow",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.Show",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.AddDownloadRow",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.RemoveDownloadRow",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.pauseAll",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.resumeAll",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.cancelAll",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.updateStatusBar",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.refreshStatusBar",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.restoreHistory",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.checkForUpdateSilent",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.checkForUpdateManual",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.showUpdateBanner",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:ShowDeleteDialog",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.startDownloadWithDuplicateCheck",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.removeRowByHistoryID",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:showAboutDialog",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:deleteFileAndResume",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "class:internal/gui/main_window.go:MainWindow",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/settings.go",
+      "target": "function:internal/gui/settings.go:LoadSettings",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/settings.go",
+      "target": "function:internal/gui/settings.go:SaveSettings",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/settings.go",
+      "target": "function:internal/gui/settings.go:ApplyTheme",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/settings.go",
+      "target": "function:internal/gui/settings.go:ShowSettingsDialog",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/settings.go",
+      "target": "function:internal/gui/settings.go:parseIntFallback",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/settings.go",
+      "target": "class:internal/gui/settings.go:AppSettings",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/updater.go",
+      "target": "function:internal/gui/updater.go:CheckForUpdate",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/updater.go",
+      "target": "function:internal/gui/updater.go:isNewer",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/updater.go",
+      "target": "function:internal/gui/updater.go:parseVersion",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/updater.go",
+      "target": "class:internal/gui/updater.go:ReleaseInfo",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/chunk.go",
+      "target": "function:pkg/engine/chunk.go:httpStatusError.Error",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/chunk.go",
+      "target": "function:pkg/engine/chunk.go:httpStatusError.IsPermanent",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/chunk.go",
+      "target": "class:pkg/engine/chunk.go:httpStatusError",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/config.go",
+      "target": "function:pkg/engine/config.go:DownloadStatus.String",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/config.go",
+      "target": "function:pkg/engine/config.go:DownloadConfig.Defaults",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/config.go",
+      "target": "class:pkg/engine/config.go:DownloadConfig",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/config.go",
+      "target": "class:pkg/engine/config.go:ProgressInfo",
+      "type": "contains",
+      "direction": "forward"
+    }
+  ],
+  "batchId": "batch-vjkfb7"
+}

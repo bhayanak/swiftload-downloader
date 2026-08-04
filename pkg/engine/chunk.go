@@ -24,6 +24,8 @@ func downloadChunkWithRetry(
 	retries int,
 	bufSize int64,
 	downloaded *int64,
+	chunkDownloaded *int64,
+	limiter *rateLimiter,
 	onRetry func(start, end int64, attempt, maxRetries int, err error, backoff time.Duration),
 ) error {
 	offset := start
@@ -34,7 +36,7 @@ func downloadChunkWithRetry(
 		default:
 		}
 
-		written, err := downloadChunk(ctx, client, url, file, offset, end, bufSize, downloaded)
+		written, err := downloadChunk(ctx, client, url, file, offset, end, bufSize, downloaded, chunkDownloaded, limiter)
 		if err == nil {
 			return nil
 		}
@@ -77,6 +79,8 @@ func downloadChunk(
 	start, end int64,
 	bufSize int64,
 	downloaded *int64,
+	chunkDownloaded *int64,
+	limiter *rateLimiter,
 ) (int64, error) {
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
 	if err != nil {
@@ -107,6 +111,12 @@ func downloadChunk(
 			offset += int64(n)
 			written += int64(n)
 			atomic.AddInt64(downloaded, int64(n))
+			if chunkDownloaded != nil {
+				atomic.AddInt64(chunkDownloaded, int64(n))
+			}
+			if limiter != nil {
+				limiter.wait(ctx, int64(n))
+			}
 		}
 		if readErr == io.EOF {
 			return written, nil

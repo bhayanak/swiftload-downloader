@@ -547,7 +547,8 @@ func TestDownloadChunkWithRetry_PermanentError(t *testing.T) {
 	defer f.Close()
 
 	var downloaded int64
-	err := downloadChunkWithRetry(context.Background(), client, srv.URL, f, 0, 99, 3, 4096, &downloaded, nil)
+	var chunkDl int64
+	err := downloadChunkWithRetry(context.Background(), client, srv.URL, f, 0, 99, 3, 4096, &downloaded, &chunkDl, nil, nil)
 	if err == nil {
 		t.Fatal("expected permanent error, got nil")
 	}
@@ -567,7 +568,8 @@ func TestDownloadChunkWithRetry_ContextCancel(t *testing.T) {
 	cancel()
 
 	var downloaded int64
-	err := downloadChunkWithRetry(ctx, client, srv.URL, f, 0, 99, 1, 4096, &downloaded, nil)
+	var chunkDl int64
+	err := downloadChunkWithRetry(ctx, client, srv.URL, f, 0, 99, 1, 4096, &downloaded, &chunkDl, nil, nil)
 	if err == nil {
 		t.Fatal("expected context.Canceled error")
 	}
@@ -606,3 +608,115 @@ func TestParallelDownload_ProgressReported(t *testing.T) {
 
 // Compile-time check: ensure io helpers exist in chunk.go.
 var _ io.Writer = (*os.File)(nil)
+
+// ── Multi-mirror ──────────────────────────────────────────────────────────────
+
+func TestParallelDownload_Mirrors(t *testing.T) {
+	data := testData(4 * 1024 * 1024) // 4 MB → multiple chunks
+	primary := makeTestServer(data, true)
+	defer primary.Close()
+
+	var mirrorHits int64
+	mirror := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Accept-Ranges", "bytes")
+		w.Header().Set("ETag", `"testfile"`)
+		if r.Method == http.MethodHead {
+			w.Header().Set("Content-Length", strconv.Itoa(len(data)))
+			return
+		}
+		if rangeHdr := r.Header.Get("Range"); rangeHdr != "" {
+			atomic.AddInt64(&mirrorHits, 1)
+			rangeStr := strings.TrimPrefix(rangeHdr, "bytes=")
+			parts := strings.SplitN(rangeStr, "-", 2)
+			start, _ := strconv.ParseInt(parts[0], 10, 64)
+			end, _ := strconv.ParseInt(parts[1], 10, 64)
+			if end >= int64(len(data)) {
+				end = int64(len(data)) - 1
+			}
+			w.Header().Set("Content-Length", strconv.FormatInt(end-start+1, 10))
+			w.WriteHeader(http.StatusPartialContent)
+			_, _ = w.Write(data[start : end+1])
+			return
+		}
+		w.Header().Set("Content-Length", strconv.Itoa(len(data)))
+		_, _ = w.Write(data)
+	}))
+	defer mirror.Close()
+
+	out := filepath.Join(t.TempDir(), "mirrored.bin")
+	cfg := DownloadConfig{
+		URL:        primary.URL,
+		OutputPath: out,
+		Parallel:   true,
+		Workers:    4,
+		Mirrors:    []string{mirror.URL},
+	}
+	if err := NewDownload(cfg).Start(context.Background()); err != nil {
+		t.Fatalf("mirror download failed: %v", err)
+	}
+
+	got, _ := os.ReadFile(out)
+	if !bytes.Equal(got, data) {
+		t.Errorf("mirror download data mismatch: %d vs %d bytes", len(got), len(data))
+	}
+	if atomic.LoadInt64(&mirrorHits) == 0 {
+		t.Error("expected the mirror to serve at least one chunk")
+	}
+}
+
+// ── Retry surfacing ───────────────────────────────────────────────────────────
+
+func TestParallelDownload_RetryCountSurfaced(t *testing.T) {
+	data := testData(2 * 1024 * 1024) // 2 MB
+	var failed int64
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Accept-Ranges", "bytes")
+		w.Header().Set("ETag", `"testfile"`)
+		if r.Method == http.MethodHead {
+			w.Header().Set("Content-Length", strconv.Itoa(len(data)))
+			return
+		}
+		rangeHdr := r.Header.Get("Range")
+		if rangeHdr != "" {
+			// Fail the very first range request once to force a retry.
+			if atomic.AddInt64(&failed, 1) == 1 {
+				http.Error(w, "temporary", http.StatusInternalServerError)
+				return
+			}
+			rangeStr := strings.TrimPrefix(rangeHdr, "bytes=")
+			parts := strings.SplitN(rangeStr, "-", 2)
+			start, _ := strconv.ParseInt(parts[0], 10, 64)
+			end, _ := strconv.ParseInt(parts[1], 10, 64)
+			if end >= int64(len(data)) {
+				end = int64(len(data)) - 1
+			}
+			w.Header().Set("Content-Length", strconv.FormatInt(end-start+1, 10))
+			w.WriteHeader(http.StatusPartialContent)
+			_, _ = w.Write(data[start : end+1])
+			return
+		}
+		w.Header().Set("Content-Length", strconv.Itoa(len(data)))
+		_, _ = w.Write(data)
+	}))
+	defer srv.Close()
+
+	out := filepath.Join(t.TempDir(), "retry.bin")
+	cfg := DownloadConfig{
+		URL:        srv.URL,
+		OutputPath: out,
+		Parallel:   true,
+		Workers:    2,
+		Retries:    3,
+	}
+	dl := NewDownload(cfg)
+	if err := dl.Start(context.Background()); err != nil {
+		t.Fatalf("download with a transient failure should still succeed: %v", err)
+	}
+	if got := dl.Info().Retries; got < 1 {
+		t.Errorf("expected Retries >= 1 to be surfaced, got %d", got)
+	}
+	if data2, _ := os.ReadFile(out); !bytes.Equal(data2, data) {
+		t.Error("retry download data mismatch")
+	}
+}
+

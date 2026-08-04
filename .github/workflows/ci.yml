@@ -71,7 +71,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y gcc libgl1-mesa-dev xorg-dev
+          sudo apt-get install -y gcc libgl1-mesa-dev xorg-dev xvfb
 
       - name: Cache Go modules
         uses: actions/cache@v4
@@ -85,3 +85,7 @@ jobs:
 
       - name: Build GUI
         run: go build -o bin/gdown-gui${{ runner.os == 'Windows' && '.exe' || '' }} ./cmd/gdown-gui
+
+      - name: Test GUI (Linux only)
+        if: runner.os == 'Linux'
+        run: xvfb-run -a go test ./internal/gui/... -count=1

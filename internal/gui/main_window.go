@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/url"
 	"os"
+	"strings"
 	"sync"
 	"time"
 
@@ -12,9 +13,11 @@ import (
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/layout"
+	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 
 	"github.com/bhayanak/swiftload-downloader/pkg/engine"
+	"github.com/bhayanak/swiftload-downloader/pkg/util"
 )
 
 // MainWindow is the primary application window with the download list.
@@ -28,6 +31,9 @@ type MainWindow struct {
 	updateBanner *fyne.Container
 	settings     AppSettings
 	history      *HistoryStore
+
+	clipStop chan struct{}
+	clipLast string
 }
 
 // NewMainWindow creates the main application window.
@@ -48,36 +54,38 @@ func NewMainWindow(a fyne.App) *MainWindow {
 
 	// Toolbar.
 	toolbar := container.NewHBox(
-		widget.NewButton("+ Add URL", func() {
-			ShowAddDialog(mw)
-		}),
-		widget.NewButton("⏸ Pause All", func() {
+		func() *widget.Button {
+			b := widget.NewButtonWithIcon("Add URL", theme.ContentAddIcon(), func() { ShowAddDialog(mw) })
+			b.Importance = widget.HighImportance
+			return b
+		}(),
+		widget.NewButtonWithIcon("Pause All", theme.MediaPauseIcon(), func() {
 			mw.pauseAll()
 		}),
-		widget.NewButton("▶ Resume All", func() {
+		widget.NewButtonWithIcon("Resume All", theme.MediaPlayIcon(), func() {
 			mw.resumeAll()
 		}),
-		widget.NewButton("⚙ Settings", func() {
+		widget.NewButtonWithIcon("Settings", theme.SettingsIcon(), func() {
 			ShowSettingsDialog(mw)
 		}),
 		layout.NewSpacer(),
-		widget.NewButton("🔄 Check Update", func() {
+		widget.NewButtonWithIcon("Check Update", theme.ViewRefreshIcon(), func() {
 			mw.checkForUpdateManual()
 		}),
-		widget.NewButton("ℹ About", func() {
+		widget.NewButtonWithIcon("About", theme.InfoIcon(), func() {
 			showAboutDialog(mw)
 		}),
 	)
 
-	// Header row.
-	header := container.NewGridWithColumns(6,
+	// Header row (padded to align with the padded download cards below).
+	header := container.NewPadded(container.NewGridWithColumns(6,
 		widget.NewLabelWithStyle("Filename", fyne.TextAlignLeading, fyne.TextStyle{Bold: true}),
 		widget.NewLabelWithStyle("Size", fyne.TextAlignCenter, fyne.TextStyle{Bold: true}),
 		widget.NewLabelWithStyle("Progress", fyne.TextAlignCenter, fyne.TextStyle{Bold: true}),
 		widget.NewLabelWithStyle("Speed", fyne.TextAlignCenter, fyne.TextStyle{Bold: true}),
 		widget.NewLabelWithStyle("ETA", fyne.TextAlignCenter, fyne.TextStyle{Bold: true}),
 		widget.NewLabelWithStyle("Actions", fyne.TextAlignCenter, fyne.TextStyle{Bold: true}),
-	)
+	))
 
 	scrollable := container.NewVScroll(mw.list)
 	scrollable.SetMinSize(fyne.NewSize(880, 350))
@@ -99,6 +107,9 @@ func NewMainWindow(a fyne.App) *MainWindow {
 	// Restore previous downloads from history.
 	mw.restoreHistory()
 
+	// Start clipboard monitor if enabled.
+	mw.applyClipboardSetting()
+
 	// Background update check (once per 24h).
 	go mw.checkForUpdateSilent()
 
@@ -110,13 +121,47 @@ func (mw *MainWindow) Show() {
 	mw.window.Show()
 }
 
-// AddDownloadRow adds a new download row to the list.
+// AddDownloadRow adds a new download row to the list and schedules it.
 func (mw *MainWindow) AddDownloadRow(row *DownloadRow) {
 	mw.mu.Lock()
-	defer mw.mu.Unlock()
 	mw.downloads = append(mw.downloads, row)
 	mw.list.Add(row.container)
 	mw.updateStatusBar()
+	mw.mu.Unlock()
+	mw.schedule()
+}
+
+// schedule starts queued downloads while respecting the max-concurrent limit.
+// It must NOT be called while holding mw.mu.
+func (mw *MainWindow) schedule() {
+	max := mw.settings.MaxConcurrent
+	if max <= 0 {
+		max = 3
+	}
+
+	mw.mu.Lock()
+	active := 0
+	for _, r := range mw.downloads {
+		if r.status == rowStatusDownloading {
+			active++
+		}
+	}
+	var toStart []*DownloadRow
+	for _, r := range mw.downloads {
+		if active >= max {
+			break
+		}
+		if r.status == rowStatusQueued {
+			r.status = rowStatusDownloading // reserve the slot before unlocking
+			toStart = append(toStart, r)
+			active++
+		}
+	}
+	mw.mu.Unlock()
+
+	for _, r := range toStart {
+		r.start()
+	}
 }
 
 // RemoveDownloadRow removes a download row from the list.
@@ -135,34 +180,104 @@ func (mw *MainWindow) RemoveDownloadRow(row *DownloadRow) {
 
 func (mw *MainWindow) pauseAll() {
 	mw.mu.Lock()
-	defer mw.mu.Unlock()
-	for _, row := range mw.downloads {
+	rows := make([]*DownloadRow, len(mw.downloads))
+	copy(rows, mw.downloads)
+	mw.mu.Unlock()
+	for _, row := range rows {
 		row.Pause()
 	}
 }
 
 func (mw *MainWindow) resumeAll() {
 	mw.mu.Lock()
-	defer mw.mu.Unlock()
-	for _, row := range mw.downloads {
-		row.Resume()
+	rows := make([]*DownloadRow, len(mw.downloads))
+	copy(rows, mw.downloads)
+	mw.mu.Unlock()
+	for _, row := range rows {
+		if row.status == rowStatusPaused {
+			row.enqueue()
+		}
 	}
+	mw.schedule()
 }
 
 func (mw *MainWindow) cancelAll() {
 	mw.mu.Lock()
-	defer mw.mu.Unlock()
-	for _, row := range mw.downloads {
+	rows := make([]*DownloadRow, len(mw.downloads))
+	copy(rows, mw.downloads)
+	mw.mu.Unlock()
+	for _, row := range rows {
 		row.Cancel()
 	}
 }
 
+// applyClipboardSetting starts or stops the clipboard monitor to match the
+// current ClipboardMonitor preference.
+func (mw *MainWindow) applyClipboardSetting() {
+	if mw.settings.ClipboardMonitor && mw.clipStop == nil {
+		mw.clipStop = make(chan struct{})
+		// Seed with current content so we don't prompt for what's already there.
+		mw.clipLast = mw.window.Clipboard().Content()
+		go mw.monitorClipboard(mw.clipStop)
+	} else if !mw.settings.ClipboardMonitor && mw.clipStop != nil {
+		close(mw.clipStop)
+		mw.clipStop = nil
+	}
+}
+
+// monitorClipboard polls the clipboard for new URLs and offers to add them.
+func (mw *MainWindow) monitorClipboard(stop chan struct{}) {
+	ticker := time.NewTicker(1500 * time.Millisecond)
+	defer ticker.Stop()
+	for {
+		select {
+		case <-stop:
+			return
+		case <-ticker.C:
+			content := strings.TrimSpace(mw.window.Clipboard().Content())
+			if content == "" || content == mw.clipLast {
+				continue
+			}
+			mw.clipLast = content
+			if !looksLikeURL(content) {
+				continue
+			}
+			url := content
+			fyne.Do(func() {
+				dialog.ShowConfirm("URL Detected",
+					fmt.Sprintf("Add this download?\n\n%s", url),
+					func(yes bool) {
+						if yes {
+							ShowAddDialogWithURL(mw, url)
+						}
+					}, mw.window)
+			})
+		}
+	}
+}
+
+// looksLikeURL reports whether s is a single http(s) URL.
+func looksLikeURL(s string) bool {
+	if strings.ContainsAny(s, " \n\t") {
+		return false
+	}
+	u, err := url.ParseRequestURI(s)
+	if err != nil {
+		return false
+	}
+	return u.Scheme == "http" || u.Scheme == "https"
+}
+
 func (mw *MainWindow) updateStatusBar() {
-	var downloading, paused, completed, failed int
+	var downloading, queued, paused, completed, failed int
+	var totalSpeed float64
 	for _, row := range mw.downloads {
 		switch row.status {
 		case rowStatusDownloading:
 			downloading++
+			totalSpeed += row.speedBps
+		case rowStatusQueued:
+			queued++
 		case rowStatusPaused:
 			paused++
 		case rowStatusCompleted:
@@ -171,9 +286,16 @@ func (mw *MainWindow) updateStatusBar() {
 			failed++
 		}
 	}
-	msg := fmtf("Total: %d downloading, %d paused, %d completed", downloading, paused, completed)
+	if len(mw.downloads) == 0 {
+		mw.statusBar.SetText("Ready — add a URL to start downloading")
+		return
+	}
+	msg := fmtf("Total: %d downloading, %d queued, %d paused, %d completed", downloading, queued, paused, completed)
 	if failed > 0 {
 		msg += fmtf(", %d failed", failed)
+	}
+	if downloading > 0 && totalSpeed > 0 {
+		msg += fmtf("  •  ↓ %s", util.FormatSpeed(totalSpeed))
 	}
 	mw.statusBar.SetText(msg)
 }
@@ -365,7 +487,7 @@ func (mw *MainWindow) removeRowByHistoryID(id string) {
 	}
 }
 
-const appVersion = "2.2.0"
+const appVersion = "2.4.0"
 
 func showAboutDialog(mw *MainWindow) {
 	var logoImg *canvas.Image

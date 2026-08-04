@@ -1,0 +1,124 @@
+{
+  "totalFiles": 18,
+  "totalBatches": 2,
+  "batches": [
+    {
+      "id": "batch-vjkfb7",
+      "files": [
+        {
+          "path": "cmd/gdown/main.go",
+          "language": "go",
+          "lines": 199
+        },
+        {
+          "path": "cmd/gdown-gui/main.go",
+          "language": "go",
+          "lines": 9
+        },
+        {
+          "path": "internal/gui/add_dialog.go",
+          "language": "go",
+          "lines": 122
+        },
+        {
+          "path": "internal/gui/app.go",
+          "language": "go",
+          "lines": 46
+        },
+        {
+          "path": "internal/gui/download_row.go",
+          "language": "go",
+          "lines": 509
+        },
+        {
+          "path": "internal/gui/history.go",
+          "language": "go",
+          "lines": 159
+        },
+        {
+          "path": "internal/gui/main_window.go",
+          "language": "go",
+          "lines": 416
+        },
+        {
+          "path": "internal/gui/settings.go",
+          "language": "go",
+          "lines": 188
+        },
+        {
+          "path": "internal/gui/updater.go",
+          "language": "go",
+          "lines": 89
+        },
+        {
+          "path": "pkg/engine/chunk.go",
+          "language": "go",
+          "lines": 133
+        },
+        {
+          "path": "pkg/engine/config.go",
+          "language": "go",
+          "lines": 88
+        }
+      ],
+      "totalLines": 1958,
+      "directories": [
+        "cmd/gdown",
+        "cmd/gdown-gui",
+        "internal/gui",
+        "pkg/engine"
+      ],
+      "intraBatchImports": [],
+      "neighborFiles": []
+    },
+    {
+      "id": "batch-8vvj03",
+      "files": [
+        {
+          "path": "pkg/engine/engine.go",
+          "language": "go",
+          "lines": 361
+        },
+        {
+          "path": "pkg/engine/progress.go",
+          "language": "go",
+          "lines": 117
+        },
+        {
+          "path": "pkg/engine/resume.go",
+          "language": "go",
+          "lines": 141
+        },
+        {
+          "path": "pkg/engine/serial.go",
+          "language": "go",
+          "lines": 77
+        },
+        {
+          "path": "pkg/util/fileutil.go",
+          "language": "go",
+          "lines": 33
+        },
+        {
+          "path": "pkg/util/format.go",
+          "language": "go",
+          "lines": 48
+        },
+        {
+          "path": "pkg/util/http.go",
+          "language": "go",
+          "lines": 42
+        }
+      ],
+      "totalLines": 819,
+      "directories": [
+        "pkg/engine",
+        "pkg/util"
+      ],
+      "intraBatchImports": [],
+      "neighborFiles": []
+    }
+  ],
+  "isIncremental": false,
+  "changedFiles": []
+}

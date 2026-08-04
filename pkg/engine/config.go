@@ -25,6 +25,9 @@ type DownloadConfig struct {
 	Checksum     string        // expected hash (optional)
 	ChecksumAlgo string        // "md5", "sha256"
 	Headers      http.Header   // custom request headers
+	Username     string        // HTTP basic-auth username (optional)
+	Password     string        // HTTP basic-auth password (optional)
+	Mirrors      []string      // additional mirror URLs serving the same file (optional)
 	Parallel     bool          // enable parallel chunked download
 }
 
@@ -68,6 +71,7 @@ type ProgressInfo struct {
 	Status       DownloadStatus
 	ActiveChunks int
 	Percent      float64
+	Retries      int           // cumulative retry attempts so far
 }
 
 // ProgressFunc is called periodically with download progress.

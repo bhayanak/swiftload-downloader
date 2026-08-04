@@ -1,0 +1,386 @@
+{
+  "meta": {
+    "analyzedAt": "2026-06-08T17:58:54.676Z",
+    "totalDebtScore": 76,
+    "criticalItems": 0,
+    "highItems": 6,
+    "mediumItems": 2,
+    "lowItems": 13,
+    "inputs": {
+      "knowledgeGraph": "present",
+      "gitContext": "missing",
+      "runtimeContext": "missing"
+    }
+  },
+  "summary": {
+    "healthScore": 35,
+    "topConcerns": [
+      "6 high-complexity files",
+      "pkg/engine/engine.go has 50% of inbound file dependencies"
+    ],
+    "estimatedEffort": {
+      "critical": "none",
+      "high": "3-5 days",
+      "quickWins": "< 1 day each"
+    },
+    "confidence": "medium (file-level dependency edges are limited in current graph)"
+  },
+  "categories": {
+    "complexity": {
+      "score": 42,
+      "items": [
+        {
+          "severity": "high",
+          "type": "high-complexity-file",
+          "nodeId": "file:pkg/engine/engine.go",
+          "metric": {
+            "linesOfCode": 361,
+            "functions": 10,
+            "cyclomaticComplexity": 24
+          },
+          "suggestion": "Extract focused helper functions and reduce branching in this module.",
+          "effort": "medium",
+          "impact": "Improves maintainability for 2 connected modules",
+          "id": "DEBT-001",
+          "priority": 37
+        },
+        {
+          "severity": "high",
+          "type": "high-complexity-file",
+          "nodeId": "file:pkg/engine/progress.go",
+          "metric": {
+            "linesOfCode": 117,
+            "functions": 10,
+            "cyclomaticComplexity": 24
+          },
+          "suggestion": "Extract focused helper functions and reduce branching in this module.",
+          "effort": "medium",
+          "impact": "Improves maintainability for 0 connected modules",
+          "id": "DEBT-002",
+          "priority": 37
+        },
+        {
+          "severity": "high",
+          "type": "high-complexity-file",
+          "nodeId": "file:pkg/engine/resume.go",
+          "metric": {
+            "linesOfCode": 141,
+            "functions": 8,
+            "cyclomaticComplexity": 24
+          },
+          "suggestion": "Extract focused helper functions and reduce branching in this module.",
+          "effort": "medium",
+          "impact": "Improves maintainability for 0 connected modules",
+          "id": "DEBT-003",
+          "priority": 37
+        },
+        {
+          "severity": "high",
+          "type": "god-module",
+          "nodeId": "file:internal/gui/download_row.go",
+          "metric": {
+            "linesOfCode": 509,
+            "functions": 14,
+            "cyclomaticComplexity": 24
+          },
+          "suggestion": "Split UI orchestration and state management into smaller focused modules.",
+          "effort": "medium",
+          "impact": "Improves maintainability for 1 connected modules",
+          "id": "DEBT-004",
+          "priority": 38
+        },
+        {
+          "severity": "high",
+          "type": "high-complexity-file",
+          "nodeId": "file:internal/gui/history.go",
+          "metric": {
+            "linesOfCode": 159,
+            "functions": 11,
+            "cyclomaticComplexity": 24
+          },
+          "suggestion": "Extract focused helper functions and reduce branching in this module.",
+          "effort": "medium",
+          "impact": "Improves maintainability for 1 connected modules",
+          "id": "DEBT-005",
+          "priority": 37
+        },
+        {
+          "severity": "high",
+          "type": "high-complexity-file",
+          "nodeId": "file:internal/gui/main_window.go",
+          "metric": {
+            "linesOfCode": 416,
+            "functions": 18,
+            "cyclomaticComplexity": 24
+          },
+          "suggestion": "Extract focused helper functions and reduce branching in this module.",
+          "effort": "medium",
+          "impact": "Improves maintainability for 2 connected modules",
+          "id": "DEBT-006",
+          "priority": 39
+        }
+      ]
+    },
+    "coupling": {
+      "score": 4,
+      "items": [
+        {
+          "severity": "medium",
+          "type": "high-fan-coupling",
+          "nodeId": "file:pkg/engine/engine.go",
+          "metric": {
+            "fanIn": 2,
+            "fanOut": 0,
+            "instability": 0
+          },
+          "suggestion": "Introduce clear interfaces between GUI orchestration and engine internals to lower direct dependency pressure.",
+          "effort": "medium",
+          "id": "DEBT-007",
+          "priority": 26
+        }
+      ]
+    },
+    "dead-code": {
+      "score": 26,
+      "items": [
+        {
+          "severity": "low",
+          "type": "orphan-module",
+          "nodeId": "file:pkg/engine/progress.go",
+          "evidence": "No inbound file-level edges and unreachable from known entrypoints in current graph representation.",
+          "suggestion": "Verify runtime or dynamic references; delete or archive if truly unused.",
+          "effort": "trivial",
+          "id": "DEBT-008",
+          "priority": 21
+        },
+        {
+          "severity": "low",
+          "type": "orphan-module",
+          "nodeId": "file:pkg/engine/resume.go",
+          "evidence": "No inbound file-level edges and unreachable from known entrypoints in current graph representation.",
+          "suggestion": "Verify runtime or dynamic references; delete or archive if truly unused.",
+          "effort": "trivial",
+          "id": "DEBT-009",
+          "priority": 21
+        },
+        {
+          "severity": "low",
+          "type": "orphan-module",
+          "nodeId": "file:pkg/engine/serial.go",
+          "evidence": "No inbound file-level edges and unreachable from known entrypoints in current graph representation.",
+          "suggestion": "Verify runtime or dynamic references; delete or archive if truly unused.",
+          "effort": "trivial",
+          "id": "DEBT-010",
+          "priority": 21
+        },
+        {
+          "severity": "low",
+          "type": "orphan-module",
+          "nodeId": "file:pkg/util/fileutil.go",
+          "evidence": "No inbound file-level edges and unreachable from known entrypoints in current graph representation.",
+          "suggestion": "Verify runtime or dynamic references; delete or archive if truly unused.",
+          "effort": "trivial",
+          "id": "DEBT-011",
+          "priority": 21
+        },
+        {
+          "severity": "low",
+          "type": "orphan-module",
+          "nodeId": "file:pkg/util/format.go",
+          "evidence": "No inbound file-level edges and unreachable from known entrypoints in current graph representation.",
+          "suggestion": "Verify runtime or dynamic references; delete or archive if truly unused.",
+          "effort": "trivial",
+          "id": "DEBT-012",
+          "priority": 21
+        },
+        {
+          "severity": "low",
+          "type": "orphan-module",
+          "nodeId": "file:pkg/util/http.go",
+          "evidence": "No inbound file-level edges and unreachable from known entrypoints in current graph representation.",
+          "suggestion": "Verify runtime or dynamic references; delete or archive if truly unused.",
+          "effort": "trivial",
+          "id": "DEBT-013",
+          "priority": 21
+        },
+        {
+          "severity": "low",
+          "type": "orphan-module",
+          "nodeId": "file:internal/gui/add_dialog.go",
+          "evidence": "No inbound file-level edges and unreachable from known entrypoints in current graph representation.",
+          "suggestion": "Verify runtime or dynamic references; delete or archive if truly unused.",
+          "effort": "trivial",
+          "id": "DEBT-014",
+          "priority": 21
+        },
+        {
+          "severity": "low",
+          "type": "orphan-module",
+          "nodeId": "file:internal/gui/app.go",
+          "evidence": "No inbound file-level edges and unreachable from known entrypoints in current graph representation.",
+          "suggestion": "Verify runtime or dynamic references; delete or archive if truly unused.",
+          "effort": "trivial",
+          "id": "DEBT-015",
+          "priority": 21
+        },
+        {
+          "severity": "low",
+          "type": "orphan-module",
+          "nodeId": "file:internal/gui/download_row.go",
+          "evidence": "No inbound file-level edges and unreachable from known entrypoints in current graph representation.",
+          "suggestion": "Verify runtime or dynamic references; delete or archive if truly unused.",
+          "effort": "trivial",
+          "id": "DEBT-016",
+          "priority": 21
+        },
+        {
+          "severity": "low",
+          "type": "orphan-module",
+          "nodeId": "file:internal/gui/main_window.go",
+          "evidence": "No inbound file-level edges and unreachable from known entrypoints in current graph representation.",
+          "suggestion": "Verify runtime or dynamic references; delete or archive if truly unused.",
+          "effort": "trivial",
+          "id": "DEBT-017",
+          "priority": 21
+        },
+        {
+          "severity": "low",
+          "type": "orphan-module",
+          "nodeId": "file:internal/gui/updater.go",
+          "evidence": "No inbound file-level edges and unreachable from known entrypoints in current graph representation.",
+          "suggestion": "Verify runtime or dynamic references; delete or archive if truly unused.",
+          "effort": "trivial",
+          "id": "DEBT-018",
+          "priority": 21
+        },
+        {
+          "severity": "low",
+          "type": "orphan-module",
+          "nodeId": "file:pkg/engine/chunk.go",
+          "evidence": "No inbound file-level edges and unreachable from known entrypoints in current graph representation.",
+          "suggestion": "Verify runtime or dynamic references; delete or archive if truly unused.",
+          "effort": "trivial",
+          "id": "DEBT-019",
+          "priority": 21
+        },
+        {
+          "severity": "low",
+          "type": "orphan-module",
+          "nodeId": "file:pkg/engine/config.go",
+          "evidence": "No inbound file-level edges and unreachable from known entrypoints in current graph representation.",
+          "suggestion": "Verify runtime or dynamic references; delete or archive if truly unused.",
+          "effort": "trivial",
+          "id": "DEBT-020",
+          "priority": 21
+        }
+      ]
+    },
+    "duplication": {
+      "score": 4,
+      "items": [
+        {
+          "severity": "medium",
+          "type": "parallel-implementation",
+          "nodes": [
+            "file:cmd/gdown/main.go",
+            "file:cmd/gdown-gui/main.go"
+          ],
+          "description": "Multiple modules share basename 'main', signaling possible overlapping responsibilities.",
+          "suggestion": "Compare APIs and extract shared helper abstractions where behavior overlaps.",
+          "effort": "small",
+          "id": "DEBT-021",
+          "priority": 27
+        }
+      ]
+    },
+    "architectural-erosion": {
+      "score": 0,
+      "items": []
+    }
+  },
+  "trends": {
+    "debtGrowthRate": "n/a (single snapshot)",
+    "hotspots": [
+      {
+        "nodeId": "file:internal/gui/main_window.go",
+        "severity": "high",
+        "priority": 39,
+        "type": "high-complexity-file"
+      },
+      {
+        "nodeId": "file:internal/gui/download_row.go",
+        "severity": "high",
+        "priority": 38,
+        "type": "god-module"
+      },
+      {
+        "nodeId": "file:pkg/engine/engine.go",
+        "severity": "high",
+        "priority": 37,
+        "type": "high-complexity-file"
+      },
+      {
+        "nodeId": "file:pkg/engine/progress.go",
+        "severity": "high",
+        "priority": 37,
+        "type": "high-complexity-file"
+      },
+      {
+        "nodeId": "file:pkg/engine/resume.go",
+        "severity": "high",
+        "priority": 37,
+        "type": "high-complexity-file"
+      }
+    ]
+  },
+  "quickWins": [
+    {
+      "id": "DEBT-021",
+      "effort": "small",
+      "impact": "Multiple modules share basename 'main', signaling possible overlapping responsibilities.",
+      "action": "Compare APIs and extract shared helper abstractions where behavior overlaps."
+    },
+    {
+      "id": "DEBT-008",
+      "effort": "trivial",
+      "impact": "Reduces maintenance overhead in frequently referenced modules.",
+      "action": "Verify runtime or dynamic references; delete or archive if truly unused."
+    },
+    {
+      "id": "DEBT-009",
+      "effort": "trivial",
+      "impact": "Reduces maintenance overhead in frequently referenced modules.",
+      "action": "Verify runtime or dynamic references; delete or archive if truly unused."
+    },
+    {
+      "id": "DEBT-010",
+      "effort": "trivial",
+      "impact": "Reduces maintenance overhead in frequently referenced modules.",
+      "action": "Verify runtime or dynamic references; delete or archive if truly unused."
+    },
+    {
+      "id": "DEBT-011",
+      "effort": "trivial",
+      "impact": "Reduces maintenance overhead in frequently referenced modules.",
+      "action": "Verify runtime or dynamic references; delete or archive if truly unused."
+    },
+    {
+      "id": "DEBT-012",
+      "effort": "trivial",
+      "impact": "Reduces maintenance overhead in frequently referenced modules.",
+      "action": "Verify runtime or dynamic references; delete or archive if truly unused."
+    },
+    {
+      "id": "DEBT-013",
+      "effort": "trivial",
+      "impact": "Reduces maintenance overhead in frequently referenced modules.",
+      "action": "Verify runtime or dynamic references; delete or archive if truly unused."
+    },
+    {
+      "id": "DEBT-014",
+      "effort": "trivial",
+      "impact": "Reduces maintenance overhead in frequently referenced modules.",
+      "action": "Verify runtime or dynamic references; delete or archive if truly unused."
+    }
+  ]
+}

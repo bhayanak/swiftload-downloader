@@ -5,6 +5,42 @@ All notable changes to Swiftload Downloader will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.0] - 2026-08-04
+
+### Added
+- Download queue with a configurable max-concurrent limit; extra downloads wait in a "Queued" state and start automatically as slots free up
+- Clipboard URL auto-detect (opt-in): watches the clipboard and offers to add copied http(s) links
+- Desktop notifications when a download completes or fails (toggle in Settings)
+- Retry surfacing: the current retry count is shown inline next to the speed (e.g. `↻2`)
+- Per-download real-time speed sparkline graph in each row
+- Coloured status badges per row (blue=downloading, green=done, amber=paused, red=failed, slate=queued)
+- Card-style rows with hover highlight for a more modern list
+- Multi-mirror downloads: supply additional mirror URLs (GUI Mirrors field / `--mirror` CLI flag) and chunks are spread across hosts
+- Engine resume option `WithMirrors`
+
+### Changed
+- Add and Settings dialogs now keep their action buttons fixed while only the fields scroll, for smoother scrolling
+- Status bar now also reports the queued count
+
+### Fixed
+- Column alignment between the header and download rows after the card layout change
+
+## [2.3.0] - 2026-08-04
+
+### Added
+- HTTP Basic Authentication: `--user`/`--password` CLI flags and Username/Password fields in the Add dialog (for password-protected sites)
+- Custom request headers: `--header`/`-H` CLI flag (repeatable) and a multi-line Headers field in the Add dialog
+- Speed limiting: token-bucket throttle via `--limit` CLI flag (e.g. `500k`, `2m`) and a Speed limit field in the Add dialog
+- Resume options for the engine API: `WithAuth`, `WithHeaders`, `WithSpeedLimit`
+- Modern UI: brand accent theme (light/dark), icon toolbar and per-row action buttons, aggregate download speed in the status bar, and an empty-state hint
+
+### Fixed
+- **Critical resume bug**: paused parallel downloads no longer restart from zero — mid-chunk progress is now persisted to the resume sidecar and reused on resume
+- GUI Resume reuses the in-memory config (including credentials) so authenticated downloads continue correctly after pause
+
+### Security
+- Credentials and custom headers are never written to disk (history or resume state); they are re-supplied via CLI flags or the dialog when resuming
+
 ## [2.2.0] - 2026-05-26
 
 ### Added

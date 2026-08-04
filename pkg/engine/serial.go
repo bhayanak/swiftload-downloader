@@ -17,6 +17,7 @@ func serialDownload(
 	outfile string,
 	bufSize int64,
 	progress *progressTracker,
+	limiter *rateLimiter,
 ) error {
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
 	if err != nil {
@@ -60,6 +61,9 @@ func serialDownload(
 				return fmt.Errorf("write error: %w", werr)
 			}
 			progress.addBytes(int64(n))
+			if limiter != nil {
+				limiter.wait(ctx, int64(n))
+			}
 		}
 		if readErr == io.EOF {
 			break

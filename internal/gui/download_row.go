@@ -8,13 +8,14 @@ import (
 	"os/exec"
 	"path/filepath"
 	"runtime"
-	"strings"
 	"sync"
 	"time"
 
 	"fyne.io/fyne/v2"
+	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/dialog"
+	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 
 	"github.com/bhayanak/swiftload-downloader/pkg/engine"
@@ -34,12 +35,14 @@ const (
 
 // DownloadRow represents a single download in the GUI list.
 type DownloadRow struct {
-	container *fyne.Container
+	container fyne.CanvasObject
 
+	badge         *canvas.Text
 	nameLabel     *widget.Label
 	sizeLabel     *widget.Label
 	progressBar   *widget.ProgressBar
 	speedLabel    *widget.Label
+	spark         *sparkline
 	etaLabel      *widget.Label
 	pauseBtn      *widget.Button
 	restartBtn    *widget.Button
@@ -50,26 +53,56 @@ type DownloadRow struct {
 	dl        *engine.Download
 	cancel    context.CancelFunc
 	status    rowStatus
+	speedBps  float64
+	notified  bool
 	mu        sync.Mutex
 	mw        *MainWindow
 	historyID string
 	startedAt time.Time
 }
 
-// NewDownloadRow creates a new download row and starts the download.
+// buildRowContainer assembles the grid + hover card for a row.
+func (r *DownloadRow) buildRowContainer() {
+	nameCell := container.NewBorder(nil, nil, r.badge, nil, r.nameLabel)
+	speedCell := container.NewVBox(r.speedLabel, r.spark)
+	actions := container.NewHBox(r.pauseBtn, r.restartBtn, r.revealBtn, r.cancelBtn)
+
+	grid := container.NewGridWithColumns(6,
+		nameCell,
+		r.sizeLabel,
+		r.progressBar,
+		speedCell,
+		r.etaLabel,
+		actions,
+	)
+	r.container = newHoverCard(grid)
+}
+
+// applyBadge recolours the status dot to match the current status.
+// Must be called on the UI goroutine.
+func (r *DownloadRow) applyBadge() {
+	r.badge.Color = badgeColor(r.status)
+	r.badge.Refresh()
+}
+
+// NewDownloadRow creates a new download row in the queued state. The
+// MainWindow scheduler decides when to actually start it.
 func NewDownloadRow(mw *MainWindow, cfg engine.DownloadConfig) *DownloadRow {
 	id := fmt.Sprintf("%d", time.Now().UnixNano())
 	row := &DownloadRow{
 		mw:          mw,
 		cfg:         cfg,
+		badge:       newStatusBadge(),
 		nameLabel:   widget.NewLabel(filenameFromPath(cfg.OutputPath)),
 		sizeLabel:   widget.NewLabel("—"),
 		progressBar: widget.NewProgressBar(),
-		speedLabel:  widget.NewLabel("—"),
+		speedLabel:  widget.NewLabel("Queued"),
+		spark:       newSparkline(),
 		etaLabel:    widget.NewLabel("—"),
 		status:      rowStatusQueued,
 		historyID:   id,
 	}
+	row.badge.Color = badgeColor(rowStatusQueued)
 
 	// Persist to history.
 	mw.history.Add(HistoryEntry{
@@ -82,18 +115,18 @@ func NewDownloadRow(mw *MainWindow, cfg engine.DownloadConfig) *DownloadRow {
 		Parallel:   cfg.Parallel,
 	})
 
-	row.pauseBtn = widget.NewButton("⏸", func() {
+	row.pauseBtn = widget.NewButtonWithIcon("", theme.MediaPauseIcon(), func() {
 		row.togglePause()
 	})
-	row.restartBtn = widget.NewButton("↻", func() {
+	row.restartBtn = widget.NewButtonWithIcon("", theme.ViewRefreshIcon(), func() {
 		row.Restart()
 	})
 	row.restartBtn.Hide()
-	row.revealBtn = widget.NewButton("📂", func() {
+	row.revealBtn = widget.NewButtonWithIcon("", theme.FolderOpenIcon(), func() {
 		row.revealOrRedownload()
 	})
 	row.revealBtn.Hide()
-	row.cancelBtn = widget.NewButton("✕", func() {
+	row.cancelBtn = widget.NewButtonWithIcon("", theme.DeleteIcon(), func() {
 		ShowDeleteDialog(mw, row)
 	})
 
@@ -102,19 +135,43 @@ func NewDownloadRow(mw *MainWindow, cfg engine.DownloadConfig) *DownloadRow {
 	row.etaLabel.Alignment = fyne.TextAlignCenter
 	row.nameLabel.Truncation = fyne.TextTruncateEllipsis
 
-	actions := container.NewHBox(row.pauseBtn, row.restartBtn, row.revealBtn, row.cancelBtn)
-
-	row.container = container.NewGridWithColumns(6,
-		row.nameLabel,
-		row.sizeLabel,
-		row.progressBar,
-		row.speedLabel,
-		row.etaLabel,
-		actions,
-	)
-
-	row.startDownload()
+	row.buildRowContainer()
 	return row
+}
+
+// start transitions the row into the downloading state and launches the
+// engine. Called by the MainWindow scheduler.
+func (r *DownloadRow) start() {
+	r.mw.history.Update(r.historyID, func(e *HistoryEntry) {
+		e.Status = "downloading"
+	})
+	fyne.Do(func() {
+		r.pauseBtn.SetIcon(theme.MediaPauseIcon())
+		r.pauseBtn.Show()
+		r.restartBtn.Hide()
+		r.speedLabel.SetText("—")
+		r.etaLabel.SetText("—")
+		r.applyBadge()
+	})
+	r.startDownload()
+}
+
+// enqueue marks the row as waiting for a free download slot.
+func (r *DownloadRow) enqueue() {
+	r.status = rowStatusQueued
+	r.notified = false
+	r.mw.history.Update(r.historyID, func(e *HistoryEntry) {
+		e.Status = "downloading"
+	})
+	fyne.Do(func() {
+		r.pauseBtn.SetIcon(theme.MediaPauseIcon())
+		r.pauseBtn.Show()
+		r.restartBtn.Hide()
+		r.speedLabel.SetText("Queued")
+		r.etaLabel.SetText("—")
+		r.spark.clear()
+		r.applyBadge()
+	})
 }
 
 // startDownload begins (or restarts) the download.
@@ -145,12 +202,17 @@ func (r *DownloadRow) startDownload() {
 					e.Status = "failed"
 				})
 				errMsg := truncate(err.Error(), 40)
+				r.notifyDone("Download failed", filenameFromPath(r.cfg.OutputPath))
 				fyne.Do(func() {
 					r.speedLabel.SetText("Failed")
 					r.etaLabel.SetText(errMsg)
+					r.speedBps = 0
+					r.spark.clear()
 					r.pauseBtn.Hide()
 					r.restartBtn.Show()
+					r.applyBadge()
 					r.mw.refreshStatusBar()
+					r.mw.schedule()
 				})
 			}
 		} else {
@@ -169,6 +231,7 @@ func (r *DownloadRow) startDownload() {
 					e.TotalSize = finalInfo.Downloaded
 				}
 			})
+			r.notifyDone("Download complete", filenameFromPath(r.cfg.OutputPath))
 			fyne.Do(func() {
 				// Show final size (use TotalSize if known, otherwise Downloaded).
 				finalSize := finalInfo.TotalSize
@@ -181,12 +244,25 @@ func (r *DownloadRow) startDownload() {
 				r.speedLabel.SetText("Done")
 				r.etaLabel.SetText(util.FormatDuration(elapsed))
 				r.progressBar.SetValue(1.0)
+				r.speedBps = 0
+				r.spark.clear()
 				r.pauseBtn.Hide()
 				r.revealBtn.Show()
+				r.applyBadge()
 				r.mw.refreshStatusBar()
+				r.mw.schedule()
 			})
 		}
 	}()
+}
+
+// notifyDone sends a desktop notification if enabled in settings.
+func (r *DownloadRow) notifyDone(title, body string) {
+	if r.notified || !r.mw.settings.Notifications {
+		return
+	}
+	r.notified = true
+	r.mw.app.SendNotification(fyne.NewNotification(title, body))
 }
 
 func (r *DownloadRow) updateFromProgress(info engine.ProgressInfo) {
@@ -205,28 +281,41 @@ func (r *DownloadRow) updateFromProgress(info engine.ProgressInfo) {
 				e.Downloaded = info.Downloaded
 			})
 		}
-		r.speedLabel.SetText(util.FormatSpeed(info.Speed))
+		speedText := util.FormatSpeed(info.Speed)
+		if info.Retries > 0 {
+			speedText = fmt.Sprintf("%s  ↻%d", speedText, info.Retries)
+		}
+		r.speedLabel.SetText(speedText)
+		r.speedBps = info.Speed
+		r.spark.push(info.Speed)
 		if info.ETA > 0 {
 			r.etaLabel.SetText(util.FormatDuration(info.ETA))
 		} else if !r.startedAt.IsZero() {
 			r.etaLabel.SetText(util.FormatDuration(time.Since(r.startedAt)))
 		}
+		r.mw.refreshStatusBar()
 	})
 }
 
 func (r *DownloadRow) togglePause() {
 	r.mu.Lock()
 	defer r.mu.Unlock()
-	if r.status == rowStatusDownloading {
+	switch r.status {
+	case rowStatusDownloading:
 		r.Pause()
-	} else if r.status == rowStatusPaused {
-		r.Resume()
+		r.mw.schedule()
+	case rowStatusPaused:
+		r.enqueue()
+		r.mw.schedule()
+	case rowStatusQueued:
+		r.Pause()
 	}
 }
 
 // Pause cancels the current download context (engine saves resume state).
+// It also handles pausing a still-queued row.
 func (r *DownloadRow) Pause() {
-	if r.status != rowStatusDownloading {
+	if r.status != rowStatusDownloading && r.status != rowStatusQueued {
 		return
 	}
 	r.status = rowStatusPaused
@@ -237,84 +326,24 @@ func (r *DownloadRow) Pause() {
 		e.Status = "paused"
 	})
 	fyne.Do(func() {
-		r.pauseBtn.SetText("▶")
+		r.pauseBtn.SetIcon(theme.MediaPlayIcon())
 		r.speedLabel.SetText("Paused")
+		r.speedBps = 0
+		r.spark.clear()
+		r.applyBadge()
 		r.mw.refreshStatusBar()
 	})
 }
 
-// Resume re-starts the download from where it left off using saved resume state.
-// If no resume state exists, automatically falls back to a fresh download.
+// Resume re-queues a paused download; the scheduler starts it when a slot is
+// free. The engine auto-resumes from saved per-chunk state on disk and the
+// in-memory config (incl. credentials) is reused.
 func (r *DownloadRow) Resume() {
 	if r.status != rowStatusPaused {
 		return
 	}
-	r.status = rowStatusDownloading
-	r.mw.history.Update(r.historyID, func(e *HistoryEntry) {
-		e.Status = "downloading"
-	})
-	fyne.Do(func() {
-		r.pauseBtn.SetText("⏸")
-		r.speedLabel.SetText("—")
-		r.etaLabel.SetText("—")
-	})
-
-	r.startedAt = time.Now()
-	ctx, cancel := context.WithCancel(context.Background())
-	r.cancel = cancel
-	outputPath := r.cfg.OutputPath
-
-	go func() {
-		err := engine.ResumeDownload(ctx, outputPath, func(info engine.ProgressInfo) {
-			r.updateFromProgress(info)
-		})
-		r.mu.Lock()
-		defer r.mu.Unlock()
-		if err != nil {
-			// If no resume state found, fall back to fresh download automatically.
-			if strings.Contains(err.Error(), "no resume state") {
-				log.Printf("[resume] no resume state for %s, restarting fresh", outputPath)
-				r.mu.Unlock()
-				r.Restart()
-				r.mu.Lock()
-				return
-			}
-			log.Printf("[resume] FAILED %s: %v", outputPath, err)
-			if r.status != rowStatusCancelled && r.status != rowStatusPaused {
-				r.status = rowStatusFailed
-				r.mw.history.Update(r.historyID, func(e *HistoryEntry) {
-					e.Status = "failed"
-				})
-				errMsg := truncate(err.Error(), 40)
-				fyne.Do(func() {
-					r.speedLabel.SetText("Failed")
-					r.etaLabel.SetText(errMsg)
-					r.pauseBtn.Hide()
-					r.restartBtn.Show()
-					r.mw.refreshStatusBar()
-				})
-			}
-		} else {
-			log.Printf("[resume] DONE %s", outputPath)
-			elapsed := time.Since(r.startedAt)
-			r.status = rowStatusCompleted
-			r.mw.history.Update(r.historyID, func(e *HistoryEntry) {
-				e.Status = "completed"
-				e.FinishedAt = time.Now()
-				if e.TotalSize > 0 {
-					e.Downloaded = e.TotalSize
-				}
-			})
-			fyne.Do(func() {
-				r.speedLabel.SetText("Done")
-				r.etaLabel.SetText(util.FormatDuration(elapsed))
-				r.progressBar.SetValue(1.0)
-				r.pauseBtn.Hide()
-				r.revealBtn.Show()
-				r.mw.refreshStatusBar()
-			})
-		}
-	}()
+	r.enqueue()
+	r.mw.schedule()
 }
 
 // Restart re-downloads from scratch (when resume fails or download failed).
@@ -322,15 +351,18 @@ func (r *DownloadRow) Restart() {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 	log.Printf("[restart] restarting download: %s", r.cfg.OutputPath)
+	r.notified = false
 	r.status = rowStatusDownloading
 	fyne.Do(func() {
 		r.progressBar.SetValue(0)
 		r.speedLabel.SetText("—")
 		r.etaLabel.SetText("—")
 		r.sizeLabel.SetText("—")
+		r.spark.clear()
+		r.applyBadge()
 		r.restartBtn.Hide()
 		r.revealBtn.Hide()
-		r.pauseBtn.SetText("⏸")
+		r.pauseBtn.SetIcon(theme.MediaPauseIcon())
 		r.pauseBtn.Show()
 	})
 	r.startDownload()
@@ -407,10 +439,12 @@ func RestoreDownloadRow(mw *MainWindow, entry HistoryEntry) *DownloadRow {
 			Workers:    entry.Workers,
 			Parallel:   entry.Parallel,
 		},
+		badge:       newStatusBadge(),
 		nameLabel:   widget.NewLabel(filenameFromPath(entry.OutputPath)),
 		sizeLabel:   widget.NewLabel("—"),
 		progressBar: widget.NewProgressBar(),
 		speedLabel:  widget.NewLabel("—"),
+		spark:       newSparkline(),
 		etaLabel:    widget.NewLabel("—"),
 	}
 
@@ -450,18 +484,19 @@ func RestoreDownloadRow(mw *MainWindow, entry HistoryEntry) *DownloadRow {
 		row.status = rowStatusCancelled
 		row.speedLabel.SetText("Cancelled")
 	}
+	row.badge.Color = badgeColor(row.status)
 
 	// Buttons.
-	row.pauseBtn = widget.NewButton("▶", func() {
+	row.pauseBtn = widget.NewButtonWithIcon("", theme.MediaPlayIcon(), func() {
 		row.togglePause()
 	})
-	row.restartBtn = widget.NewButton("↻", func() {
+	row.restartBtn = widget.NewButtonWithIcon("", theme.ViewRefreshIcon(), func() {
 		row.Restart()
 	})
-	row.revealBtn = widget.NewButton("📂", func() {
+	row.revealBtn = widget.NewButtonWithIcon("", theme.FolderOpenIcon(), func() {
 		row.revealOrRedownload()
 	})
-	row.cancelBtn = widget.NewButton("✕", func() {
+	row.cancelBtn = widget.NewButtonWithIcon("", theme.DeleteIcon(), func() {
 		ShowDeleteDialog(mw, row)
 	})
 
@@ -474,7 +509,7 @@ func RestoreDownloadRow(mw *MainWindow, entry HistoryEntry) *DownloadRow {
 		row.pauseBtn.Hide()
 		row.revealBtn.Hide()
 	case rowStatusPaused:
-		row.pauseBtn.SetText("▶")
+		row.pauseBtn.SetIcon(theme.MediaPlayIcon())
 		row.restartBtn.Hide()
 		row.revealBtn.Hide()
 	default:
@@ -483,21 +518,12 @@ func RestoreDownloadRow(mw *MainWindow, entry HistoryEntry) *DownloadRow {
 		row.revealBtn.Hide()
 	}
 
-	actions := container.NewHBox(row.pauseBtn, row.restartBtn, row.revealBtn, row.cancelBtn)
-
 	row.sizeLabel.Alignment = fyne.TextAlignCenter
 	row.speedLabel.Alignment = fyne.TextAlignCenter
 	row.etaLabel.Alignment = fyne.TextAlignCenter
 	row.nameLabel.Truncation = fyne.TextTruncateEllipsis
 
-	row.container = container.NewGridWithColumns(6,
-		row.nameLabel,
-		row.sizeLabel,
-		row.progressBar,
-		row.speedLabel,
-		row.etaLabel,
-		actions,
-	)
+	row.buildRowContainer()
 
 	return row
 }

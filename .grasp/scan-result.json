@@ -1,0 +1,271 @@
+{
+  "name": "swiftload-downloader",
+  "projectPath": "/Users/yadava/Documents/copilot-work/swiftload-downloader",
+  "languages": [
+    "go"
+  ],
+  "frameworks": [],
+  "gitMeta": {
+    "commitHash": "3c01dfad29b3957d4ed455bb43aea62f68146bdb",
+    "branch": "main"
+  },
+  "totalFiles": 41,
+  "totalLines": 22873,
+  "categoryCounts": {
+    "script": 1,
+    "config": 3,
+    "other": 12,
+    "docs": 2,
+    "code": 18,
+    "test": 5
+  },
+  "files": [
+    {
+      "path": "install.sh",
+      "language": null,
+      "category": "script",
+      "lines": 414
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "language": null,
+      "category": "config",
+      "lines": 88
+    },
+    {
+      "path": ".github/workflows/release.yml",
+      "language": null,
+      "category": "config",
+      "lines": 91
+    },
+    {
+      "path": ".gitignore",
+      "language": null,
+      "category": "other",
+      "lines": 45
+    },
+    {
+      "path": ".goreleaser.yaml",
+      "language": null,
+      "category": "config",
+      "lines": 54
+    },
+    {
+      "path": "CHANGELOG.md",
+      "language": null,
+      "category": "docs",
+      "lines": 60
+    },
+    {
+      "path": "LICENSE",
+      "language": null,
+      "category": "other",
+      "lines": 22
+    },
+    {
+      "path": "Makefile",
+      "language": null,
+      "category": "other",
+      "lines": 57
+    },
+    {
+      "path": "README.md",
+      "language": null,
+      "category": "docs",
+      "lines": 213
+    },
+    {
+      "path": "assets/1.png",
+      "language": null,
+      "category": "other",
+      "lines": 441
+    },
+    {
+      "path": "assets/2.png",
+      "language": null,
+      "category": "other",
+      "lines": 356
+    },
+    {
+      "path": "assets/3.png",
+      "language": null,
+      "category": "other",
+      "lines": 787
+    },
+    {
+      "path": "assets/4.png",
+      "language": null,
+      "category": "other",
+      "lines": 730
+    },
+    {
+      "path": "assets/5.png",
+      "language": null,
+      "category": "other",
+      "lines": 585
+    },
+    {
+      "path": "assets/logo.png",
+      "language": null,
+      "category": "other",
+      "lines": 7513
+    },
+    {
+      "path": "cmd/gdown-gui/main.go",
+      "language": "go",
+      "category": "code",
+      "lines": 9
+    },
+    {
+      "path": "cmd/gdown/main.go",
+      "language": "go",
+      "category": "code",
+      "lines": 199
+    },
+    {
+      "path": "go.mod",
+      "language": null,
+      "category": "other",
+      "lines": 46
+    },
+    {
+      "path": "go.sum",
+      "language": null,
+      "category": "other",
+      "lines": 90
+    },
+    {
+      "path": "internal/gui/add_dialog.go",
+      "language": "go",
+      "category": "code",
+      "lines": 122
+    },
+    {
+      "path": "internal/gui/app.go",
+      "language": "go",
+      "category": "code",
+      "lines": 46
+    },
+    {
+      "path": "internal/gui/assets/icon.png",
+      "language": null,
+      "category": "other",
+      "lines": 7513
+    },
+    {
+      "path": "internal/gui/download_row.go",
+      "language": "go",
+      "category": "code",
+      "lines": 509
+    },
+    {
+      "path": "internal/gui/history.go",
+      "language": "go",
+      "category": "code",
+      "lines": 159
+    },
+    {
+      "path": "internal/gui/main_window.go",
+      "language": "go",
+      "category": "code",
+      "lines": 416
+    },
+    {
+      "path": "internal/gui/settings.go",
+      "language": "go",
+      "category": "code",
+      "lines": 188
+    },
+    {
+      "path": "internal/gui/updater.go",
+      "language": "go",
+      "category": "code",
+      "lines": 89
+    },
+    {
+      "path": "internal/gui/updater_test.go",
+      "language": "go",
+      "category": "test",
+      "lines": 59
+    },
+    {
+      "path": "pkg/engine/chunk.go",
+      "language": "go",
+      "category": "code",
+      "lines": 133
+    },
+    {
+      "path": "pkg/engine/config.go",
+      "language": "go",
+      "category": "code",
+      "lines": 88
+    },
+    {
+      "path": "pkg/engine/config_test.go",
+      "language": "go",
+      "category": "test",
+      "lines": 152
+    },
+    {
+      "path": "pkg/engine/engine.go",
+      "language": "go",
+      "category": "code",
+      "lines": 361
+    },
+    {
+      "path": "pkg/engine/engine_test.go",
+      "language": "go",
+      "category": "test",
+      "lines": 609
+    },
+    {
+      "path": "pkg/engine/progress.go",
+      "language": "go",
+      "category": "code",
+      "lines": 117
+    },
+    {
+      "path": "pkg/engine/resume.go",
+      "language": "go",
+      "category": "code",
+      "lines": 141
+    },
+    {
+      "path": "pkg/engine/serial.go",
+      "language": "go",
+      "category": "code",
+      "lines": 77
+    },
+    {
+      "path": "pkg/util/fileutil.go",
+      "language": "go",
+      "category": "code",
+      "lines": 33
+    },
+    {
+      "path": "pkg/util/fileutil_test.go",
+      "language": "go",
+      "category": "test",
+      "lines": 104
+    },
+    {
+      "path": "pkg/util/format.go",
+      "language": "go",
+      "category": "code",
+      "lines": 48
+    },
+    {
+      "path": "pkg/util/format_test.go",
+      "language": "go",
+      "category": "test",
+      "lines": 67
+    },
+    {
+      "path": "pkg/util/http.go",
+      "language": "go",
+      "category": "code",
+      "lines": 42
+    }
+  ],
+  "scannedAt": "2026-06-01T10:00:19.410Z"
+}

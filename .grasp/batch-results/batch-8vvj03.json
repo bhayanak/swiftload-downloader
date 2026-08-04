@@ -1,0 +1,911 @@
+{
+  "nodes": [
+    {
+      "id": "file:pkg/engine/engine.go",
+      "type": "file",
+      "name": "engine.go",
+      "filePath": "pkg/engine/engine.go",
+      "summary": "",
+      "tags": [
+        "go"
+      ],
+      "complexity": "complex",
+      "language": "go"
+    },
+    {
+      "id": "function:pkg/engine/engine.go:NewDownload",
+      "type": "function",
+      "name": "NewDownload",
+      "filePath": "pkg/engine/engine.go",
+      "lineRange": [
+        37,
+        37
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/engine.go:headerTransport.RoundTrip",
+      "type": "function",
+      "name": "headerTransport.RoundTrip",
+      "filePath": "pkg/engine/engine.go",
+      "lineRange": [
+        75,
+        75
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/engine.go:Download.OnProgress",
+      "type": "function",
+      "name": "Download.OnProgress",
+      "filePath": "pkg/engine/engine.go",
+      "lineRange": [
+        87,
+        87
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/engine.go:Download.Status",
+      "type": "function",
+      "name": "Download.Status",
+      "filePath": "pkg/engine/engine.go",
+      "lineRange": [
+        92,
+        92
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/engine.go:Download.Info",
+      "type": "function",
+      "name": "Download.Info",
+      "filePath": "pkg/engine/engine.go",
+      "lineRange": [
+        97,
+        97
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/engine.go:Download.Cancel",
+      "type": "function",
+      "name": "Download.Cancel",
+      "filePath": "pkg/engine/engine.go",
+      "lineRange": [
+        102,
+        102
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/engine.go:Download.Start",
+      "type": "function",
+      "name": "Download.Start",
+      "filePath": "pkg/engine/engine.go",
+      "lineRange": [
+        112,
+        112
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/engine.go:Download.parallelDownload",
+      "type": "function",
+      "name": "Download.parallelDownload",
+      "filePath": "pkg/engine/engine.go",
+      "lineRange": [
+        156,
+        156
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/engine.go:Download.verifyChecksum",
+      "type": "function",
+      "name": "Download.verifyChecksum",
+      "filePath": "pkg/engine/engine.go",
+      "lineRange": [
+        306,
+        306
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/engine.go:ResumeDownload",
+      "type": "function",
+      "name": "ResumeDownload",
+      "filePath": "pkg/engine/engine.go",
+      "lineRange": [
+        335,
+        335
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:pkg/engine/engine.go:Download",
+      "type": "class",
+      "name": "Download",
+      "filePath": "pkg/engine/engine.go",
+      "lineRange": [
+        27,
+        27
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:pkg/engine/engine.go:headerTransport",
+      "type": "class",
+      "name": "headerTransport",
+      "filePath": "pkg/engine/engine.go",
+      "lineRange": [
+        70,
+        70
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:pkg/engine/progress.go",
+      "type": "file",
+      "name": "progress.go",
+      "filePath": "pkg/engine/progress.go",
+      "summary": "",
+      "tags": [
+        "go"
+      ],
+      "complexity": "complex",
+      "language": "go"
+    },
+    {
+      "id": "function:pkg/engine/progress.go:newProgressTracker",
+      "type": "function",
+      "name": "newProgressTracker",
+      "filePath": "pkg/engine/progress.go",
+      "lineRange": [
+        19,
+        19
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/progress.go:progressTracker.addCallback",
+      "type": "function",
+      "name": "progressTracker.addCallback",
+      "filePath": "pkg/engine/progress.go",
+      "lineRange": [
+        27,
+        27
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/progress.go:progressTracker.setStatus",
+      "type": "function",
+      "name": "progressTracker.setStatus",
+      "filePath": "pkg/engine/progress.go",
+      "lineRange": [
+        33,
+        33
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/progress.go:progressTracker.getStatus",
+      "type": "function",
+      "name": "progressTracker.getStatus",
+      "filePath": "pkg/engine/progress.go",
+      "lineRange": [
+        39,
+        39
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/progress.go:progressTracker.addBytes",
+      "type": "function",
+      "name": "progressTracker.addBytes",
+      "filePath": "pkg/engine/progress.go",
+      "lineRange": [
+        45,
+        45
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/progress.go:progressTracker.getDownloaded",
+      "type": "function",
+      "name": "progressTracker.getDownloaded",
+      "filePath": "pkg/engine/progress.go",
+      "lineRange": [
+        49,
+        49
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/progress.go:progressTracker.setDownloaded",
+      "type": "function",
+      "name": "progressTracker.setDownloaded",
+      "filePath": "pkg/engine/progress.go",
+      "lineRange": [
+        53,
+        53
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/progress.go:progressTracker.info",
+      "type": "function",
+      "name": "progressTracker.info",
+      "filePath": "pkg/engine/progress.go",
+      "lineRange": [
+        57,
+        57
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/progress.go:progressTracker.notify",
+      "type": "function",
+      "name": "progressTracker.notify",
+      "filePath": "pkg/engine/progress.go",
+      "lineRange": [
+        87,
+        87
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/progress.go:progressTracker.startTicker",
+      "type": "function",
+      "name": "progressTracker.startTicker",
+      "filePath": "pkg/engine/progress.go",
+      "lineRange": [
+        101,
+        101
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:pkg/engine/progress.go:progressTracker",
+      "type": "class",
+      "name": "progressTracker",
+      "filePath": "pkg/engine/progress.go",
+      "lineRange": [
+        10,
+        10
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:pkg/engine/resume.go",
+      "type": "file",
+      "name": "resume.go",
+      "filePath": "pkg/engine/resume.go",
+      "summary": "",
+      "tags": [
+        "go"
+      ],
+      "complexity": "complex",
+      "language": "go"
+    },
+    {
+      "id": "function:pkg/engine/resume.go:resumeFilePath",
+      "type": "function",
+      "name": "resumeFilePath",
+      "filePath": "pkg/engine/resume.go",
+      "lineRange": [
+        39,
+        39
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/resume.go:saveResumeState",
+      "type": "function",
+      "name": "saveResumeState",
+      "filePath": "pkg/engine/resume.go",
+      "lineRange": [
+        44,
+        44
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/resume.go:loadResumeState",
+      "type": "function",
+      "name": "loadResumeState",
+      "filePath": "pkg/engine/resume.go",
+      "lineRange": [
+        59,
+        59
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/resume.go:removeResumeState",
+      "type": "function",
+      "name": "removeResumeState",
+      "filePath": "pkg/engine/resume.go",
+      "lineRange": [
+        76,
+        76
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/resume.go:newResumeState",
+      "type": "function",
+      "name": "newResumeState",
+      "filePath": "pkg/engine/resume.go",
+      "lineRange": [
+        81,
+        81
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:pkg/engine/resume.go:ResumeState.isResumable",
+      "type": "function",
+      "name": "ResumeState.isResumable",
+      "filePath": "pkg/engine/resume.go",
+      "lineRange": [
+        107,
+        107
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:pkg/engine/resume.go:ResumeState.incompleteChunks",
+      "type": "function",
+      "name": "ResumeState.incompleteChunks",
+      "filePath": "pkg/engine/resume.go",
+      "lineRange": [
+        123,
+        123
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/resume.go:ResumeState.totalDownloaded",
+      "type": "function",
+      "name": "ResumeState.totalDownloaded",
+      "filePath": "pkg/engine/resume.go",
+      "lineRange": [
+        134,
+        134
+      ],
+      "summary": "",
+      "tags": [],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:pkg/engine/resume.go:ResumeState",
+      "type": "class",
+      "name": "ResumeState",
+      "filePath": "pkg/engine/resume.go",
+      "lineRange": [
+        11,
+        11
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:pkg/engine/resume.go:ChunkState",
+      "type": "class",
+      "name": "ChunkState",
+      "filePath": "pkg/engine/resume.go",
+      "lineRange": [
+        25,
+        25
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:pkg/engine/resume.go:ChecksumInfo",
+      "type": "class",
+      "name": "ChecksumInfo",
+      "filePath": "pkg/engine/resume.go",
+      "lineRange": [
+        33,
+        33
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:pkg/engine/serial.go",
+      "type": "file",
+      "name": "serial.go",
+      "filePath": "pkg/engine/serial.go",
+      "summary": "",
+      "tags": [
+        "go"
+      ],
+      "complexity": "simple",
+      "language": "go"
+    },
+    {
+      "id": "file:pkg/util/fileutil.go",
+      "type": "file",
+      "name": "fileutil.go",
+      "filePath": "pkg/util/fileutil.go",
+      "summary": "",
+      "tags": [
+        "go",
+        "utility"
+      ],
+      "complexity": "simple",
+      "language": "go"
+    },
+    {
+      "id": "function:pkg/util/fileutil.go:CreateOrOpenFile",
+      "type": "function",
+      "name": "CreateOrOpenFile",
+      "filePath": "pkg/util/fileutil.go",
+      "lineRange": [
+        10,
+        10
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/util/fileutil.go:PreallocateFile",
+      "type": "function",
+      "name": "PreallocateFile",
+      "filePath": "pkg/util/fileutil.go",
+      "lineRange": [
+        19,
+        19
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/util/fileutil.go:SyncAndClose",
+      "type": "function",
+      "name": "SyncAndClose",
+      "filePath": "pkg/util/fileutil.go",
+      "lineRange": [
+        27,
+        27
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:pkg/util/format.go",
+      "type": "file",
+      "name": "format.go",
+      "filePath": "pkg/util/format.go",
+      "summary": "",
+      "tags": [
+        "go",
+        "utility"
+      ],
+      "complexity": "simple",
+      "language": "go"
+    },
+    {
+      "id": "function:pkg/util/format.go:FormatBytes",
+      "type": "function",
+      "name": "FormatBytes",
+      "filePath": "pkg/util/format.go",
+      "lineRange": [
+        9,
+        9
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/util/format.go:FormatDuration",
+      "type": "function",
+      "name": "FormatDuration",
+      "filePath": "pkg/util/format.go",
+      "lineRange": [
+        23,
+        23
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/util/format.go:FormatSpeed",
+      "type": "function",
+      "name": "FormatSpeed",
+      "filePath": "pkg/util/format.go",
+      "lineRange": [
+        40,
+        40
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:pkg/util/http.go",
+      "type": "file",
+      "name": "http.go",
+      "filePath": "pkg/util/http.go",
+      "summary": "",
+      "tags": [
+        "go",
+        "utility"
+      ],
+      "complexity": "simple",
+      "language": "go"
+    },
+    {
+      "id": "function:pkg/util/http.go:NewTransport",
+      "type": "function",
+      "name": "NewTransport",
+      "filePath": "pkg/util/http.go",
+      "lineRange": [
+        13,
+        13
+      ],
+      "summary": "",
+      "tags": [
+        "exported"
+      ],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:pkg/engine/engine.go",
+      "target": "function:pkg/engine/engine.go:NewDownload",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/engine.go",
+      "target": "function:pkg/engine/engine.go:headerTransport.RoundTrip",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/engine.go",
+      "target": "function:pkg/engine/engine.go:Download.OnProgress",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/engine.go",
+      "target": "function:pkg/engine/engine.go:Download.Status",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/engine.go",
+      "target": "function:pkg/engine/engine.go:Download.Info",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/engine.go",
+      "target": "function:pkg/engine/engine.go:Download.Cancel",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/engine.go",
+      "target": "function:pkg/engine/engine.go:Download.Start",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/engine.go",
+      "target": "function:pkg/engine/engine.go:Download.parallelDownload",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/engine.go",
+      "target": "function:pkg/engine/engine.go:Download.verifyChecksum",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/engine.go",
+      "target": "function:pkg/engine/engine.go:ResumeDownload",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/engine.go",
+      "target": "class:pkg/engine/engine.go:Download",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/engine.go",
+      "target": "class:pkg/engine/engine.go:headerTransport",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/progress.go",
+      "target": "function:pkg/engine/progress.go:newProgressTracker",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/progress.go",
+      "target": "function:pkg/engine/progress.go:progressTracker.addCallback",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/progress.go",
+      "target": "function:pkg/engine/progress.go:progressTracker.setStatus",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/progress.go",
+      "target": "function:pkg/engine/progress.go:progressTracker.getStatus",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/progress.go",
+      "target": "function:pkg/engine/progress.go:progressTracker.addBytes",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/progress.go",
+      "target": "function:pkg/engine/progress.go:progressTracker.getDownloaded",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/progress.go",
+      "target": "function:pkg/engine/progress.go:progressTracker.setDownloaded",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/progress.go",
+      "target": "function:pkg/engine/progress.go:progressTracker.info",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/progress.go",
+      "target": "function:pkg/engine/progress.go:progressTracker.notify",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/progress.go",
+      "target": "function:pkg/engine/progress.go:progressTracker.startTicker",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/progress.go",
+      "target": "class:pkg/engine/progress.go:progressTracker",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/resume.go",
+      "target": "function:pkg/engine/resume.go:resumeFilePath",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/resume.go",
+      "target": "function:pkg/engine/resume.go:saveResumeState",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/resume.go",
+      "target": "function:pkg/engine/resume.go:loadResumeState",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/resume.go",
+      "target": "function:pkg/engine/resume.go:removeResumeState",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/resume.go",
+      "target": "function:pkg/engine/resume.go:newResumeState",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/resume.go",
+      "target": "function:pkg/engine/resume.go:ResumeState.isResumable",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/resume.go",
+      "target": "function:pkg/engine/resume.go:ResumeState.incompleteChunks",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/resume.go",
+      "target": "function:pkg/engine/resume.go:ResumeState.totalDownloaded",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/resume.go",
+      "target": "class:pkg/engine/resume.go:ResumeState",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/resume.go",
+      "target": "class:pkg/engine/resume.go:ChunkState",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/resume.go",
+      "target": "class:pkg/engine/resume.go:ChecksumInfo",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/util/fileutil.go",
+      "target": "function:pkg/util/fileutil.go:CreateOrOpenFile",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/util/fileutil.go",
+      "target": "function:pkg/util/fileutil.go:PreallocateFile",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/util/fileutil.go",
+      "target": "function:pkg/util/fileutil.go:SyncAndClose",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/util/format.go",
+      "target": "function:pkg/util/format.go:FormatBytes",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/util/format.go",
+      "target": "function:pkg/util/format.go:FormatDuration",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/util/format.go",
+      "target": "function:pkg/util/format.go:FormatSpeed",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/util/http.go",
+      "target": "function:pkg/util/http.go:NewTransport",
+      "type": "contains",
+      "direction": "forward"
+    }
+  ],
+  "batchId": "batch-8vvj03"
+}

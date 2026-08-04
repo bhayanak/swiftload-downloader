@@ -1,0 +1,1096 @@
+{
+  "importMap": {
+    "cmd/gdown-gui/main.go": [],
+    "cmd/gdown/main.go": [
+      {
+        "source": "context",
+        "specifiers": [
+          "context"
+        ],
+        "line": 4,
+        "resolved": {
+          "type": "external",
+          "package": "context",
+          "source": "context"
+        }
+      },
+      {
+        "source": "fmt",
+        "specifiers": [
+          "fmt"
+        ],
+        "line": 5,
+        "resolved": {
+          "type": "external",
+          "package": "fmt",
+          "source": "fmt"
+        }
+      },
+      {
+        "source": "os",
+        "specifiers": [
+          "os"
+        ],
+        "line": 6,
+        "resolved": {
+          "type": "external",
+          "package": "os",
+          "source": "os"
+        }
+      },
+      {
+        "source": "os/signal",
+        "specifiers": [
+          "signal"
+        ],
+        "line": 7,
+        "resolved": {
+          "type": "external",
+          "package": "os",
+          "source": "os/signal"
+        }
+      },
+      {
+        "source": "strings",
+        "specifiers": [
+          "strings"
+        ],
+        "line": 8,
+        "resolved": {
+          "type": "external",
+          "package": "strings",
+          "source": "strings"
+        }
+      }
+    ],
+    "internal/gui/add_dialog.go": [
+      {
+        "source": "strings",
+        "specifiers": [
+          "strings"
+        ],
+        "line": 4,
+        "resolved": {
+          "type": "external",
+          "package": "strings",
+          "source": "strings"
+        }
+      },
+      {
+        "source": "fyne.io/fyne/v2",
+        "specifiers": [
+          "v2"
+        ],
+        "line": 6,
+        "resolved": {
+          "type": "external",
+          "package": "fyne.io",
+          "source": "fyne.io/fyne/v2"
+        }
+      },
+      {
+        "source": "fyne.io/fyne/v2/container",
+        "specifiers": [
+          "container"
+        ],
+        "line": 7,
+        "resolved": {
+          "type": "external",
+          "package": "fyne.io",
+          "source": "fyne.io/fyne/v2/container"
+        }
+      },
+      {
+        "source": "fyne.io/fyne/v2/dialog",
+        "specifiers": [
+          "dialog"
+        ],
+        "line": 8,
+        "resolved": {
+          "type": "external",
+          "package": "fyne.io",
+          "source": "fyne.io/fyne/v2/dialog"
+        }
+      }
+    ],
+    "internal/gui/app.go": [
+      {
+        "source": "embed",
+        "specifiers": [
+          "embed"
+        ],
+        "line": 4,
+        "resolved": {
+          "type": "external",
+          "package": "embed",
+          "source": "embed"
+        }
+      },
+      {
+        "source": "fyne.io/fyne/v2",
+        "specifiers": [
+          "v2"
+        ],
+        "line": 6,
+        "resolved": {
+          "type": "external",
+          "package": "fyne.io",
+          "source": "fyne.io/fyne/v2"
+        }
+      },
+      {
+        "source": "fyne.io/fyne/v2/app",
+        "specifiers": [
+          "app"
+        ],
+        "line": 7,
+        "resolved": {
+          "type": "external",
+          "package": "fyne.io",
+          "source": "fyne.io/fyne/v2/app"
+        }
+      }
+    ],
+    "internal/gui/download_row.go": [
+      {
+        "source": "context",
+        "specifiers": [
+          "context"
+        ],
+        "line": 4,
+        "resolved": {
+          "type": "external",
+          "package": "context",
+          "source": "context"
+        }
+      },
+      {
+        "source": "fmt",
+        "specifiers": [
+          "fmt"
+        ],
+        "line": 5,
+        "resolved": {
+          "type": "external",
+          "package": "fmt",
+          "source": "fmt"
+        }
+      },
+      {
+        "source": "log",
+        "specifiers": [
+          "log"
+        ],
+        "line": 6,
+        "resolved": {
+          "type": "external",
+          "package": "log",
+          "source": "log"
+        }
+      },
+      {
+        "source": "os",
+        "specifiers": [
+          "os"
+        ],
+        "line": 7,
+        "resolved": {
+          "type": "external",
+          "package": "os",
+          "source": "os"
+        }
+      },
+      {
+        "source": "os/exec",
+        "specifiers": [
+          "exec"
+        ],
+        "line": 8,
+        "resolved": {
+          "type": "external",
+          "package": "os",
+          "source": "os/exec"
+        }
+      }
+    ],
+    "internal/gui/history.go": [
+      {
+        "source": "encoding/json",
+        "specifiers": [
+          "json"
+        ],
+        "line": 4,
+        "resolved": {
+          "type": "external",
+          "package": "encoding",
+          "source": "encoding/json"
+        }
+      },
+      {
+        "source": "os",
+        "specifiers": [
+          "os"
+        ],
+        "line": 5,
+        "resolved": {
+          "type": "external",
+          "package": "os",
+          "source": "os"
+        }
+      },
+      {
+        "source": "path/filepath",
+        "specifiers": [
+          "filepath"
+        ],
+        "line": 6,
+        "resolved": {
+          "type": "external",
+          "package": "path",
+          "source": "path/filepath"
+        }
+      },
+      {
+        "source": "sync",
+        "specifiers": [
+          "sync"
+        ],
+        "line": 7,
+        "resolved": {
+          "type": "external",
+          "package": "sync",
+          "source": "sync"
+        }
+      },
+      {
+        "source": "time",
+        "specifiers": [
+          "time"
+        ],
+        "line": 8,
+        "resolved": {
+          "type": "external",
+          "package": "time",
+          "source": "time"
+        }
+      }
+    ],
+    "internal/gui/main_window.go": [
+      {
+        "source": "fmt",
+        "specifiers": [
+          "fmt"
+        ],
+        "line": 4,
+        "resolved": {
+          "type": "external",
+          "package": "fmt",
+          "source": "fmt"
+        }
+      },
+      {
+        "source": "net/url",
+        "specifiers": [
+          "url"
+        ],
+        "line": 5,
+        "resolved": {
+          "type": "external",
+          "package": "net",
+          "source": "net/url"
+        }
+      },
+      {
+        "source": "os",
+        "specifiers": [
+          "os"
+        ],
+        "line": 6,
+        "resolved": {
+          "type": "external",
+          "package": "os",
+          "source": "os"
+        }
+      },
+      {
+        "source": "sync",
+        "specifiers": [
+          "sync"
+        ],
+        "line": 7,
+        "resolved": {
+          "type": "external",
+          "package": "sync",
+          "source": "sync"
+        }
+      },
+      {
+        "source": "time",
+        "specifiers": [
+          "time"
+        ],
+        "line": 8,
+        "resolved": {
+          "type": "external",
+          "package": "time",
+          "source": "time"
+        }
+      }
+    ],
+    "internal/gui/settings.go": [
+      {
+        "source": "strconv",
+        "specifiers": [
+          "strconv"
+        ],
+        "line": 4,
+        "resolved": {
+          "type": "external",
+          "package": "strconv",
+          "source": "strconv"
+        }
+      },
+      {
+        "source": "fyne.io/fyne/v2",
+        "specifiers": [
+          "v2"
+        ],
+        "line": 6,
+        "resolved": {
+          "type": "external",
+          "package": "fyne.io",
+          "source": "fyne.io/fyne/v2"
+        }
+      },
+      {
+        "source": "fyne.io/fyne/v2/container",
+        "specifiers": [
+          "container"
+        ],
+        "line": 7,
+        "resolved": {
+          "type": "external",
+          "package": "fyne.io",
+          "source": "fyne.io/fyne/v2/container"
+        }
+      },
+      {
+        "source": "fyne.io/fyne/v2/dialog",
+        "specifiers": [
+          "dialog"
+        ],
+        "line": 8,
+        "resolved": {
+          "type": "external",
+          "package": "fyne.io",
+          "source": "fyne.io/fyne/v2/dialog"
+        }
+      }
+    ],
+    "internal/gui/updater.go": [
+      {
+        "source": "encoding/json",
+        "specifiers": [
+          "json"
+        ],
+        "line": 4,
+        "resolved": {
+          "type": "external",
+          "package": "encoding",
+          "source": "encoding/json"
+        }
+      },
+      {
+        "source": "fmt",
+        "specifiers": [
+          "fmt"
+        ],
+        "line": 5,
+        "resolved": {
+          "type": "external",
+          "package": "fmt",
+          "source": "fmt"
+        }
+      },
+      {
+        "source": "net/http",
+        "specifiers": [
+          "http"
+        ],
+        "line": 6,
+        "resolved": {
+          "type": "external",
+          "package": "net",
+          "source": "net/http"
+        }
+      },
+      {
+        "source": "strconv",
+        "specifiers": [
+          "strconv"
+        ],
+        "line": 7,
+        "resolved": {
+          "type": "external",
+          "package": "strconv",
+          "source": "strconv"
+        }
+      },
+      {
+        "source": "strings",
+        "specifiers": [
+          "strings"
+        ],
+        "line": 8,
+        "resolved": {
+          "type": "external",
+          "package": "strings",
+          "source": "strings"
+        }
+      }
+    ],
+    "pkg/engine/chunk.go": [
+      {
+        "source": "context",
+        "specifiers": [
+          "context"
+        ],
+        "line": 4,
+        "resolved": {
+          "type": "external",
+          "package": "context",
+          "source": "context"
+        }
+      },
+      {
+        "source": "errors",
+        "specifiers": [
+          "errors"
+        ],
+        "line": 5,
+        "resolved": {
+          "type": "external",
+          "package": "errors",
+          "source": "errors"
+        }
+      },
+      {
+        "source": "fmt",
+        "specifiers": [
+          "fmt"
+        ],
+        "line": 6,
+        "resolved": {
+          "type": "external",
+          "package": "fmt",
+          "source": "fmt"
+        }
+      },
+      {
+        "source": "io",
+        "specifiers": [
+          "io"
+        ],
+        "line": 7,
+        "resolved": {
+          "type": "external",
+          "package": "io",
+          "source": "io"
+        }
+      },
+      {
+        "source": "math",
+        "specifiers": [
+          "math"
+        ],
+        "line": 8,
+        "resolved": {
+          "type": "external",
+          "package": "math",
+          "source": "math"
+        }
+      }
+    ],
+    "pkg/engine/config.go": [
+      {
+        "source": "net/http",
+        "specifiers": [
+          "http"
+        ],
+        "line": 4,
+        "resolved": {
+          "type": "external",
+          "package": "net",
+          "source": "net/http"
+        }
+      },
+      {
+        "source": "time",
+        "specifiers": [
+          "time"
+        ],
+        "line": 5,
+        "resolved": {
+          "type": "external",
+          "package": "time",
+          "source": "time"
+        }
+      }
+    ],
+    "pkg/engine/engine.go": [
+      {
+        "source": "context",
+        "specifiers": [
+          "context"
+        ],
+        "line": 4,
+        "resolved": {
+          "type": "external",
+          "package": "context",
+          "source": "context"
+        }
+      },
+      {
+        "source": "crypto/md5",
+        "specifiers": [
+          "md5"
+        ],
+        "line": 5,
+        "resolved": {
+          "type": "external",
+          "package": "crypto",
+          "source": "crypto/md5"
+        }
+      },
+      {
+        "source": "crypto/sha256",
+        "specifiers": [
+          "sha256"
+        ],
+        "line": 6,
+        "resolved": {
+          "type": "external",
+          "package": "crypto",
+          "source": "crypto/sha256"
+        }
+      },
+      {
+        "source": "errors",
+        "specifiers": [
+          "errors"
+        ],
+        "line": 7,
+        "resolved": {
+          "type": "external",
+          "package": "errors",
+          "source": "errors"
+        }
+      },
+      {
+        "source": "fmt",
+        "specifiers": [
+          "fmt"
+        ],
+        "line": 8,
+        "resolved": {
+          "type": "external",
+          "package": "fmt",
+          "source": "fmt"
+        }
+      }
+    ],
+    "pkg/engine/progress.go": [
+      {
+        "source": "sync",
+        "specifiers": [
+          "sync"
+        ],
+        "line": 4,
+        "resolved": {
+          "type": "external",
+          "package": "sync",
+          "source": "sync"
+        }
+      },
+      {
+        "source": "sync/atomic",
+        "specifiers": [
+          "atomic"
+        ],
+        "line": 5,
+        "resolved": {
+          "type": "external",
+          "package": "sync",
+          "source": "sync/atomic"
+        }
+      },
+      {
+        "source": "time",
+        "specifiers": [
+          "time"
+        ],
+        "line": 6,
+        "resolved": {
+          "type": "external",
+          "package": "time",
+          "source": "time"
+        }
+      }
+    ],
+    "pkg/engine/resume.go": [
+      {
+        "source": "encoding/json",
+        "specifiers": [
+          "json"
+        ],
+        "line": 4,
+        "resolved": {
+          "type": "external",
+          "package": "encoding",
+          "source": "encoding/json"
+        }
+      },
+      {
+        "source": "fmt",
+        "specifiers": [
+          "fmt"
+        ],
+        "line": 5,
+        "resolved": {
+          "type": "external",
+          "package": "fmt",
+          "source": "fmt"
+        }
+      },
+      {
+        "source": "os",
+        "specifiers": [
+          "os"
+        ],
+        "line": 6,
+        "resolved": {
+          "type": "external",
+          "package": "os",
+          "source": "os"
+        }
+      },
+      {
+        "source": "time",
+        "specifiers": [
+          "time"
+        ],
+        "line": 7,
+        "resolved": {
+          "type": "external",
+          "package": "time",
+          "source": "time"
+        }
+      }
+    ],
+    "pkg/engine/serial.go": [
+      {
+        "source": "context",
+        "specifiers": [
+          "context"
+        ],
+        "line": 4,
+        "resolved": {
+          "type": "external",
+          "package": "context",
+          "source": "context"
+        }
+      },
+      {
+        "source": "fmt",
+        "specifiers": [
+          "fmt"
+        ],
+        "line": 5,
+        "resolved": {
+          "type": "external",
+          "package": "fmt",
+          "source": "fmt"
+        }
+      },
+      {
+        "source": "io",
+        "specifiers": [
+          "io"
+        ],
+        "line": 6,
+        "resolved": {
+          "type": "external",
+          "package": "io",
+          "source": "io"
+        }
+      },
+      {
+        "source": "net/http",
+        "specifiers": [
+          "http"
+        ],
+        "line": 7,
+        "resolved": {
+          "type": "external",
+          "package": "net",
+          "source": "net/http"
+        }
+      },
+      {
+        "source": "os",
+        "specifiers": [
+          "os"
+        ],
+        "line": 8,
+        "resolved": {
+          "type": "external",
+          "package": "os",
+          "source": "os"
+        }
+      }
+    ],
+    "pkg/util/fileutil.go": [
+      {
+        "source": "fmt",
+        "specifiers": [
+          "fmt"
+        ],
+        "line": 4,
+        "resolved": {
+          "type": "external",
+          "package": "fmt",
+          "source": "fmt"
+        }
+      },
+      {
+        "source": "os",
+        "specifiers": [
+          "os"
+        ],
+        "line": 5,
+        "resolved": {
+          "type": "external",
+          "package": "os",
+          "source": "os"
+        }
+      }
+    ],
+    "pkg/util/format.go": [
+      {
+        "source": "fmt",
+        "specifiers": [
+          "fmt"
+        ],
+        "line": 4,
+        "resolved": {
+          "type": "external",
+          "package": "fmt",
+          "source": "fmt"
+        }
+      },
+      {
+        "source": "time",
+        "specifiers": [
+          "time"
+        ],
+        "line": 5,
+        "resolved": {
+          "type": "external",
+          "package": "time",
+          "source": "time"
+        }
+      }
+    ],
+    "pkg/util/http.go": [
+      {
+        "source": "crypto/tls",
+        "specifiers": [
+          "tls"
+        ],
+        "line": 4,
+        "resolved": {
+          "type": "external",
+          "package": "crypto",
+          "source": "crypto/tls"
+        }
+      },
+      {
+        "source": "net",
+        "specifiers": [
+          "net"
+        ],
+        "line": 5,
+        "resolved": {
+          "type": "external",
+          "package": "net",
+          "source": "net"
+        }
+      },
+      {
+        "source": "net/http",
+        "specifiers": [
+          "http"
+        ],
+        "line": 6,
+        "resolved": {
+          "type": "external",
+          "package": "net",
+          "source": "net/http"
+        }
+      },
+      {
+        "source": "net/url",
+        "specifiers": [
+          "url"
+        ],
+        "line": 7,
+        "resolved": {
+          "type": "external",
+          "package": "net",
+          "source": "net/url"
+        }
+      },
+      {
+        "source": "time",
+        "specifiers": [
+          "time"
+        ],
+        "line": 8,
+        "resolved": {
+          "type": "external",
+          "package": "time",
+          "source": "time"
+        }
+      }
+    ]
+  },
+  "dependencyGraph": {
+    "internal": {},
+    "external": {
+      "context": [
+        "cmd/gdown/main.go",
+        "internal/gui/download_row.go",
+        "pkg/engine/chunk.go",
+        "pkg/engine/engine.go",
+        "pkg/engine/serial.go"
+      ],
+      "fmt": [
+        "cmd/gdown/main.go",
+        "internal/gui/download_row.go",
+        "internal/gui/main_window.go",
+        "internal/gui/updater.go",
+        "pkg/engine/chunk.go",
+        "pkg/engine/engine.go",
+        "pkg/engine/resume.go",
+        "pkg/engine/serial.go",
+        "pkg/util/fileutil.go",
+        "pkg/util/format.go"
+      ],
+      "os": [
+        "cmd/gdown/main.go",
+        "internal/gui/download_row.go",
+        "internal/gui/history.go",
+        "internal/gui/main_window.go",
+        "pkg/engine/resume.go",
+        "pkg/engine/serial.go",
+        "pkg/util/fileutil.go"
+      ],
+      "strings": [
+        "cmd/gdown/main.go",
+        "internal/gui/add_dialog.go",
+        "internal/gui/updater.go"
+      ],
+      "fyne.io": [
+        "internal/gui/add_dialog.go",
+        "internal/gui/app.go",
+        "internal/gui/settings.go"
+      ],
+      "embed": [
+        "internal/gui/app.go"
+      ],
+      "log": [
+        "internal/gui/download_row.go"
+      ],
+      "encoding": [
+        "internal/gui/history.go",
+        "internal/gui/updater.go",
+        "pkg/engine/resume.go"
+      ],
+      "path": [
+        "internal/gui/history.go"
+      ],
+      "sync": [
+        "internal/gui/history.go",
+        "internal/gui/main_window.go",
+        "pkg/engine/progress.go"
+      ],
+      "time": [
+        "internal/gui/history.go",
+        "internal/gui/main_window.go",
+        "pkg/engine/config.go",
+        "pkg/engine/progress.go",
+        "pkg/engine/resume.go",
+        "pkg/util/format.go",
+        "pkg/util/http.go"
+      ],
+      "net": [
+        "internal/gui/main_window.go",
+        "internal/gui/updater.go",
+        "pkg/engine/config.go",
+        "pkg/engine/serial.go",
+        "pkg/util/http.go"
+      ],
+      "strconv": [
+        "internal/gui/settings.go",
+        "internal/gui/updater.go"
+      ],
+      "errors": [
+        "pkg/engine/chunk.go",
+        "pkg/engine/engine.go"
+      ],
+      "io": [
+        "pkg/engine/chunk.go",
+        "pkg/engine/serial.go"
+      ],
+      "math": [
+        "pkg/engine/chunk.go"
+      ],
+      "crypto": [
+        "pkg/engine/engine.go",
+        "pkg/util/http.go"
+      ]
+    }
+  },
+  "reverseMap": {},
+  "metrics": {
+    "cmd/gdown-gui/main.go": {
+      "fanIn": 0,
+      "fanOut": 0,
+      "isEntryPoint": false,
+      "isLeaf": false
+    },
+    "cmd/gdown/main.go": {
+      "fanIn": 0,
+      "fanOut": 0,
+      "isEntryPoint": false,
+      "isLeaf": false
+    },
+    "internal/gui/add_dialog.go": {
+      "fanIn": 0,
+      "fanOut": 0,
+      "isEntryPoint": false,
+      "isLeaf": false
+    },
+    "internal/gui/app.go": {
+      "fanIn": 0,
+      "fanOut": 0,
+      "isEntryPoint": false,
+      "isLeaf": false
+    },
+    "internal/gui/download_row.go": {
+      "fanIn": 0,
+      "fanOut": 0,
+      "isEntryPoint": false,
+      "isLeaf": false
+    },
+    "internal/gui/history.go": {
+      "fanIn": 0,
+      "fanOut": 0,
+      "isEntryPoint": false,
+      "isLeaf": false
+    },
+    "internal/gui/main_window.go": {
+      "fanIn": 0,
+      "fanOut": 0,
+      "isEntryPoint": false,
+      "isLeaf": false
+    },
+    "internal/gui/settings.go": {
+      "fanIn": 0,
+      "fanOut": 0,
+      "isEntryPoint": false,
+      "isLeaf": false
+    },
+    "internal/gui/updater.go": {
+      "fanIn": 0,
+      "fanOut": 0,
+      "isEntryPoint": false,
+      "isLeaf": false
+    },
+    "pkg/engine/chunk.go": {
+      "fanIn": 0,
+      "fanOut": 0,
+      "isEntryPoint": false,
+      "isLeaf": false
+    },
+    "pkg/engine/config.go": {
+      "fanIn": 0,
+      "fanOut": 0,
+      "isEntryPoint": false,
+      "isLeaf": false
+    },
+    "pkg/engine/engine.go": {
+      "fanIn": 0,
+      "fanOut": 0,
+      "isEntryPoint": false,
+      "isLeaf": false
+    },
+    "pkg/engine/progress.go": {
+      "fanIn": 0,
+      "fanOut": 0,
+      "isEntryPoint": false,
+      "isLeaf": false
+    },
+    "pkg/engine/resume.go": {
+      "fanIn": 0,
+      "fanOut": 0,
+      "isEntryPoint": false,
+      "isLeaf": false
+    },
+    "pkg/engine/serial.go": {
+      "fanIn": 0,
+      "fanOut": 0,
+      "isEntryPoint": false,
+      "isLeaf": false
+    },
+    "pkg/util/fileutil.go": {
+      "fanIn": 0,
+      "fanOut": 0,
+      "isEntryPoint": false,
+      "isLeaf": false
+    },
+    "pkg/util/format.go": {
+      "fanIn": 0,
+      "fanOut": 0,
+      "isEntryPoint": false,
+      "isLeaf": false
+    },
+    "pkg/util/http.go": {
+      "fanIn": 0,
+      "fanOut": 0,
+      "isEntryPoint": false,
+      "isLeaf": false
+    }
+  },
+  "externalPackages": [
+    "context",
+    "crypto",
+    "embed",
+    "encoding",
+    "errors",
+    "fmt",
+    "fyne.io",
+    "io",
+    "log",
+    "math",
+    "net",
+    "os",
+    "path",
+    "strconv",
+    "strings",
+    "sync",
+    "time"
+  ],
+  "entryPoints": [],
+  "leafNodes": []
+}

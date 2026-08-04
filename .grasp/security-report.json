@@ -1,0 +1,256 @@
+{
+  "meta": {
+    "analyzedAt": "2026-06-08T18:02:21.513Z",
+    "overallRisk": "high",
+    "criticalFindings": 1,
+    "highFindings": 2,
+    "mediumFindings": 2,
+    "lowFindings": 1,
+    "owaspCoverage": [
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06",
+      "A09",
+      "A10"
+    ]
+  },
+  "trustBoundaries": [
+    {
+      "name": "External Input -> Download Engine",
+      "entryNodes": [
+        "function:cmd/gdown/main.go:runDownload",
+        "function:internal/gui/add_dialog.go:ShowAddDialog"
+      ],
+      "guards": [
+        "function:internal/gui/add_dialog.go:parseInt",
+        "function:internal/gui/updater.go:CheckForUpdate (HTTP timeout)",
+        "function:pkg/engine/engine.go:Download.verifyChecksum"
+      ],
+      "unguarded": [
+        "function:cmd/gdown/main.go:runDownload (URL accepted without allowlist/scheme enforcement)",
+        "function:internal/gui/add_dialog.go:ShowAddDialog (URL accepted with only non-empty check)",
+        "function:pkg/util/http.go:NewTransport (TLS verification disabled globally)"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "SEC-001",
+      "severity": "critical",
+      "owasp": "A02:2021-Cryptographic Failures",
+      "category": "tls-verification-disabled",
+      "nodeId": "function:pkg/util/http.go:NewTransport",
+      "description": "TLS certificate verification is disabled via InsecureSkipVerify=true, enabling MITM attacks on download/update traffic.",
+      "attackVector": {
+        "entryPoint": "function:cmd/gdown/main.go:runDownload",
+        "path": [
+          "runDownload",
+          "engine.NewDownload",
+          "util.NewTransport",
+          "http.Transport.RoundTrip"
+        ],
+        "inputSource": "Remote server TLS endpoint",
+        "sink": "TLS handshake trust decision bypass"
+      },
+      "remediation": "Set InsecureSkipVerify to false by default. If needed for debugging, gate it behind an explicit insecure flag and warning.",
+      "verification": "Attempt connection to a host with invalid cert; request must fail unless explicit insecure mode is enabled.",
+      "cweId": "CWE-295",
+      "cvssEstimate": 9.1,
+      "evidence": [
+        "pkg/util/http.go:19 sets TLSClientConfig to &tls.Config{InsecureSkipVerify: true}"
+      ]
+    },
+    {
+      "id": "SEC-002",
+      "severity": "high",
+      "owasp": "A06:2021-Vulnerable and Outdated Components",
+      "category": "dependency-vulnerabilities",
+      "nodeId": "file:go.mod",
+      "description": "Dependency scan reports 14 reachable vulnerabilities affecting Go stdlib and x/image/x/net usage in active code paths.",
+      "attackVector": {
+        "entryPoint": "function:pkg/engine/engine.go:parallelDownload",
+        "path": [
+          "parallelDownload",
+          "http.Client.Do",
+          "crypto/tls and net/http internals"
+        ],
+        "inputSource": "Remote HTTP/TLS peer behavior",
+        "sink": "vulnerable stdlib/module execution paths"
+      },
+      "remediation": "Upgrade toolchain to a patched Go release (>=1.25.11) and bump vulnerable modules (e.g., golang.org/x/image, golang.org/x/net) to fixed versions.",
+      "verification": "Re-run govulncheck and confirm zero reachable vulnerabilities.",
+      "cweId": "CWE-1104",
+      "cvssEstimate": 8.2,
+      "evidence": [
+        "govulncheck reports GO-2026-5039, GO-2026-5037, GO-2026-4918, GO-2026-4870 and others reachable",
+        "Scan summary: code affected by 14 vulnerabilities from stdlib and golang.org/x/image"
+      ]
+    },
+    {
+      "id": "SEC-003",
+      "severity": "high",
+      "owasp": "A10:2021-Server-Side Request Forgery (SSRF)",
+      "category": "unrestricted-outbound-fetch",
+      "nodeId": "function:cmd/gdown/main.go:runDownload",
+      "description": "User-supplied URLs are fetched directly without host/IP allowlist or scheme restriction, enabling access to internal network targets if run in sensitive environments.",
+      "attackVector": {
+        "entryPoint": "function:cmd/gdown/main.go:runDownload",
+        "path": [
+          "runDownload",
+          "engine.Download.parallelDownload",
+          "http.NewRequestWithContext",
+          "http.Client.Do"
+        ],
+        "inputSource": "CLI arg <url> / GUI URL field",
+        "sink": "Outbound HTTP requests to arbitrary destinations"
+      },
+      "remediation": "Validate URL scheme (http/https only), block localhost/private CIDR by default, and optionally support an explicit allowlist mode.",
+      "verification": "Attempt download from localhost/169.254.169.254/private CIDR; tool should deny unless explicitly permitted.",
+      "cweId": "CWE-918",
+      "cvssEstimate": 8,
+      "evidence": [
+        "cmd/gdown/main.go:83 takes args[0] URL and passes to engine config without policy checks",
+        "internal/gui/add_dialog.go:40 accepts any non-empty URL string",
+        "pkg/engine/chunk.go:81 and pkg/engine/engine.go:158 create requests directly from provided URL"
+      ]
+    },
+    {
+      "id": "SEC-004",
+      "severity": "medium",
+      "owasp": "A04:2021-Insecure Design",
+      "category": "optional-integrity-check",
+      "nodeId": "function:pkg/engine/engine.go:Download.Start",
+      "description": "Checksum verification is optional and off by default, allowing silent acceptance of tampered payloads when users do not provide checksum input.",
+      "attackVector": {
+        "entryPoint": "function:cmd/gdown/main.go:runDownload",
+        "path": [
+          "runDownload",
+          "Download.Start",
+          "verifyChecksum (conditional)"
+        ],
+        "inputSource": "Downloaded file content",
+        "sink": "File persisted and marked completed without integrity assertion"
+      },
+      "remediation": "Support mandatory checksum mode for sensitive use and optionally auto-fetch signed checksums for known sources.",
+      "verification": "Run with strict checksum mode and confirm mismatched payloads fail before completion.",
+      "cweId": "CWE-353",
+      "cvssEstimate": 5.9,
+      "evidence": [
+        "pkg/engine/engine.go:141-149 only verifies checksum when cfg.Checksum is non-empty"
+      ]
+    },
+    {
+      "id": "SEC-005",
+      "severity": "medium",
+      "owasp": "A05:2021-Security Misconfiguration",
+      "category": "proxy-url-validation-gap",
+      "nodeId": "function:pkg/util/http.go:NewTransport",
+      "description": "Manual proxy URL is parsed but not constrained by scheme/host policy, increasing risk of accidental insecure proxy routing or interception.",
+      "attackVector": {
+        "entryPoint": "function:internal/gui/settings.go:ShowSettingsDialog",
+        "path": [
+          "ShowSettingsDialog",
+          "SaveSettings",
+          "ShowAddDialog",
+          "util.NewTransport"
+        ],
+        "inputSource": "User-entered proxy URL",
+        "sink": "Transport proxy configuration"
+      },
+      "remediation": "Validate proxy URL scheme to http/https/socks5, reject credential-bearing URLs in UI, and surface warnings for plaintext proxies.",
+      "verification": "Set invalid or unsupported proxy scheme and confirm configuration is rejected.",
+      "cweId": "CWE-16",
+      "cvssEstimate": 5.3,
+      "evidence": [
+        "pkg/util/http.go:34 uses url.Parse(proxyURL) and applies directly to ProxyURL when parse succeeds",
+        "internal/gui/settings.go stores proxy URL as free-form text"
+      ]
+    },
+    {
+      "id": "SEC-006",
+      "severity": "low",
+      "owasp": "A09:2021-Security Logging and Monitoring Failures",
+      "category": "security-audit-logging-gap",
+      "nodeId": "file:internal/gui",
+      "description": "Security-relevant events (invalid TLS certs, blocked targets, proxy misuse attempts) are not explicitly audit-logged.",
+      "attackVector": {
+        "entryPoint": "function:cmd/gdown/main.go:runDownload",
+        "path": [
+          "runDownload",
+          "Download.Start"
+        ],
+        "inputSource": "Operational error/security event",
+        "sink": "No dedicated security audit trail"
+      },
+      "remediation": "Add structured security event logging for TLS errors, URL policy denials, and proxy configuration failures.",
+      "verification": "Trigger each event type and confirm structured log entries with timestamp and reason.",
+      "cweId": "CWE-778",
+      "cvssEstimate": 3.7,
+      "evidence": [
+        "No dedicated security logging module or security-event tags found in current code graph"
+      ]
+    }
+  ],
+  "attackSurface": {
+    "publicEndpoints": 0,
+    "authenticatedEndpoints": 0,
+    "unauthenticatedEndpoints": 0,
+    "adminEndpoints": 0,
+    "fileUploadEndpoints": 0,
+    "externalIntegrations": 2,
+    "externalInputVectors": [
+      "CLI URL argument (gdown download <url>)",
+      "GUI Add Download URL field",
+      "Manual proxy URL setting"
+    ]
+  },
+  "securityControls": {
+    "authentication": {
+      "present": false,
+      "mechanism": "none (local client app)",
+      "nodes": []
+    },
+    "authorization": {
+      "present": false,
+      "mechanism": "none (local client app)",
+      "gaps": [
+        "No policy layer for destination URL restrictions"
+      ]
+    },
+    "inputValidation": {
+      "present": true,
+      "coverage": "limited",
+      "gaps": [
+        "URL scheme/host allowlist not enforced",
+        "proxy URL policy checks absent"
+      ]
+    },
+    "encryption": {
+      "atRest": false,
+      "inTransit": true,
+      "secrets": "env-vars optional",
+      "gaps": [
+        "TLS verification disabled in transport"
+      ]
+    },
+    "rateLimiting": {
+      "present": false,
+      "recommendation": "Apply destination policy/rate guard if app is used in automated pipelines."
+    },
+    "logging": {
+      "present": true,
+      "securityEvents": false,
+      "recommendation": "Add structured security event logs and denial reasons."
+    }
+  },
+  "methodology": {
+    "graphAware": true,
+    "dependencyScan": "govulncheck (via go run golang.org/x/vuln/cmd/govulncheck@latest ./...)",
+    "limitations": [
+      ".grasp/runtime-context.json missing: no traffic-weighted prioritization",
+      "No endpoint/auth middleware graph nodes (desktop/CLI architecture), so trust-boundary model adapted to input vectors"
+    ]
+  }
+}

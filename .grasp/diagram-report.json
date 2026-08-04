@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "generatedAt": "2026-06-08T18:16:25.329Z",
+    "atCommit": "3c01dfa",
+    "diagramCount": 5
+  },
+  "diagrams": [
+    {
+      "id": "system-context",
+      "title": "System Context",
+      "type": "context",
+      "description": "How swiftload-downloader interacts with external actors and remote services.",
+      "mermaid": "graph TD\n    classDef internal fill:#1f6feb,stroke:#9ecbff,color:#ffffff\n    classDef data fill:#2ea043,stroke:#9be9a8,color:#ffffff\n    classDef external fill:#f0883e,stroke:#ffd8b5,color:#111111\n    classDef security fill:#da3633,stroke:#ffb3b3,color:#ffffff\n    classDef utility fill:#8b949e,stroke:#c9d1d9,color:#111111\n\n    subgraph External\n        UserCLI[CLI User]\n        UserGUI[Desktop User]\n        RemoteHost[Remote HTTP Host]\n        ReleaseAPI[Release Metadata Endpoint]\n    end\n\n    subgraph SwiftloadDownloader[swiftload-downloader]\n        CLI[cmd/gdown/main.go]\n        GUI[cmd/gdown-gui/main.go]\n        Win[internal/gui/main_window.go]\n        Row[internal/gui/download_row.go]\n        Engine[pkg/engine/engine.go]\n        Progress[pkg/engine/progress.go]\n        Resume[pkg/engine/resume.go]\n        HttpUtil[pkg/util/http.go]\n        FileStore[(Local Filesystem)]\n        History[(internal/gui/history.go)]\n        Settings[(internal/gui/settings.go)]\n    end\n\n    UserCLI --> CLI\n    UserGUI --> GUI\n    GUI --> Win\n    Win --> Row\n    CLI --> Engine\n    Row --> Engine\n    Engine --> Progress\n    Engine --> Resume\n    Engine --> HttpUtil\n    HttpUtil --> RemoteHost\n    Engine --> FileStore\n    Win --> History\n    Win --> Settings\n    Win --> ReleaseAPI\n\n    class CLI,GUI,Win,Row,Engine,Progress,Resume internal\n    class FileStore,History,Settings data\n    class UserCLI,UserGUI,RemoteHost,ReleaseAPI external\n    class HttpUtil utility"
+    },
+    {
+      "id": "component",
+      "title": "Component Diagram",
+      "type": "component",
+      "description": "Major components aligned to Presentation, Business logic, and Infrastructure layers.",
+      "mermaid": "graph TD\n    classDef internal fill:#1f6feb,stroke:#9ecbff,color:#ffffff\n    classDef data fill:#2ea043,stroke:#9be9a8,color:#ffffff\n    classDef utility fill:#8b949e,stroke:#c9d1d9,color:#111111\n\n    subgraph PresentationLayer[Presentation layer]\n        CLI[cmd/gdown/main.go]\n        GuiEntry[cmd/gdown-gui/main.go]\n        App[internal/gui/app.go]\n        MainWin[internal/gui/main_window.go]\n        Row[internal/gui/download_row.go]\n        AddDlg[internal/gui/add_dialog.go]\n        Updater[internal/gui/updater.go]\n    end\n\n    subgraph BusinessLayer[Business logic layer]\n        Engine[pkg/engine/engine.go]\n        Chunk[pkg/engine/chunk.go]\n        Progress[pkg/engine/progress.go]\n        Resume[pkg/engine/resume.go]\n        Config[pkg/engine/config.go]\n        Serial[pkg/engine/serial.go]\n    end\n\n    subgraph InfraLayer[Infrastructure layer]\n        FileUtil[pkg/util/fileutil.go]\n        Format[pkg/util/format.go]\n        Http[pkg/util/http.go]\n    end\n\n    CLI --> Engine\n    GuiEntry --> App\n    App --> MainWin\n    MainWin --> AddDlg\n    MainWin --> Row\n    MainWin --> Updater\n    Row --> Engine\n    Engine --> Chunk\n    Engine --> Progress\n    Engine --> Resume\n    Engine --> Config\n    Resume --> Serial\n    Engine --> Http\n    Resume --> FileUtil\n    Progress --> Format\n\n    class CLI,GuiEntry,App,MainWin,Row,AddDlg,Updater internal\n    class Engine,Chunk,Progress,Resume,Config,Serial internal\n    class FileUtil,Format,Http utility"
+    },
+    {
+      "id": "data-flow",
+      "title": "Data Flow",
+      "type": "data-flow",
+      "description": "Primary CLI and GUI flows into download engine, network, and local persistence.",
+      "mermaid": "flowchart LR\n    classDef internal fill:#1f6feb,stroke:#9ecbff,color:#ffffff\n    classDef data fill:#2ea043,stroke:#9be9a8,color:#ffffff\n    classDef external fill:#f0883e,stroke:#ffd8b5,color:#111111\n    classDef utility fill:#8b949e,stroke:#c9d1d9,color:#111111\n\n    subgraph CLIFlow[CLI download path]\n        Input[URL + flags] --> CLI[cmd/gdown/main.go]\n        CLI --> Eng[pkg/engine/engine.go]\n        Eng --> Chunk[pkg/engine/chunk.go]\n        Eng --> Prog[pkg/engine/progress.go]\n        Eng --> Res[pkg/engine/resume.go]\n        Eng --> Http[pkg/util/http.go]\n        Eng --> FS[(Download File)]\n    end\n\n    subgraph GUIFlow[GUI download path]\n        User[Desktop interactions] --> Main[internal/gui/main_window.go]\n        Main --> Row[internal/gui/download_row.go]\n        Row --> Eng\n        Main --> Hist[(internal/gui/history.go)]\n        Main --> Set[(internal/gui/settings.go)]\n    end\n\n    Http --> Remote[Remote HTTP Host]\n\n    class CLI,Eng,Chunk,Prog,Res,Main,Row internal\n    class FS,Hist,Set data\n    class Input,User,Remote external\n    class Http utility"
+    },
+    {
+      "id": "scalability-evolution",
+      "title": "Scalability Evolution",
+      "type": "scalability",
+      "description": "Current architecture and staged growth patterns for higher scale.",
+      "mermaid": "graph LR\n    classDef internal fill:#1f6feb,stroke:#9ecbff,color:#ffffff\n    classDef data fill:#2ea043,stroke:#9be9a8,color:#ffffff\n    classDef external fill:#f0883e,stroke:#ffd8b5,color:#111111\n    classDef utility fill:#8b949e,stroke:#c9d1d9,color:#111111\n\n    subgraph Current[Current state: single-process downloader]\n        C1[cmd/gdown/main.go]\n        C2[internal/gui/main_window.go]\n        C3[pkg/engine/engine.go]\n        C4[pkg/engine/progress.go]\n        C5[pkg/engine/resume.go]\n        C6[pkg/util/http.go]\n        C7[(Local Filesystem)]\n        C1 --> C3\n        C2 --> C3\n        C3 --> C4\n        C3 --> C5\n        C3 --> C6\n        C3 --> C7\n    end\n\n    subgraph Growth[Growth step: isolate hot components]\n        G1[CLI + GUI orchestrators]\n        G2[Download Worker Pool]\n        G3[Progress Aggregator]\n        G4[Resume State Store]\n        G5[HTTP Adapter]\n        G1 --> G2\n        G2 --> G3\n        G2 --> G4\n        G2 --> G5\n    end\n\n    subgraph Scale[Scale pattern: multi-worker + observability]\n        S1[Ingress commands/events]\n        S2[Worker queue]\n        S3[Stateless transfer workers]\n        S4[Shared resume metadata]\n        S5[Metrics + tracing]\n        S1 --> S2 --> S3\n        S3 --> S4\n        S3 --> S5\n    end\n\n    Current --> Growth --> Scale\n\n    class C1,C2,C3,C4,C5,G1,G2,G3,G4,S1,S2,S3,S5 internal\n    class C7,S4 data\n    class C6,G5 utility"
+    },
+    {
+      "id": "sequence-download-cli",
+      "title": "Sequence: CLI Download",
+      "type": "sequence",
+      "description": "Critical workflow from CLI entrypoint through engine, resume, HTTP, and progress updates.",
+      "mermaid": "sequenceDiagram\n    actor U as CLI User\n    participant CLI as cmd/gdown/main.go\n    participant ENG as pkg/engine/engine.go\n    participant RES as pkg/engine/resume.go\n    participant HTTP as pkg/util/http.go\n    participant FS as Local Filesystem\n    participant PROG as pkg/engine/progress.go\n\n    U->>CLI: run download URL\n    CLI->>ENG: runDownload(config)\n    ENG->>RES: load resume metadata\n    RES-->>ENG: prior offsets/state\n    ENG->>HTTP: open ranged HTTP requests\n    HTTP-->>ENG: response streams\n    ENG->>FS: write chunks\n    ENG->>PROG: update transfer progress\n    PROG-->>CLI: progress snapshot\n    CLI-->>U: render progress + completion"
+    }
+  ]
+}

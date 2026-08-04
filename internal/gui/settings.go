@@ -20,32 +20,38 @@ const (
 	prefProxyMode      = "proxy_mode"
 	prefProxyURL       = "proxy_url"
 	prefChecksumAlgo   = "checksum_algo"
+	prefNotifications  = "notifications"
+	prefClipboard      = "clipboard_monitor"
 )
 
 // AppSettings holds the in-memory copy of user preferences.
 type AppSettings struct {
-	DownloadDir    string
-	MaxConcurrent  int
-	DefaultWorkers int
-	Theme          string
-	BufSizeMB      int
-	ProxyMode      string // "none", "environment", "manual"
-	ProxyURL       string // used when ProxyMode == "manual"
-	ChecksumAlgo   string
+	DownloadDir      string
+	MaxConcurrent    int
+	DefaultWorkers   int
+	Theme            string
+	BufSizeMB        int
+	ProxyMode        string // "none", "environment", "manual"
+	ProxyURL         string // used when ProxyMode == "manual"
+	ChecksumAlgo     string
+	Notifications    bool // desktop notification on complete/fail
+	ClipboardMonitor bool // watch clipboard for URLs
 }
 
 // LoadSettings reads settings from Fyne app preferences.
 func LoadSettings(a fyne.App) AppSettings {
 	prefs := a.Preferences()
 	return AppSettings{
-		DownloadDir:    prefs.StringWithFallback(prefDownloadDir, "./"),
-		MaxConcurrent:  prefs.IntWithFallback(prefMaxConcurrent, 3),
-		DefaultWorkers: prefs.IntWithFallback(prefDefaultWorkers, 16),
-		Theme:          prefs.StringWithFallback(prefTheme, "System"),
-		BufSizeMB:      prefs.IntWithFallback(prefBufSizeMB, 4),
-		ProxyMode:      prefs.StringWithFallback(prefProxyMode, "none"),
-		ProxyURL:       prefs.StringWithFallback(prefProxyURL, ""),
-		ChecksumAlgo:   prefs.StringWithFallback(prefChecksumAlgo, "sha256"),
+		DownloadDir:      prefs.StringWithFallback(prefDownloadDir, "./"),
+		MaxConcurrent:    prefs.IntWithFallback(prefMaxConcurrent, 3),
+		DefaultWorkers:   prefs.IntWithFallback(prefDefaultWorkers, 16),
+		Theme:            prefs.StringWithFallback(prefTheme, "System"),
+		BufSizeMB:        prefs.IntWithFallback(prefBufSizeMB, 4),
+		ProxyMode:        prefs.StringWithFallback(prefProxyMode, "none"),
+		ProxyURL:         prefs.StringWithFallback(prefProxyURL, ""),
+		ChecksumAlgo:     prefs.StringWithFallback(prefChecksumAlgo, "sha256"),
+		Notifications:    prefs.BoolWithFallback(prefNotifications, true),
+		ClipboardMonitor: prefs.BoolWithFallback(prefClipboard, false),
 	}
 }
 
@@ -60,17 +66,24 @@ func SaveSettings(a fyne.App, s AppSettings) {
 	prefs.SetString(prefProxyMode, s.ProxyMode)
 	prefs.SetString(prefProxyURL, s.ProxyURL)
 	prefs.SetString(prefChecksumAlgo, s.ChecksumAlgo)
+	prefs.SetBool(prefNotifications, s.Notifications)
+	prefs.SetBool(prefClipboard, s.ClipboardMonitor)
 }
 
 // ApplyTheme sets the Fyne theme based on the theme name.
 func ApplyTheme(a fyne.App, themeName string) {
 	switch themeName {
 	case "Light":
-		a.Settings().SetTheme(theme.LightTheme())
+		a.Settings().SetTheme(newSwiftTheme(theme.VariantLight))
 	case "Dark":
-		a.Settings().SetTheme(theme.DarkTheme())
+		a.Settings().SetTheme(newSwiftTheme(theme.VariantDark))
 	default:
-		a.Settings().SetTheme(theme.DefaultTheme())
+		// Follow the OS setting but keep the brand accent.
+		variant := theme.VariantDark
+		if a.Settings().ThemeVariant() == theme.VariantLight {
+			variant = theme.VariantLight
+		}
+		a.Settings().SetTheme(newSwiftTheme(variant))
 	}
 }
 
@@ -97,6 +110,12 @@ func ShowSettingsDialog(mw *MainWindow) {
 	checksumAlgoSelect := widget.NewSelect([]string{"sha256", "md5"}, nil)
 	checksumAlgoSelect.SetSelected(s.ChecksumAlgo)
 
+	notifyCheck := widget.NewCheck("Show desktop notification when a download finishes", nil)
+	notifyCheck.SetChecked(s.Notifications)
+
+	clipboardCheck := widget.NewCheck("Watch clipboard and offer to add copied URLs", nil)
+	clipboardCheck.SetChecked(s.ClipboardMonitor)
+
 	// Proxy settings.
 	proxyURLEntry := widget.NewEntry()
 	proxyURLEntry.SetPlaceHolder("http://proxy.example.com:8080")
@@ -114,32 +133,7 @@ func ShowSettingsDialog(mw *MainWindow) {
 		proxyURLEntry.Disable()
 	}
 
-	var d dialog.Dialog
-
-	saveBtn := widget.NewButton("Save", func() {
-		newSettings := AppSettings{
-			DownloadDir:    downloadDirEntry.Text,
-			MaxConcurrent:  parseIntFallback(maxConcurrentEntry.Text, 3),
-			DefaultWorkers: parseIntFallback(defaultWorkersEntry.Text, 16),
-			Theme:          themeSelect.Selected,
-			BufSizeMB:      parseIntFallback(bufSizeEntry.Text, 4),
-			ProxyMode:      proxyModeSelect.Selected,
-			ProxyURL:       proxyURLEntry.Text,
-			ChecksumAlgo:   checksumAlgoSelect.Selected,
-		}
-		SaveSettings(mw.app, newSettings)
-		mw.settings = newSettings
-		ApplyTheme(mw.app, newSettings.Theme)
-		if d != nil {
-			d.Hide()
-		}
-	})
-	saveBtn.Importance = widget.HighImportance
-
 	form := container.NewVBox(
-		widget.NewLabelWithStyle("Settings", fyne.TextAlignLeading, fyne.TextStyle{Bold: true}),
-		widget.NewSeparator(),
-
 		widget.NewLabel("Default download directory:"),
 		downloadDirEntry,
 
@@ -156,6 +150,11 @@ func ShowSettingsDialog(mw *MainWindow) {
 		checksumAlgoSelect,
 
 		widget.NewSeparator(),
+		widget.NewLabelWithStyle("Behaviour", fyne.TextAlignLeading, fyne.TextStyle{Bold: true}),
+		notifyCheck,
+		clipboardCheck,
+
+		widget.NewSeparator(),
 		widget.NewLabelWithStyle("Proxy", fyne.TextAlignLeading, fyne.TextStyle{Bold: true}),
 		widget.NewLabel("Proxy mode:"),
 		proxyModeSelect,
@@ -165,16 +164,33 @@ func ShowSettingsDialog(mw *MainWindow) {
 		widget.NewSeparator(),
 		widget.NewLabel("Theme:"),
 		themeSelect,
-
-		widget.NewSeparator(),
-		saveBtn,
 	)
 
 	scrollable := container.NewVScroll(form)
-	scrollable.SetMinSize(fyne.NewSize(460, 500))
+	scrollable.SetMinSize(fyne.NewSize(460, 420))
 
-	d = dialog.NewCustom("Swiftload Settings", "Cancel", scrollable, mw.window)
-	d.Resize(fyne.NewSize(520, 560))
+	d := dialog.NewCustomConfirm("Swiftload Settings", "Save", "Cancel", scrollable, func(save bool) {
+		if !save {
+			return
+		}
+		newSettings := AppSettings{
+			DownloadDir:      downloadDirEntry.Text,
+			MaxConcurrent:    parseIntFallback(maxConcurrentEntry.Text, 3),
+			DefaultWorkers:   parseIntFallback(defaultWorkersEntry.Text, 16),
+			Theme:            themeSelect.Selected,
+			BufSizeMB:        parseIntFallback(bufSizeEntry.Text, 4),
+			ProxyMode:        proxyModeSelect.Selected,
+			ProxyURL:         proxyURLEntry.Text,
+			ChecksumAlgo:     checksumAlgoSelect.Selected,
+			Notifications:    notifyCheck.Checked,
+			ClipboardMonitor: clipboardCheck.Checked,
+		}
+		SaveSettings(mw.app, newSettings)
+		mw.settings = newSettings
+		ApplyTheme(mw.app, newSettings.Theme)
+		mw.applyClipboardSetting()
+	}, mw.window)
+	d.Resize(fyne.NewSize(540, 560))
 	d.Show()
 }
 

@@ -1,0 +1,3208 @@
+{
+  "version": "1.0.0",
+  "kind": "codebase",
+  "project": {
+    "name": "swiftload-downloader",
+    "languages": [
+      "go"
+    ],
+    "frameworks": [],
+    "analyzedAt": "2026-06-01T10:01:03.806Z",
+    "gitCommitHash": "3c01dfad29b3957d4ed455bb43aea62f68146bdb"
+  },
+  "nodes": [
+    {
+      "id": "file:pkg/engine/engine.go",
+      "type": "file",
+      "name": "engine.go",
+      "filePath": "pkg/engine/engine.go",
+      "summary": "Core download engine module handling chunked transfers, progress accounting, resume state, and concurrent transfer behavior.",
+      "tags": [
+        "go",
+        "download-engine"
+      ],
+      "complexity": "complex",
+      "language": "go"
+    },
+    {
+      "id": "function:pkg/engine/engine.go:NewDownload",
+      "type": "function",
+      "name": "NewDownload",
+      "filePath": "pkg/engine/engine.go",
+      "lineRange": [
+        37,
+        37
+      ],
+      "summary": "Constructs and initializes a new component instance with default runtime dependencies and state.",
+      "tags": [
+        "exported",
+        "download-engine",
+        "download"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/engine.go:headerTransport.RoundTrip",
+      "type": "function",
+      "name": "headerTransport.RoundTrip",
+      "filePath": "pkg/engine/engine.go",
+      "lineRange": [
+        75,
+        75
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "download-engine"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/engine.go:Download.OnProgress",
+      "type": "function",
+      "name": "Download.OnProgress",
+      "filePath": "pkg/engine/engine.go",
+      "lineRange": [
+        87,
+        87
+      ],
+      "summary": "Calculates or propagates progress updates so UI and CLI layers can render transfer state.",
+      "tags": [
+        "exported",
+        "download-engine",
+        "download",
+        "progress"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/engine.go:Download.Status",
+      "type": "function",
+      "name": "Download.Status",
+      "filePath": "pkg/engine/engine.go",
+      "lineRange": [
+        92,
+        92
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "download-engine",
+        "download"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/engine.go:Download.Info",
+      "type": "function",
+      "name": "Download.Info",
+      "filePath": "pkg/engine/engine.go",
+      "lineRange": [
+        97,
+        97
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "download-engine",
+        "download"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/engine.go:Download.Cancel",
+      "type": "function",
+      "name": "Download.Cancel",
+      "filePath": "pkg/engine/engine.go",
+      "lineRange": [
+        102,
+        102
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "download-engine",
+        "download"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/engine.go:Download.Start",
+      "type": "function",
+      "name": "Download.Start",
+      "filePath": "pkg/engine/engine.go",
+      "lineRange": [
+        112,
+        112
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "download-engine",
+        "download"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/engine.go:Download.parallelDownload",
+      "type": "function",
+      "name": "Download.parallelDownload",
+      "filePath": "pkg/engine/engine.go",
+      "lineRange": [
+        156,
+        156
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "download-engine",
+        "download"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/engine.go:Download.verifyChecksum",
+      "type": "function",
+      "name": "Download.verifyChecksum",
+      "filePath": "pkg/engine/engine.go",
+      "lineRange": [
+        306,
+        306
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "download-engine",
+        "download"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/engine.go:ResumeDownload",
+      "type": "function",
+      "name": "ResumeDownload",
+      "filePath": "pkg/engine/engine.go",
+      "lineRange": [
+        335,
+        335
+      ],
+      "summary": "Handles resume-oriented logic for partially completed downloads and persisted state recovery.",
+      "tags": [
+        "exported",
+        "download-engine",
+        "download",
+        "resume"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:pkg/engine/engine.go:Download",
+      "type": "class",
+      "name": "Download",
+      "filePath": "pkg/engine/engine.go",
+      "lineRange": [
+        27,
+        27
+      ],
+      "summary": "Structured type definition that encapsulates related state and behavior for downloader workflows.",
+      "tags": [
+        "exported",
+        "download-engine",
+        "stateful-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:pkg/engine/engine.go:headerTransport",
+      "type": "class",
+      "name": "headerTransport",
+      "filePath": "pkg/engine/engine.go",
+      "lineRange": [
+        70,
+        70
+      ],
+      "summary": "Structured type definition that encapsulates related state and behavior for downloader workflows.",
+      "tags": [
+        "download-engine",
+        "stateful-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:pkg/engine/progress.go",
+      "type": "file",
+      "name": "progress.go",
+      "filePath": "pkg/engine/progress.go",
+      "summary": "Core download engine module handling chunked transfers, progress accounting, resume state, and concurrent transfer behavior.",
+      "tags": [
+        "go",
+        "download-engine"
+      ],
+      "complexity": "complex",
+      "language": "go"
+    },
+    {
+      "id": "function:pkg/engine/progress.go:newProgressTracker",
+      "type": "function",
+      "name": "newProgressTracker",
+      "filePath": "pkg/engine/progress.go",
+      "lineRange": [
+        19,
+        19
+      ],
+      "summary": "Calculates or propagates progress updates so UI and CLI layers can render transfer state.",
+      "tags": [
+        "download-engine",
+        "progress"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/progress.go:progressTracker.addCallback",
+      "type": "function",
+      "name": "progressTracker.addCallback",
+      "filePath": "pkg/engine/progress.go",
+      "lineRange": [
+        27,
+        27
+      ],
+      "summary": "Calculates or propagates progress updates so UI and CLI layers can render transfer state.",
+      "tags": [
+        "download-engine",
+        "progress"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/progress.go:progressTracker.setStatus",
+      "type": "function",
+      "name": "progressTracker.setStatus",
+      "filePath": "pkg/engine/progress.go",
+      "lineRange": [
+        33,
+        33
+      ],
+      "summary": "Calculates or propagates progress updates so UI and CLI layers can render transfer state.",
+      "tags": [
+        "download-engine",
+        "progress"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/progress.go:progressTracker.getStatus",
+      "type": "function",
+      "name": "progressTracker.getStatus",
+      "filePath": "pkg/engine/progress.go",
+      "lineRange": [
+        39,
+        39
+      ],
+      "summary": "Calculates or propagates progress updates so UI and CLI layers can render transfer state.",
+      "tags": [
+        "download-engine",
+        "progress"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/progress.go:progressTracker.addBytes",
+      "type": "function",
+      "name": "progressTracker.addBytes",
+      "filePath": "pkg/engine/progress.go",
+      "lineRange": [
+        45,
+        45
+      ],
+      "summary": "Calculates or propagates progress updates so UI and CLI layers can render transfer state.",
+      "tags": [
+        "download-engine",
+        "progress"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/progress.go:progressTracker.getDownloaded",
+      "type": "function",
+      "name": "progressTracker.getDownloaded",
+      "filePath": "pkg/engine/progress.go",
+      "lineRange": [
+        49,
+        49
+      ],
+      "summary": "Calculates or propagates progress updates so UI and CLI layers can render transfer state.",
+      "tags": [
+        "download-engine",
+        "download",
+        "progress"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/progress.go:progressTracker.setDownloaded",
+      "type": "function",
+      "name": "progressTracker.setDownloaded",
+      "filePath": "pkg/engine/progress.go",
+      "lineRange": [
+        53,
+        53
+      ],
+      "summary": "Calculates or propagates progress updates so UI and CLI layers can render transfer state.",
+      "tags": [
+        "download-engine",
+        "download",
+        "progress"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/progress.go:progressTracker.info",
+      "type": "function",
+      "name": "progressTracker.info",
+      "filePath": "pkg/engine/progress.go",
+      "lineRange": [
+        57,
+        57
+      ],
+      "summary": "Calculates or propagates progress updates so UI and CLI layers can render transfer state.",
+      "tags": [
+        "download-engine",
+        "progress"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/progress.go:progressTracker.notify",
+      "type": "function",
+      "name": "progressTracker.notify",
+      "filePath": "pkg/engine/progress.go",
+      "lineRange": [
+        87,
+        87
+      ],
+      "summary": "Calculates or propagates progress updates so UI and CLI layers can render transfer state.",
+      "tags": [
+        "download-engine",
+        "progress"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/progress.go:progressTracker.startTicker",
+      "type": "function",
+      "name": "progressTracker.startTicker",
+      "filePath": "pkg/engine/progress.go",
+      "lineRange": [
+        101,
+        101
+      ],
+      "summary": "Calculates or propagates progress updates so UI and CLI layers can render transfer state.",
+      "tags": [
+        "download-engine",
+        "progress"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:pkg/engine/progress.go:progressTracker",
+      "type": "class",
+      "name": "progressTracker",
+      "filePath": "pkg/engine/progress.go",
+      "lineRange": [
+        10,
+        10
+      ],
+      "summary": "Structured type definition that encapsulates related state and behavior for downloader workflows.",
+      "tags": [
+        "download-engine",
+        "stateful-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:pkg/engine/resume.go",
+      "type": "file",
+      "name": "resume.go",
+      "filePath": "pkg/engine/resume.go",
+      "summary": "Core download engine module handling chunked transfers, progress accounting, resume state, and concurrent transfer behavior.",
+      "tags": [
+        "go",
+        "download-engine",
+        "resume"
+      ],
+      "complexity": "complex",
+      "language": "go"
+    },
+    {
+      "id": "function:pkg/engine/resume.go:resumeFilePath",
+      "type": "function",
+      "name": "resumeFilePath",
+      "filePath": "pkg/engine/resume.go",
+      "lineRange": [
+        39,
+        39
+      ],
+      "summary": "Handles resume-oriented logic for partially completed downloads and persisted state recovery.",
+      "tags": [
+        "download-engine",
+        "resume"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/resume.go:saveResumeState",
+      "type": "function",
+      "name": "saveResumeState",
+      "filePath": "pkg/engine/resume.go",
+      "lineRange": [
+        44,
+        44
+      ],
+      "summary": "Handles resume-oriented logic for partially completed downloads and persisted state recovery.",
+      "tags": [
+        "download-engine",
+        "resume"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/resume.go:loadResumeState",
+      "type": "function",
+      "name": "loadResumeState",
+      "filePath": "pkg/engine/resume.go",
+      "lineRange": [
+        59,
+        59
+      ],
+      "summary": "Handles resume-oriented logic for partially completed downloads and persisted state recovery.",
+      "tags": [
+        "download-engine",
+        "resume"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/resume.go:removeResumeState",
+      "type": "function",
+      "name": "removeResumeState",
+      "filePath": "pkg/engine/resume.go",
+      "lineRange": [
+        76,
+        76
+      ],
+      "summary": "Handles resume-oriented logic for partially completed downloads and persisted state recovery.",
+      "tags": [
+        "download-engine",
+        "resume"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/resume.go:newResumeState",
+      "type": "function",
+      "name": "newResumeState",
+      "filePath": "pkg/engine/resume.go",
+      "lineRange": [
+        81,
+        81
+      ],
+      "summary": "Handles resume-oriented logic for partially completed downloads and persisted state recovery.",
+      "tags": [
+        "download-engine",
+        "resume"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:pkg/engine/resume.go:ResumeState.isResumable",
+      "type": "function",
+      "name": "ResumeState.isResumable",
+      "filePath": "pkg/engine/resume.go",
+      "lineRange": [
+        107,
+        107
+      ],
+      "summary": "Handles resume-oriented logic for partially completed downloads and persisted state recovery.",
+      "tags": [
+        "download-engine",
+        "resume"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:pkg/engine/resume.go:ResumeState.incompleteChunks",
+      "type": "function",
+      "name": "ResumeState.incompleteChunks",
+      "filePath": "pkg/engine/resume.go",
+      "lineRange": [
+        123,
+        123
+      ],
+      "summary": "Handles resume-oriented logic for partially completed downloads and persisted state recovery.",
+      "tags": [
+        "download-engine",
+        "resume"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/resume.go:ResumeState.totalDownloaded",
+      "type": "function",
+      "name": "ResumeState.totalDownloaded",
+      "filePath": "pkg/engine/resume.go",
+      "lineRange": [
+        134,
+        134
+      ],
+      "summary": "Handles resume-oriented logic for partially completed downloads and persisted state recovery.",
+      "tags": [
+        "download-engine",
+        "resume",
+        "download"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:pkg/engine/resume.go:ResumeState",
+      "type": "class",
+      "name": "ResumeState",
+      "filePath": "pkg/engine/resume.go",
+      "lineRange": [
+        11,
+        11
+      ],
+      "summary": "Structured type definition that encapsulates related state and behavior for downloader workflows.",
+      "tags": [
+        "exported",
+        "download-engine",
+        "resume",
+        "stateful-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:pkg/engine/resume.go:ChunkState",
+      "type": "class",
+      "name": "ChunkState",
+      "filePath": "pkg/engine/resume.go",
+      "lineRange": [
+        25,
+        25
+      ],
+      "summary": "Structured type definition that encapsulates related state and behavior for downloader workflows.",
+      "tags": [
+        "exported",
+        "download-engine",
+        "resume",
+        "stateful-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:pkg/engine/resume.go:ChecksumInfo",
+      "type": "class",
+      "name": "ChecksumInfo",
+      "filePath": "pkg/engine/resume.go",
+      "lineRange": [
+        33,
+        33
+      ],
+      "summary": "Structured type definition that encapsulates related state and behavior for downloader workflows.",
+      "tags": [
+        "exported",
+        "download-engine",
+        "resume",
+        "stateful-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:pkg/engine/serial.go",
+      "type": "file",
+      "name": "serial.go",
+      "filePath": "pkg/engine/serial.go",
+      "summary": "Core download engine module handling chunked transfers, progress accounting, resume state, and concurrent transfer behavior.",
+      "tags": [
+        "go",
+        "download-engine",
+        "serialization"
+      ],
+      "complexity": "simple",
+      "language": "go"
+    },
+    {
+      "id": "file:pkg/util/fileutil.go",
+      "type": "file",
+      "name": "fileutil.go",
+      "filePath": "pkg/util/fileutil.go",
+      "summary": "Reusable utility helpers for filesystem work, formatting, and HTTP-related support used across CLI and GUI flows.",
+      "tags": [
+        "go",
+        "utility"
+      ],
+      "complexity": "simple",
+      "language": "go"
+    },
+    {
+      "id": "function:pkg/util/fileutil.go:CreateOrOpenFile",
+      "type": "function",
+      "name": "CreateOrOpenFile",
+      "filePath": "pkg/util/fileutil.go",
+      "lineRange": [
+        10,
+        10
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/util/fileutil.go:PreallocateFile",
+      "type": "function",
+      "name": "PreallocateFile",
+      "filePath": "pkg/util/fileutil.go",
+      "lineRange": [
+        19,
+        19
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/util/fileutil.go:SyncAndClose",
+      "type": "function",
+      "name": "SyncAndClose",
+      "filePath": "pkg/util/fileutil.go",
+      "lineRange": [
+        27,
+        27
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:pkg/util/format.go",
+      "type": "file",
+      "name": "format.go",
+      "filePath": "pkg/util/format.go",
+      "summary": "Reusable utility helpers for filesystem work, formatting, and HTTP-related support used across CLI and GUI flows.",
+      "tags": [
+        "go",
+        "utility"
+      ],
+      "complexity": "simple",
+      "language": "go"
+    },
+    {
+      "id": "function:pkg/util/format.go:FormatBytes",
+      "type": "function",
+      "name": "FormatBytes",
+      "filePath": "pkg/util/format.go",
+      "lineRange": [
+        9,
+        9
+      ],
+      "summary": "Formats values for human-readable output in logs, CLI output, or GUI labels.",
+      "tags": [
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/util/format.go:FormatDuration",
+      "type": "function",
+      "name": "FormatDuration",
+      "filePath": "pkg/util/format.go",
+      "lineRange": [
+        23,
+        23
+      ],
+      "summary": "Formats values for human-readable output in logs, CLI output, or GUI labels.",
+      "tags": [
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/util/format.go:FormatSpeed",
+      "type": "function",
+      "name": "FormatSpeed",
+      "filePath": "pkg/util/format.go",
+      "lineRange": [
+        40,
+        40
+      ],
+      "summary": "Formats values for human-readable output in logs, CLI output, or GUI labels.",
+      "tags": [
+        "exported",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:pkg/util/http.go",
+      "type": "file",
+      "name": "http.go",
+      "filePath": "pkg/util/http.go",
+      "summary": "Reusable utility helpers for filesystem work, formatting, and HTTP-related support used across CLI and GUI flows.",
+      "tags": [
+        "go",
+        "utility",
+        "http"
+      ],
+      "complexity": "simple",
+      "language": "go"
+    },
+    {
+      "id": "function:pkg/util/http.go:NewTransport",
+      "type": "function",
+      "name": "NewTransport",
+      "filePath": "pkg/util/http.go",
+      "lineRange": [
+        13,
+        13
+      ],
+      "summary": "Constructs and initializes a new component instance with default runtime dependencies and state.",
+      "tags": [
+        "exported",
+        "utility",
+        "http"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:cmd/gdown/main.go",
+      "type": "file",
+      "name": "main.go",
+      "filePath": "cmd/gdown/main.go",
+      "summary": "CLI entry point that parses flags, starts downloads, and renders terminal progress for command-line usage.",
+      "tags": [
+        "go",
+        "entrypoint"
+      ],
+      "complexity": "moderate",
+      "language": "go"
+    },
+    {
+      "id": "function:cmd/gdown/main.go:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "cmd/gdown/main.go",
+      "lineRange": [
+        19,
+        19
+      ],
+      "summary": "Initializes the CLI command flow and dispatches to download or resume execution paths.",
+      "tags": [
+        "entrypoint"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:cmd/gdown/main.go:init",
+      "type": "function",
+      "name": "init",
+      "filePath": "cmd/gdown/main.go",
+      "lineRange": [
+        34,
+        34
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "entrypoint"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:cmd/gdown/main.go:runDownload",
+      "type": "function",
+      "name": "runDownload",
+      "filePath": "cmd/gdown/main.go",
+      "lineRange": [
+        85,
+        85
+      ],
+      "summary": "Executes a primary workflow step and coordinates side effects for the current operation.",
+      "tags": [
+        "entrypoint",
+        "download"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:cmd/gdown/main.go:runResume",
+      "type": "function",
+      "name": "runResume",
+      "filePath": "cmd/gdown/main.go",
+      "lineRange": [
+        138,
+        138
+      ],
+      "summary": "Executes a primary workflow step and coordinates side effects for the current operation.",
+      "tags": [
+        "entrypoint",
+        "resume"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:cmd/gdown/main.go:cliProgressFunc",
+      "type": "function",
+      "name": "cliProgressFunc",
+      "filePath": "cmd/gdown/main.go",
+      "lineRange": [
+        157,
+        157
+      ],
+      "summary": "Calculates or propagates progress updates so UI and CLI layers can render transfer state.",
+      "tags": [
+        "entrypoint",
+        "progress"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:cmd/gdown/main.go:filenameFromURL",
+      "type": "function",
+      "name": "filenameFromURL",
+      "filePath": "cmd/gdown/main.go",
+      "lineRange": [
+        184,
+        184
+      ],
+      "summary": "Builds or executes HTTP-related behavior used by download or metadata resolution paths.",
+      "tags": [
+        "entrypoint"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:cmd/gdown-gui/main.go",
+      "type": "file",
+      "name": "main.go",
+      "filePath": "cmd/gdown-gui/main.go",
+      "summary": "GUI entry point that boots the desktop application and delegates runtime orchestration to the internal GUI package.",
+      "tags": [
+        "go",
+        "ui",
+        "entrypoint"
+      ],
+      "complexity": "simple",
+      "language": "go"
+    },
+    {
+      "id": "function:cmd/gdown-gui/main.go:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "cmd/gdown-gui/main.go",
+      "lineRange": [
+        5,
+        5
+      ],
+      "summary": "Launches the desktop app startup routine for the Fyne GUI.",
+      "tags": [
+        "entrypoint"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:internal/gui/add_dialog.go",
+      "type": "file",
+      "name": "add_dialog.go",
+      "filePath": "internal/gui/add_dialog.go",
+      "summary": "Desktop UI module built with Fyne that manages windows, dialogs, settings, and user-triggered download workflows.",
+      "tags": [
+        "go",
+        "ui",
+        "gui"
+      ],
+      "complexity": "simple",
+      "language": "go"
+    },
+    {
+      "id": "function:internal/gui/add_dialog.go:ShowAddDialog",
+      "type": "function",
+      "name": "ShowAddDialog",
+      "filePath": "internal/gui/add_dialog.go",
+      "lineRange": [
+        15,
+        15
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "gui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/add_dialog.go:guessFilename",
+      "type": "function",
+      "name": "guessFilename",
+      "filePath": "internal/gui/add_dialog.go",
+      "lineRange": [
+        97,
+        97
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "gui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/add_dialog.go:parseInt",
+      "type": "function",
+      "name": "parseInt",
+      "filePath": "internal/gui/add_dialog.go",
+      "lineRange": [
+        112,
+        112
+      ],
+      "summary": "Parses user-provided or persisted values into strongly typed runtime data.",
+      "tags": [
+        "gui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:internal/gui/app.go",
+      "type": "file",
+      "name": "app.go",
+      "filePath": "internal/gui/app.go",
+      "summary": "Desktop UI module built with Fyne that manages windows, dialogs, settings, and user-triggered download workflows.",
+      "tags": [
+        "go",
+        "ui",
+        "gui"
+      ],
+      "complexity": "moderate",
+      "language": "go"
+    },
+    {
+      "id": "function:internal/gui/app.go:NewApp",
+      "type": "function",
+      "name": "NewApp",
+      "filePath": "internal/gui/app.go",
+      "lineRange": [
+        22,
+        22
+      ],
+      "summary": "Constructs and initializes a new component instance with default runtime dependencies and state.",
+      "tags": [
+        "exported",
+        "gui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/app.go:App.Run",
+      "type": "function",
+      "name": "App.Run",
+      "filePath": "internal/gui/app.go",
+      "lineRange": [
+        42,
+        42
+      ],
+      "summary": "Executes a primary workflow step and coordinates side effects for the current operation.",
+      "tags": [
+        "exported",
+        "gui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:internal/gui/app.go:App",
+      "type": "class",
+      "name": "App",
+      "filePath": "internal/gui/app.go",
+      "lineRange": [
+        16,
+        16
+      ],
+      "summary": "Stateful GUI component that groups Fyne widgets and event handlers for the desktop downloader experience.",
+      "tags": [
+        "exported",
+        "gui",
+        "stateful-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:internal/gui/download_row.go",
+      "type": "file",
+      "name": "download_row.go",
+      "filePath": "internal/gui/download_row.go",
+      "summary": "Desktop UI module built with Fyne that manages windows, dialogs, settings, and user-triggered download workflows.",
+      "tags": [
+        "go",
+        "ui",
+        "gui"
+      ],
+      "complexity": "complex",
+      "language": "go"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:NewDownloadRow",
+      "type": "function",
+      "name": "NewDownloadRow",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        60,
+        60
+      ],
+      "summary": "Constructs and initializes a new component instance with default runtime dependencies and state.",
+      "tags": [
+        "exported",
+        "gui",
+        "download"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:DownloadRow.startDownload",
+      "type": "function",
+      "name": "DownloadRow.startDownload",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        121,
+        121
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "gui",
+        "download"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:DownloadRow.updateFromProgress",
+      "type": "function",
+      "name": "DownloadRow.updateFromProgress",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        192,
+        192
+      ],
+      "summary": "Calculates or propagates progress updates so UI and CLI layers can render transfer state.",
+      "tags": [
+        "gui",
+        "download",
+        "progress",
+        "update-check"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:DownloadRow.togglePause",
+      "type": "function",
+      "name": "DownloadRow.togglePause",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        217,
+        217
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "gui",
+        "download"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:DownloadRow.Pause",
+      "type": "function",
+      "name": "DownloadRow.Pause",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        228,
+        228
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "gui",
+        "download"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:DownloadRow.Resume",
+      "type": "function",
+      "name": "DownloadRow.Resume",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        248,
+        248
+      ],
+      "summary": "Handles resume-oriented logic for partially completed downloads and persisted state recovery.",
+      "tags": [
+        "exported",
+        "gui",
+        "download",
+        "resume"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:DownloadRow.Restart",
+      "type": "function",
+      "name": "DownloadRow.Restart",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        321,
+        321
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "gui",
+        "download"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:DownloadRow.Cancel",
+      "type": "function",
+      "name": "DownloadRow.Cancel",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        340,
+        340
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "gui",
+        "download"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:truncate",
+      "type": "function",
+      "name": "truncate",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        350,
+        350
+      ],
+      "summary": "Executes a primary workflow step and coordinates side effects for the current operation.",
+      "tags": [
+        "gui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:DownloadRow.revealOrRedownload",
+      "type": "function",
+      "name": "DownloadRow.revealOrRedownload",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        359,
+        359
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "gui",
+        "download"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:revealInFinder",
+      "type": "function",
+      "name": "revealInFinder",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        377,
+        377
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "gui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:filenameFromPath",
+      "type": "function",
+      "name": "filenameFromPath",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        390,
+        390
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "gui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:RestoreDownloadRow",
+      "type": "function",
+      "name": "RestoreDownloadRow",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        400,
+        400
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "gui",
+        "download"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/download_row.go:fmtf",
+      "type": "function",
+      "name": "fmtf",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        506,
+        506
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "gui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:internal/gui/download_row.go:DownloadRow",
+      "type": "class",
+      "name": "DownloadRow",
+      "filePath": "internal/gui/download_row.go",
+      "lineRange": [
+        36,
+        36
+      ],
+      "summary": "Stateful GUI component that groups Fyne widgets and event handlers for the desktop downloader experience.",
+      "tags": [
+        "exported",
+        "gui",
+        "stateful-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:internal/gui/history.go",
+      "type": "file",
+      "name": "history.go",
+      "filePath": "internal/gui/history.go",
+      "summary": "Desktop UI module built with Fyne that manages windows, dialogs, settings, and user-triggered download workflows.",
+      "tags": [
+        "go",
+        "ui",
+        "gui",
+        "persistence"
+      ],
+      "complexity": "complex",
+      "language": "go"
+    },
+    {
+      "id": "function:internal/gui/history.go:NewHistoryStore",
+      "type": "function",
+      "name": "NewHistoryStore",
+      "filePath": "internal/gui/history.go",
+      "lineRange": [
+        37,
+        37
+      ],
+      "summary": "Constructs and initializes a new component instance with default runtime dependencies and state.",
+      "tags": [
+        "exported",
+        "gui",
+        "persistence",
+        "history"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/history.go:HistoryStore.Entries",
+      "type": "function",
+      "name": "HistoryStore.Entries",
+      "filePath": "internal/gui/history.go",
+      "lineRange": [
+        52,
+        52
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "gui",
+        "persistence",
+        "history"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/history.go:HistoryStore.Add",
+      "type": "function",
+      "name": "HistoryStore.Add",
+      "filePath": "internal/gui/history.go",
+      "lineRange": [
+        61,
+        61
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "gui",
+        "persistence",
+        "history"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/history.go:HistoryStore.Update",
+      "type": "function",
+      "name": "HistoryStore.Update",
+      "filePath": "internal/gui/history.go",
+      "lineRange": [
+        69,
+        69
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "gui",
+        "persistence",
+        "history",
+        "update-check"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/history.go:HistoryStore.Remove",
+      "type": "function",
+      "name": "HistoryStore.Remove",
+      "filePath": "internal/gui/history.go",
+      "lineRange": [
+        82,
+        82
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "gui",
+        "persistence",
+        "history"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/history.go:HistoryStore.FindByOutputPath",
+      "type": "function",
+      "name": "HistoryStore.FindByOutputPath",
+      "filePath": "internal/gui/history.go",
+      "lineRange": [
+        95,
+        95
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "gui",
+        "persistence",
+        "history"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/history.go:HistoryStore.Stop",
+      "type": "function",
+      "name": "HistoryStore.Stop",
+      "filePath": "internal/gui/history.go",
+      "lineRange": [
+        108,
+        108
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "gui",
+        "persistence",
+        "history"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/history.go:HistoryStore.requestSave",
+      "type": "function",
+      "name": "HistoryStore.requestSave",
+      "filePath": "internal/gui/history.go",
+      "lineRange": [
+        113,
+        113
+      ],
+      "summary": "Performs persistence operations by reading or writing structured data involved in downloader state.",
+      "tags": [
+        "gui",
+        "persistence",
+        "history"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/history.go:HistoryStore.saveLoop",
+      "type": "function",
+      "name": "HistoryStore.saveLoop",
+      "filePath": "internal/gui/history.go",
+      "lineRange": [
+        121,
+        121
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "gui",
+        "persistence",
+        "history"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/history.go:HistoryStore.load",
+      "type": "function",
+      "name": "HistoryStore.load",
+      "filePath": "internal/gui/history.go",
+      "lineRange": [
+        138,
+        138
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "gui",
+        "persistence",
+        "history"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/history.go:HistoryStore.save",
+      "type": "function",
+      "name": "HistoryStore.save",
+      "filePath": "internal/gui/history.go",
+      "lineRange": [
+        148,
+        148
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "gui",
+        "persistence",
+        "history"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:internal/gui/history.go:HistoryEntry",
+      "type": "class",
+      "name": "HistoryEntry",
+      "filePath": "internal/gui/history.go",
+      "lineRange": [
+        14,
+        14
+      ],
+      "summary": "Stateful GUI component that groups Fyne widgets and event handlers for the desktop downloader experience.",
+      "tags": [
+        "exported",
+        "gui",
+        "persistence",
+        "stateful-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:internal/gui/history.go:HistoryStore",
+      "type": "class",
+      "name": "HistoryStore",
+      "filePath": "internal/gui/history.go",
+      "lineRange": [
+        28,
+        28
+      ],
+      "summary": "Stateful GUI component that groups Fyne widgets and event handlers for the desktop downloader experience.",
+      "tags": [
+        "exported",
+        "gui",
+        "persistence",
+        "stateful-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:internal/gui/main_window.go",
+      "type": "file",
+      "name": "main_window.go",
+      "filePath": "internal/gui/main_window.go",
+      "summary": "Desktop UI module built with Fyne that manages windows, dialogs, settings, and user-triggered download workflows.",
+      "tags": [
+        "go",
+        "ui",
+        "gui"
+      ],
+      "complexity": "complex",
+      "language": "go"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:NewMainWindow",
+      "type": "function",
+      "name": "NewMainWindow",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        34,
+        34
+      ],
+      "summary": "Constructs and initializes a new component instance with default runtime dependencies and state.",
+      "tags": [
+        "exported",
+        "gui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.Show",
+      "type": "function",
+      "name": "MainWindow.Show",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        109,
+        109
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "gui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.AddDownloadRow",
+      "type": "function",
+      "name": "MainWindow.AddDownloadRow",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        114,
+        114
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "gui",
+        "download"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.RemoveDownloadRow",
+      "type": "function",
+      "name": "MainWindow.RemoveDownloadRow",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        123,
+        123
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "gui",
+        "download"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.pauseAll",
+      "type": "function",
+      "name": "MainWindow.pauseAll",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        136,
+        136
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "gui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.resumeAll",
+      "type": "function",
+      "name": "MainWindow.resumeAll",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        144,
+        144
+      ],
+      "summary": "Handles resume-oriented logic for partially completed downloads and persisted state recovery.",
+      "tags": [
+        "gui",
+        "resume"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.cancelAll",
+      "type": "function",
+      "name": "MainWindow.cancelAll",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        152,
+        152
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "gui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.updateStatusBar",
+      "type": "function",
+      "name": "MainWindow.updateStatusBar",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        160,
+        160
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "gui",
+        "update-check"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.refreshStatusBar",
+      "type": "function",
+      "name": "MainWindow.refreshStatusBar",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        182,
+        182
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "gui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.restoreHistory",
+      "type": "function",
+      "name": "MainWindow.restoreHistory",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        189,
+        189
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "gui",
+        "history"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.checkForUpdateSilent",
+      "type": "function",
+      "name": "MainWindow.checkForUpdateSilent",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        204,
+        204
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "gui",
+        "update-check"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.checkForUpdateManual",
+      "type": "function",
+      "name": "MainWindow.checkForUpdateManual",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        225,
+        225
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "gui",
+        "update-check"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.showUpdateBanner",
+      "type": "function",
+      "name": "MainWindow.showUpdateBanner",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        247,
+        247
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "gui",
+        "update-check"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:ShowDeleteDialog",
+      "type": "function",
+      "name": "ShowDeleteDialog",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        271,
+        271
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "gui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.startDownloadWithDuplicateCheck",
+      "type": "function",
+      "name": "MainWindow.startDownloadWithDuplicateCheck",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        316,
+        316
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "gui",
+        "download"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:MainWindow.removeRowByHistoryID",
+      "type": "function",
+      "name": "MainWindow.removeRowByHistoryID",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        355,
+        355
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "gui",
+        "history"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:showAboutDialog",
+      "type": "function",
+      "name": "showAboutDialog",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        370,
+        370
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "gui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/main_window.go:deleteFileAndResume",
+      "type": "function",
+      "name": "deleteFileAndResume",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        412,
+        412
+      ],
+      "summary": "Handles resume-oriented logic for partially completed downloads and persisted state recovery.",
+      "tags": [
+        "gui",
+        "resume"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:internal/gui/main_window.go:MainWindow",
+      "type": "class",
+      "name": "MainWindow",
+      "filePath": "internal/gui/main_window.go",
+      "lineRange": [
+        21,
+        21
+      ],
+      "summary": "Stateful GUI component that groups Fyne widgets and event handlers for the desktop downloader experience.",
+      "tags": [
+        "exported",
+        "gui",
+        "stateful-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:internal/gui/settings.go",
+      "type": "file",
+      "name": "settings.go",
+      "filePath": "internal/gui/settings.go",
+      "summary": "Desktop UI module built with Fyne that manages windows, dialogs, settings, and user-triggered download workflows.",
+      "tags": [
+        "go",
+        "ui",
+        "gui",
+        "configuration"
+      ],
+      "complexity": "moderate",
+      "language": "go"
+    },
+    {
+      "id": "function:internal/gui/settings.go:LoadSettings",
+      "type": "function",
+      "name": "LoadSettings",
+      "filePath": "internal/gui/settings.go",
+      "lineRange": [
+        38,
+        38
+      ],
+      "summary": "Performs persistence operations by reading or writing structured data involved in downloader state.",
+      "tags": [
+        "exported",
+        "gui",
+        "configuration",
+        "settings"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/settings.go:SaveSettings",
+      "type": "function",
+      "name": "SaveSettings",
+      "filePath": "internal/gui/settings.go",
+      "lineRange": [
+        53,
+        53
+      ],
+      "summary": "Performs persistence operations by reading or writing structured data involved in downloader state.",
+      "tags": [
+        "exported",
+        "gui",
+        "configuration",
+        "settings"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/settings.go:ApplyTheme",
+      "type": "function",
+      "name": "ApplyTheme",
+      "filePath": "internal/gui/settings.go",
+      "lineRange": [
+        66,
+        66
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "gui",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/settings.go:ShowSettingsDialog",
+      "type": "function",
+      "name": "ShowSettingsDialog",
+      "filePath": "internal/gui/settings.go",
+      "lineRange": [
+        78,
+        78
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "gui",
+        "configuration",
+        "settings"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/settings.go:parseIntFallback",
+      "type": "function",
+      "name": "parseIntFallback",
+      "filePath": "internal/gui/settings.go",
+      "lineRange": [
+        181,
+        181
+      ],
+      "summary": "Parses user-provided or persisted values into strongly typed runtime data.",
+      "tags": [
+        "gui",
+        "configuration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:internal/gui/settings.go:AppSettings",
+      "type": "class",
+      "name": "AppSettings",
+      "filePath": "internal/gui/settings.go",
+      "lineRange": [
+        26,
+        26
+      ],
+      "summary": "Stateful GUI component that groups Fyne widgets and event handlers for the desktop downloader experience.",
+      "tags": [
+        "exported",
+        "gui",
+        "configuration",
+        "stateful-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:internal/gui/updater.go",
+      "type": "file",
+      "name": "updater.go",
+      "filePath": "internal/gui/updater.go",
+      "summary": "Desktop UI module built with Fyne that manages windows, dialogs, settings, and user-triggered download workflows.",
+      "tags": [
+        "go",
+        "ui",
+        "gui",
+        "release-check"
+      ],
+      "complexity": "moderate",
+      "language": "go"
+    },
+    {
+      "id": "function:internal/gui/updater.go:CheckForUpdate",
+      "type": "function",
+      "name": "CheckForUpdate",
+      "filePath": "internal/gui/updater.go",
+      "lineRange": [
+        27,
+        27
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "gui",
+        "release-check",
+        "update-check"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/updater.go:isNewer",
+      "type": "function",
+      "name": "isNewer",
+      "filePath": "internal/gui/updater.go",
+      "lineRange": [
+        51,
+        51
+      ],
+      "summary": "Constructs and initializes a new component instance with default runtime dependencies and state.",
+      "tags": [
+        "predicate",
+        "gui",
+        "release-check"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:internal/gui/updater.go:parseVersion",
+      "type": "function",
+      "name": "parseVersion",
+      "filePath": "internal/gui/updater.go",
+      "lineRange": [
+        69,
+        69
+      ],
+      "summary": "Parses user-provided or persisted values into strongly typed runtime data.",
+      "tags": [
+        "gui",
+        "release-check"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:internal/gui/updater.go:ReleaseInfo",
+      "type": "class",
+      "name": "ReleaseInfo",
+      "filePath": "internal/gui/updater.go",
+      "lineRange": [
+        19,
+        19
+      ],
+      "summary": "Stateful GUI component that groups Fyne widgets and event handlers for the desktop downloader experience.",
+      "tags": [
+        "exported",
+        "gui",
+        "release-check",
+        "stateful-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:pkg/engine/chunk.go",
+      "type": "file",
+      "name": "chunk.go",
+      "filePath": "pkg/engine/chunk.go",
+      "summary": "Core download engine module handling chunked transfers, progress accounting, resume state, and concurrent transfer behavior.",
+      "tags": [
+        "go",
+        "download-engine",
+        "chunking"
+      ],
+      "complexity": "moderate",
+      "language": "go"
+    },
+    {
+      "id": "function:pkg/engine/chunk.go:httpStatusError.Error",
+      "type": "function",
+      "name": "httpStatusError.Error",
+      "filePath": "pkg/engine/chunk.go",
+      "lineRange": [
+        125,
+        125
+      ],
+      "summary": "Builds or executes HTTP-related behavior used by download or metadata resolution paths.",
+      "tags": [
+        "exported",
+        "download-engine",
+        "chunking"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/chunk.go:httpStatusError.IsPermanent",
+      "type": "function",
+      "name": "httpStatusError.IsPermanent",
+      "filePath": "pkg/engine/chunk.go",
+      "lineRange": [
+        130,
+        130
+      ],
+      "summary": "Builds or executes HTTP-related behavior used by download or metadata resolution paths.",
+      "tags": [
+        "exported",
+        "download-engine",
+        "chunking"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:pkg/engine/chunk.go:httpStatusError",
+      "type": "class",
+      "name": "httpStatusError",
+      "filePath": "pkg/engine/chunk.go",
+      "lineRange": [
+        121,
+        121
+      ],
+      "summary": "Structured type definition that encapsulates related state and behavior for downloader workflows.",
+      "tags": [
+        "download-engine",
+        "chunking",
+        "stateful-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:pkg/engine/config.go",
+      "type": "file",
+      "name": "config.go",
+      "filePath": "pkg/engine/config.go",
+      "summary": "Core download engine module handling chunked transfers, progress accounting, resume state, and concurrent transfer behavior.",
+      "tags": [
+        "go",
+        "config",
+        "download-engine"
+      ],
+      "complexity": "moderate",
+      "language": "go"
+    },
+    {
+      "id": "function:pkg/engine/config.go:DownloadStatus.String",
+      "type": "function",
+      "name": "DownloadStatus.String",
+      "filePath": "pkg/engine/config.go",
+      "lineRange": [
+        43,
+        43
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "download-engine",
+        "download"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:pkg/engine/config.go:DownloadConfig.Defaults",
+      "type": "function",
+      "name": "DownloadConfig.Defaults",
+      "filePath": "pkg/engine/config.go",
+      "lineRange": [
+        77,
+        77
+      ],
+      "summary": "Implements a focused unit of behavior within this module and collaborates with adjacent download components.",
+      "tags": [
+        "exported",
+        "download-engine",
+        "download"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:pkg/engine/config.go:DownloadConfig",
+      "type": "class",
+      "name": "DownloadConfig",
+      "filePath": "pkg/engine/config.go",
+      "lineRange": [
+        16,
+        16
+      ],
+      "summary": "Structured type definition that encapsulates related state and behavior for downloader workflows.",
+      "tags": [
+        "exported",
+        "download-engine",
+        "stateful-component"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:pkg/engine/config.go:ProgressInfo",
+      "type": "class",
+      "name": "ProgressInfo",
+      "filePath": "pkg/engine/config.go",
+      "lineRange": [
+        63,
+        63
+      ],
+      "summary": "Structured type definition that encapsulates related state and behavior for downloader workflows.",
+      "tags": [
+        "exported",
+        "download-engine",
+        "stateful-component"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:pkg/engine/engine.go",
+      "target": "function:pkg/engine/engine.go:NewDownload",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/engine.go",
+      "target": "function:pkg/engine/engine.go:headerTransport.RoundTrip",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/engine.go",
+      "target": "function:pkg/engine/engine.go:Download.OnProgress",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/engine.go",
+      "target": "function:pkg/engine/engine.go:Download.Status",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/engine.go",
+      "target": "function:pkg/engine/engine.go:Download.Info",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/engine.go",
+      "target": "function:pkg/engine/engine.go:Download.Cancel",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/engine.go",
+      "target": "function:pkg/engine/engine.go:Download.Start",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/engine.go",
+      "target": "function:pkg/engine/engine.go:Download.parallelDownload",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/engine.go",
+      "target": "function:pkg/engine/engine.go:Download.verifyChecksum",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/engine.go",
+      "target": "function:pkg/engine/engine.go:ResumeDownload",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/engine.go",
+      "target": "class:pkg/engine/engine.go:Download",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/engine.go",
+      "target": "class:pkg/engine/engine.go:headerTransport",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/progress.go",
+      "target": "function:pkg/engine/progress.go:newProgressTracker",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/progress.go",
+      "target": "function:pkg/engine/progress.go:progressTracker.addCallback",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/progress.go",
+      "target": "function:pkg/engine/progress.go:progressTracker.setStatus",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/progress.go",
+      "target": "function:pkg/engine/progress.go:progressTracker.getStatus",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/progress.go",
+      "target": "function:pkg/engine/progress.go:progressTracker.addBytes",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/progress.go",
+      "target": "function:pkg/engine/progress.go:progressTracker.getDownloaded",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/progress.go",
+      "target": "function:pkg/engine/progress.go:progressTracker.setDownloaded",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/progress.go",
+      "target": "function:pkg/engine/progress.go:progressTracker.info",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/progress.go",
+      "target": "function:pkg/engine/progress.go:progressTracker.notify",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/progress.go",
+      "target": "function:pkg/engine/progress.go:progressTracker.startTicker",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/progress.go",
+      "target": "class:pkg/engine/progress.go:progressTracker",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/resume.go",
+      "target": "function:pkg/engine/resume.go:resumeFilePath",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/resume.go",
+      "target": "function:pkg/engine/resume.go:saveResumeState",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/resume.go",
+      "target": "function:pkg/engine/resume.go:loadResumeState",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/resume.go",
+      "target": "function:pkg/engine/resume.go:removeResumeState",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/resume.go",
+      "target": "function:pkg/engine/resume.go:newResumeState",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/resume.go",
+      "target": "function:pkg/engine/resume.go:ResumeState.isResumable",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/resume.go",
+      "target": "function:pkg/engine/resume.go:ResumeState.incompleteChunks",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/resume.go",
+      "target": "function:pkg/engine/resume.go:ResumeState.totalDownloaded",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/resume.go",
+      "target": "class:pkg/engine/resume.go:ResumeState",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/resume.go",
+      "target": "class:pkg/engine/resume.go:ChunkState",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/resume.go",
+      "target": "class:pkg/engine/resume.go:ChecksumInfo",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/util/fileutil.go",
+      "target": "function:pkg/util/fileutil.go:CreateOrOpenFile",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/util/fileutil.go",
+      "target": "function:pkg/util/fileutil.go:PreallocateFile",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/util/fileutil.go",
+      "target": "function:pkg/util/fileutil.go:SyncAndClose",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/util/format.go",
+      "target": "function:pkg/util/format.go:FormatBytes",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/util/format.go",
+      "target": "function:pkg/util/format.go:FormatDuration",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/util/format.go",
+      "target": "function:pkg/util/format.go:FormatSpeed",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/util/http.go",
+      "target": "function:pkg/util/http.go:NewTransport",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:cmd/gdown/main.go",
+      "target": "function:cmd/gdown/main.go:main",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:cmd/gdown/main.go",
+      "target": "function:cmd/gdown/main.go:init",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:cmd/gdown/main.go",
+      "target": "function:cmd/gdown/main.go:runDownload",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:cmd/gdown/main.go",
+      "target": "function:cmd/gdown/main.go:runResume",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:cmd/gdown/main.go",
+      "target": "function:cmd/gdown/main.go:cliProgressFunc",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:cmd/gdown/main.go",
+      "target": "function:cmd/gdown/main.go:filenameFromURL",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:cmd/gdown-gui/main.go",
+      "target": "function:cmd/gdown-gui/main.go:main",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/add_dialog.go",
+      "target": "function:internal/gui/add_dialog.go:ShowAddDialog",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/add_dialog.go",
+      "target": "function:internal/gui/add_dialog.go:guessFilename",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/add_dialog.go",
+      "target": "function:internal/gui/add_dialog.go:parseInt",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/app.go",
+      "target": "function:internal/gui/app.go:NewApp",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/app.go",
+      "target": "function:internal/gui/app.go:App.Run",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/app.go",
+      "target": "class:internal/gui/app.go:App",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:NewDownloadRow",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:DownloadRow.startDownload",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:DownloadRow.updateFromProgress",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:DownloadRow.togglePause",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:DownloadRow.Pause",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:DownloadRow.Resume",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:DownloadRow.Restart",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:DownloadRow.Cancel",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:truncate",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:DownloadRow.revealOrRedownload",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:revealInFinder",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:filenameFromPath",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:RestoreDownloadRow",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "function:internal/gui/download_row.go:fmtf",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "class:internal/gui/download_row.go:DownloadRow",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/history.go",
+      "target": "function:internal/gui/history.go:NewHistoryStore",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/history.go",
+      "target": "function:internal/gui/history.go:HistoryStore.Entries",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/history.go",
+      "target": "function:internal/gui/history.go:HistoryStore.Add",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/history.go",
+      "target": "function:internal/gui/history.go:HistoryStore.Update",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/history.go",
+      "target": "function:internal/gui/history.go:HistoryStore.Remove",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/history.go",
+      "target": "function:internal/gui/history.go:HistoryStore.FindByOutputPath",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/history.go",
+      "target": "function:internal/gui/history.go:HistoryStore.Stop",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/history.go",
+      "target": "function:internal/gui/history.go:HistoryStore.requestSave",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/history.go",
+      "target": "function:internal/gui/history.go:HistoryStore.saveLoop",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/history.go",
+      "target": "function:internal/gui/history.go:HistoryStore.load",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/history.go",
+      "target": "function:internal/gui/history.go:HistoryStore.save",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/history.go",
+      "target": "class:internal/gui/history.go:HistoryEntry",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/history.go",
+      "target": "class:internal/gui/history.go:HistoryStore",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:NewMainWindow",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.Show",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.AddDownloadRow",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.RemoveDownloadRow",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.pauseAll",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.resumeAll",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.cancelAll",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.updateStatusBar",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.refreshStatusBar",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.restoreHistory",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.checkForUpdateSilent",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.checkForUpdateManual",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.showUpdateBanner",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:ShowDeleteDialog",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.startDownloadWithDuplicateCheck",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:MainWindow.removeRowByHistoryID",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:showAboutDialog",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "function:internal/gui/main_window.go:deleteFileAndResume",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "class:internal/gui/main_window.go:MainWindow",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/settings.go",
+      "target": "function:internal/gui/settings.go:LoadSettings",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/settings.go",
+      "target": "function:internal/gui/settings.go:SaveSettings",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/settings.go",
+      "target": "function:internal/gui/settings.go:ApplyTheme",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/settings.go",
+      "target": "function:internal/gui/settings.go:ShowSettingsDialog",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/settings.go",
+      "target": "function:internal/gui/settings.go:parseIntFallback",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/settings.go",
+      "target": "class:internal/gui/settings.go:AppSettings",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/updater.go",
+      "target": "function:internal/gui/updater.go:CheckForUpdate",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/updater.go",
+      "target": "function:internal/gui/updater.go:isNewer",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/updater.go",
+      "target": "function:internal/gui/updater.go:parseVersion",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/updater.go",
+      "target": "class:internal/gui/updater.go:ReleaseInfo",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/chunk.go",
+      "target": "function:pkg/engine/chunk.go:httpStatusError.Error",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/chunk.go",
+      "target": "function:pkg/engine/chunk.go:httpStatusError.IsPermanent",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/chunk.go",
+      "target": "class:pkg/engine/chunk.go:httpStatusError",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/config.go",
+      "target": "function:pkg/engine/config.go:DownloadStatus.String",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/config.go",
+      "target": "function:pkg/engine/config.go:DownloadConfig.Defaults",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/config.go",
+      "target": "class:pkg/engine/config.go:DownloadConfig",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:pkg/engine/config.go",
+      "target": "class:pkg/engine/config.go:ProgressInfo",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:internal/gui/download_row.go",
+      "target": "file:pkg/engine/engine.go",
+      "type": "related",
+      "direction": "outbound"
+    },
+    {
+      "source": "file:cmd/gdown/main.go",
+      "target": "file:pkg/engine/engine.go",
+      "type": "related",
+      "direction": "outbound"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "file:internal/gui/history.go",
+      "type": "related",
+      "direction": "outbound"
+    },
+    {
+      "source": "file:internal/gui/main_window.go",
+      "target": "file:internal/gui/settings.go",
+      "type": "related",
+      "direction": "outbound"
+    }
+  ],
+  "layers": [
+    {
+      "id": "layer:presentation",
+      "name": "Presentation layer",
+      "description": "User-facing CLI and GUI entry points, windows, dialogs, and display logic.",
+      "nodeIds": [
+        "file:cmd/gdown/main.go",
+        "function:cmd/gdown/main.go:main",
+        "function:cmd/gdown/main.go:init",
+        "function:cmd/gdown/main.go:runDownload",
+        "function:cmd/gdown/main.go:runResume",
+        "function:cmd/gdown/main.go:cliProgressFunc",
+        "function:cmd/gdown/main.go:filenameFromURL",
+        "file:cmd/gdown-gui/main.go",
+        "function:cmd/gdown-gui/main.go:main",
+        "file:internal/gui/add_dialog.go",
+        "function:internal/gui/add_dialog.go:ShowAddDialog",
+        "function:internal/gui/add_dialog.go:guessFilename",
+        "function:internal/gui/add_dialog.go:parseInt",
+        "file:internal/gui/app.go",
+        "function:internal/gui/app.go:NewApp",
+        "function:internal/gui/app.go:App.Run",
+        "class:internal/gui/app.go:App",
+        "file:internal/gui/download_row.go",
+        "function:internal/gui/download_row.go:NewDownloadRow",
+        "function:internal/gui/download_row.go:DownloadRow.startDownload",
+        "function:internal/gui/download_row.go:DownloadRow.updateFromProgress",
+        "function:internal/gui/download_row.go:DownloadRow.togglePause",
+        "function:internal/gui/download_row.go:DownloadRow.Pause",
+        "function:internal/gui/download_row.go:DownloadRow.Resume",
+        "function:internal/gui/download_row.go:DownloadRow.Restart",
+        "function:internal/gui/download_row.go:DownloadRow.Cancel",
+        "function:internal/gui/download_row.go:truncate",
+        "function:internal/gui/download_row.go:DownloadRow.revealOrRedownload",
+        "function:internal/gui/download_row.go:revealInFinder",
+        "function:internal/gui/download_row.go:filenameFromPath",
+        "function:internal/gui/download_row.go:RestoreDownloadRow",
+        "function:internal/gui/download_row.go:fmtf",
+        "class:internal/gui/download_row.go:DownloadRow",
+        "file:internal/gui/history.go",
+        "function:internal/gui/history.go:NewHistoryStore",
+        "function:internal/gui/history.go:HistoryStore.Entries",
+        "function:internal/gui/history.go:HistoryStore.Add",
+        "function:internal/gui/history.go:HistoryStore.Update",
+        "function:internal/gui/history.go:HistoryStore.Remove",
+        "function:internal/gui/history.go:HistoryStore.FindByOutputPath",
+        "function:internal/gui/history.go:HistoryStore.Stop",
+        "function:internal/gui/history.go:HistoryStore.requestSave",
+        "function:internal/gui/history.go:HistoryStore.saveLoop",
+        "function:internal/gui/history.go:HistoryStore.load",
+        "function:internal/gui/history.go:HistoryStore.save",
+        "class:internal/gui/history.go:HistoryEntry",
+        "class:internal/gui/history.go:HistoryStore",
+        "file:internal/gui/main_window.go",
+        "function:internal/gui/main_window.go:NewMainWindow",
+        "function:internal/gui/main_window.go:MainWindow.Show",
+        "function:internal/gui/main_window.go:MainWindow.AddDownloadRow",
+        "function:internal/gui/main_window.go:MainWindow.RemoveDownloadRow",
+        "function:internal/gui/main_window.go:MainWindow.pauseAll",
+        "function:internal/gui/main_window.go:MainWindow.resumeAll",
+        "function:internal/gui/main_window.go:MainWindow.cancelAll",
+        "function:internal/gui/main_window.go:MainWindow.updateStatusBar",
+        "function:internal/gui/main_window.go:MainWindow.refreshStatusBar",
+        "function:internal/gui/main_window.go:MainWindow.restoreHistory",
+        "function:internal/gui/main_window.go:MainWindow.checkForUpdateSilent",
+        "function:internal/gui/main_window.go:MainWindow.checkForUpdateManual",
+        "function:internal/gui/main_window.go:MainWindow.showUpdateBanner",
+        "function:internal/gui/main_window.go:ShowDeleteDialog",
+        "function:internal/gui/main_window.go:MainWindow.startDownloadWithDuplicateCheck",
+        "function:internal/gui/main_window.go:MainWindow.removeRowByHistoryID",
+        "function:internal/gui/main_window.go:showAboutDialog",
+        "function:internal/gui/main_window.go:deleteFileAndResume",
+        "class:internal/gui/main_window.go:MainWindow",
+        "file:internal/gui/settings.go",
+        "function:internal/gui/settings.go:LoadSettings",
+        "function:internal/gui/settings.go:SaveSettings",
+        "function:internal/gui/settings.go:ApplyTheme",
+        "function:internal/gui/settings.go:ShowSettingsDialog",
+        "function:internal/gui/settings.go:parseIntFallback",
+        "class:internal/gui/settings.go:AppSettings",
+        "file:internal/gui/updater.go",
+        "function:internal/gui/updater.go:CheckForUpdate",
+        "function:internal/gui/updater.go:isNewer",
+        "function:internal/gui/updater.go:parseVersion",
+        "class:internal/gui/updater.go:ReleaseInfo"
+      ]
+    },
+    {
+      "id": "layer:business",
+      "name": "Business logic layer",
+      "description": "Download orchestration, chunk management, progress, and resume behavior in core engine modules.",
+      "nodeIds": [
+        "file:pkg/engine/engine.go",
+        "function:pkg/engine/engine.go:NewDownload",
+        "function:pkg/engine/engine.go:headerTransport.RoundTrip",
+        "function:pkg/engine/engine.go:Download.OnProgress",
+        "function:pkg/engine/engine.go:Download.Status",
+        "function:pkg/engine/engine.go:Download.Info",
+        "function:pkg/engine/engine.go:Download.Cancel",
+        "function:pkg/engine/engine.go:Download.Start",
+        "function:pkg/engine/engine.go:Download.parallelDownload",
+        "function:pkg/engine/engine.go:Download.verifyChecksum",
+        "function:pkg/engine/engine.go:ResumeDownload",
+        "class:pkg/engine/engine.go:Download",
+        "class:pkg/engine/engine.go:headerTransport",
+        "file:pkg/engine/progress.go",
+        "function:pkg/engine/progress.go:newProgressTracker",
+        "function:pkg/engine/progress.go:progressTracker.addCallback",
+        "function:pkg/engine/progress.go:progressTracker.setStatus",
+        "function:pkg/engine/progress.go:progressTracker.getStatus",
+        "function:pkg/engine/progress.go:progressTracker.addBytes",
+        "function:pkg/engine/progress.go:progressTracker.getDownloaded",
+        "function:pkg/engine/progress.go:progressTracker.setDownloaded",
+        "function:pkg/engine/progress.go:progressTracker.info",
+        "function:pkg/engine/progress.go:progressTracker.notify",
+        "function:pkg/engine/progress.go:progressTracker.startTicker",
+        "class:pkg/engine/progress.go:progressTracker",
+        "file:pkg/engine/resume.go",
+        "function:pkg/engine/resume.go:resumeFilePath",
+        "function:pkg/engine/resume.go:saveResumeState",
+        "function:pkg/engine/resume.go:loadResumeState",
+        "function:pkg/engine/resume.go:removeResumeState",
+        "function:pkg/engine/resume.go:newResumeState",
+        "function:pkg/engine/resume.go:ResumeState.isResumable",
+        "function:pkg/engine/resume.go:ResumeState.incompleteChunks",
+        "function:pkg/engine/resume.go:ResumeState.totalDownloaded",
+        "class:pkg/engine/resume.go:ResumeState",
+        "class:pkg/engine/resume.go:ChunkState",
+        "class:pkg/engine/resume.go:ChecksumInfo",
+        "file:pkg/engine/serial.go",
+        "file:pkg/engine/chunk.go",
+        "function:pkg/engine/chunk.go:httpStatusError.Error",
+        "function:pkg/engine/chunk.go:httpStatusError.IsPermanent",
+        "class:pkg/engine/chunk.go:httpStatusError",
+        "file:pkg/engine/config.go",
+        "function:pkg/engine/config.go:DownloadStatus.String",
+        "function:pkg/engine/config.go:DownloadConfig.Defaults",
+        "class:pkg/engine/config.go:DownloadConfig",
+        "class:pkg/engine/config.go:ProgressInfo"
+      ]
+    },
+    {
+      "id": "layer:infrastructure",
+      "name": "Infrastructure layer",
+      "description": "Cross-cutting utility helpers for files, formatting, and HTTP interactions.",
+      "nodeIds": [
+        "file:pkg/util/fileutil.go",
+        "function:pkg/util/fileutil.go:CreateOrOpenFile",
+        "function:pkg/util/fileutil.go:PreallocateFile",
+        "function:pkg/util/fileutil.go:SyncAndClose",
+        "file:pkg/util/format.go",
+        "function:pkg/util/format.go:FormatBytes",
+        "function:pkg/util/format.go:FormatDuration",
+        "function:pkg/util/format.go:FormatSpeed",
+        "file:pkg/util/http.go",
+        "function:pkg/util/http.go:NewTransport"
+      ]
+    }
+  ],
+  "tour": [
+    {
+      "order": 1,
+      "title": "Start at the CLI entrypoint",
+      "description": "Begin with command parsing and top-level orchestration for terminal workflows.",
+      "nodeIds": [
+        "file:cmd/gdown/main.go",
+        "function:cmd/gdown/main.go:main",
+        "function:cmd/gdown/main.go:init",
+        "function:cmd/gdown/main.go:runDownload",
+        "function:cmd/gdown/main.go:runResume",
+        "function:cmd/gdown/main.go:cliProgressFunc",
+        "function:cmd/gdown/main.go:filenameFromURL"
+      ]
+    },
+    {
+      "order": 2,
+      "title": "Explore GUI boot and shell",
+      "description": "Review desktop startup, window composition, dialogs, and event-driven interactions.",
+      "nodeIds": [
+        "file:cmd/gdown-gui/main.go",
+        "function:cmd/gdown-gui/main.go:main",
+        "file:internal/gui/add_dialog.go",
+        "function:internal/gui/add_dialog.go:ShowAddDialog",
+        "function:internal/gui/add_dialog.go:guessFilename",
+        "function:internal/gui/add_dialog.go:parseInt",
+        "file:internal/gui/app.go",
+        "function:internal/gui/app.go:NewApp",
+        "function:internal/gui/app.go:App.Run",
+        "class:internal/gui/app.go:App",
+        "file:internal/gui/main_window.go",
+        "function:internal/gui/main_window.go:NewMainWindow",
+        "function:internal/gui/main_window.go:MainWindow.Show",
+        "function:internal/gui/main_window.go:MainWindow.AddDownloadRow",
+        "function:internal/gui/main_window.go:MainWindow.RemoveDownloadRow",
+        "function:internal/gui/main_window.go:MainWindow.pauseAll",
+        "function:internal/gui/main_window.go:MainWindow.resumeAll",
+        "function:internal/gui/main_window.go:MainWindow.cancelAll",
+        "function:internal/gui/main_window.go:MainWindow.updateStatusBar",
+        "function:internal/gui/main_window.go:MainWindow.refreshStatusBar"
+      ]
+    },
+    {
+      "order": 3,
+      "title": "Understand core engine mechanics",
+      "description": "Inspect concurrent download execution, chunking, resume state, and progress aggregation.",
+      "nodeIds": [
+        "file:pkg/engine/engine.go",
+        "function:pkg/engine/engine.go:NewDownload",
+        "function:pkg/engine/engine.go:headerTransport.RoundTrip",
+        "function:pkg/engine/engine.go:Download.OnProgress",
+        "function:pkg/engine/engine.go:Download.Status",
+        "function:pkg/engine/engine.go:Download.Info",
+        "function:pkg/engine/engine.go:Download.Cancel",
+        "function:pkg/engine/engine.go:Download.Start",
+        "function:pkg/engine/engine.go:Download.parallelDownload",
+        "function:pkg/engine/engine.go:Download.verifyChecksum",
+        "function:pkg/engine/engine.go:ResumeDownload",
+        "class:pkg/engine/engine.go:Download",
+        "class:pkg/engine/engine.go:headerTransport",
+        "file:pkg/engine/progress.go",
+        "function:pkg/engine/progress.go:newProgressTracker",
+        "function:pkg/engine/progress.go:progressTracker.addCallback",
+        "function:pkg/engine/progress.go:progressTracker.setStatus",
+        "function:pkg/engine/progress.go:progressTracker.getStatus",
+        "function:pkg/engine/progress.go:progressTracker.addBytes",
+        "function:pkg/engine/progress.go:progressTracker.getDownloaded",
+        "function:pkg/engine/progress.go:progressTracker.setDownloaded",
+        "function:pkg/engine/progress.go:progressTracker.info",
+        "function:pkg/engine/progress.go:progressTracker.notify",
+        "function:pkg/engine/progress.go:progressTracker.startTicker",
+        "class:pkg/engine/progress.go:progressTracker"
+      ]
+    },
+    {
+      "order": 4,
+      "title": "Finish with utilities and tests",
+      "description": "Validate supporting helpers and check tests that lock expected downloader behavior.",
+      "nodeIds": [
+        "file:pkg/util/fileutil.go",
+        "function:pkg/util/fileutil.go:CreateOrOpenFile",
+        "function:pkg/util/fileutil.go:PreallocateFile",
+        "function:pkg/util/fileutil.go:SyncAndClose",
+        "file:pkg/util/format.go",
+        "function:pkg/util/format.go:FormatBytes",
+        "function:pkg/util/format.go:FormatDuration",
+        "function:pkg/util/format.go:FormatSpeed",
+        "file:pkg/util/http.go",
+        "function:pkg/util/http.go:NewTransport"
+      ]
+    }
+  ],
+  "stats": {
+    "totalNodes": 136,
+    "totalEdges": 118,
+    "droppedEdges": 0,
+    "mergedAt": "2026-06-01T10:00:19.703Z"
+  }
+}

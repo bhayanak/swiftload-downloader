@@ -1,0 +1,1538 @@
+{
+  "version": "1.0.0",
+  "gitCommitHash": "3c01dfad29b3957d4ed455bb43aea62f68146bdb",
+  "generatedAt": "2026-06-01T10:00:19.836Z",
+  "totalFiles": 18,
+  "files": {
+    "cmd/gdown-gui/main.go": {
+      "filePath": "cmd/gdown-gui/main.go",
+      "contentHash": "1251e1267eb49e1e",
+      "functions": [
+        {
+          "name": "main",
+          "params": [],
+          "exported": false,
+          "line": 5
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 9
+    },
+    "cmd/gdown/main.go": {
+      "filePath": "cmd/gdown/main.go",
+      "contentHash": "48b9734d909c048e",
+      "functions": [
+        {
+          "name": "main",
+          "params": [],
+          "exported": false,
+          "line": 19
+        },
+        {
+          "name": "init",
+          "params": [],
+          "exported": false,
+          "line": 34
+        },
+        {
+          "name": "runDownload",
+          "params": [
+            "cmd",
+            "args"
+          ],
+          "exported": false,
+          "line": 85
+        },
+        {
+          "name": "runResume",
+          "params": [
+            "cmd",
+            "args"
+          ],
+          "exported": false,
+          "line": 138
+        },
+        {
+          "name": "cliProgressFunc",
+          "params": [],
+          "exported": false,
+          "line": 157
+        },
+        {
+          "name": "filenameFromURL",
+          "params": [
+            "rawURL"
+          ],
+          "exported": false,
+          "line": 184
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "context",
+          "specifiers": [
+            "context"
+          ]
+        },
+        {
+          "source": "fmt",
+          "specifiers": [
+            "fmt"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "os/signal",
+          "specifiers": [
+            "signal"
+          ]
+        },
+        {
+          "source": "strings",
+          "specifiers": [
+            "strings"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 199
+    },
+    "internal/gui/add_dialog.go": {
+      "filePath": "internal/gui/add_dialog.go",
+      "contentHash": "ab9ea2cb9fae5a56",
+      "functions": [
+        {
+          "name": "ShowAddDialog",
+          "params": [
+            "mw"
+          ],
+          "exported": true,
+          "line": 15
+        },
+        {
+          "name": "guessFilename",
+          "params": [
+            "rawURL"
+          ],
+          "exported": false,
+          "line": 97
+        },
+        {
+          "name": "parseInt",
+          "params": [
+            "s"
+          ],
+          "exported": false,
+          "line": 112
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "strings",
+          "specifiers": [
+            "strings"
+          ]
+        },
+        {
+          "source": "fyne.io/fyne/v2",
+          "specifiers": [
+            "v2"
+          ]
+        },
+        {
+          "source": "fyne.io/fyne/v2/container",
+          "specifiers": [
+            "container"
+          ]
+        },
+        {
+          "source": "fyne.io/fyne/v2/dialog",
+          "specifiers": [
+            "dialog"
+          ]
+        }
+      ],
+      "exports": [
+        "ShowAddDialog"
+      ],
+      "totalLines": 122
+    },
+    "internal/gui/app.go": {
+      "filePath": "internal/gui/app.go",
+      "contentHash": "7ea43d75dfc8b29b",
+      "functions": [
+        {
+          "name": "NewApp",
+          "params": [],
+          "exported": true,
+          "line": 22
+        },
+        {
+          "name": "App.Run",
+          "params": [],
+          "exported": true,
+          "line": 42
+        }
+      ],
+      "classes": [
+        {
+          "name": "App",
+          "methods": [],
+          "exported": true
+        }
+      ],
+      "imports": [
+        {
+          "source": "embed",
+          "specifiers": [
+            "embed"
+          ]
+        },
+        {
+          "source": "fyne.io/fyne/v2",
+          "specifiers": [
+            "v2"
+          ]
+        },
+        {
+          "source": "fyne.io/fyne/v2/app",
+          "specifiers": [
+            "app"
+          ]
+        }
+      ],
+      "exports": [
+        "App",
+        "NewApp",
+        "Run"
+      ],
+      "totalLines": 46
+    },
+    "internal/gui/download_row.go": {
+      "filePath": "internal/gui/download_row.go",
+      "contentHash": "ce2f254f6f2a59e4",
+      "functions": [
+        {
+          "name": "NewDownloadRow",
+          "params": [
+            "mw",
+            "cfg"
+          ],
+          "exported": true,
+          "line": 60
+        },
+        {
+          "name": "DownloadRow.startDownload",
+          "params": [],
+          "exported": false,
+          "line": 121
+        },
+        {
+          "name": "DownloadRow.updateFromProgress",
+          "params": [
+            "info"
+          ],
+          "exported": false,
+          "line": 192
+        },
+        {
+          "name": "DownloadRow.togglePause",
+          "params": [],
+          "exported": false,
+          "line": 217
+        },
+        {
+          "name": "DownloadRow.Pause",
+          "params": [],
+          "exported": true,
+          "line": 228
+        },
+        {
+          "name": "DownloadRow.Resume",
+          "params": [],
+          "exported": true,
+          "line": 248
+        },
+        {
+          "name": "DownloadRow.Restart",
+          "params": [],
+          "exported": true,
+          "line": 321
+        },
+        {
+          "name": "DownloadRow.Cancel",
+          "params": [],
+          "exported": true,
+          "line": 340
+        },
+        {
+          "name": "truncate",
+          "params": [
+            "s",
+            "maxLen"
+          ],
+          "exported": false,
+          "line": 350
+        },
+        {
+          "name": "DownloadRow.revealOrRedownload",
+          "params": [],
+          "exported": false,
+          "line": 359
+        },
+        {
+          "name": "revealInFinder",
+          "params": [
+            "path"
+          ],
+          "exported": false,
+          "line": 377
+        },
+        {
+          "name": "filenameFromPath",
+          "params": [
+            "path"
+          ],
+          "exported": false,
+          "line": 390
+        },
+        {
+          "name": "RestoreDownloadRow",
+          "params": [
+            "mw",
+            "entry"
+          ],
+          "exported": true,
+          "line": 400
+        },
+        {
+          "name": "fmtf",
+          "params": [
+            "format",
+            "a"
+          ],
+          "exported": false,
+          "line": 506
+        }
+      ],
+      "classes": [
+        {
+          "name": "DownloadRow",
+          "methods": [],
+          "exported": true
+        }
+      ],
+      "imports": [
+        {
+          "source": "context",
+          "specifiers": [
+            "context"
+          ]
+        },
+        {
+          "source": "fmt",
+          "specifiers": [
+            "fmt"
+          ]
+        },
+        {
+          "source": "log",
+          "specifiers": [
+            "log"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "os/exec",
+          "specifiers": [
+            "exec"
+          ]
+        }
+      ],
+      "exports": [
+        "DownloadRow",
+        "NewDownloadRow",
+        "Pause",
+        "Resume",
+        "Restart",
+        "Cancel",
+        "RestoreDownloadRow"
+      ],
+      "totalLines": 509
+    },
+    "internal/gui/history.go": {
+      "filePath": "internal/gui/history.go",
+      "contentHash": "d64ee2de8b858e27",
+      "functions": [
+        {
+          "name": "NewHistoryStore",
+          "params": [
+            "a"
+          ],
+          "exported": true,
+          "line": 37
+        },
+        {
+          "name": "HistoryStore.Entries",
+          "params": [],
+          "exported": true,
+          "line": 52
+        },
+        {
+          "name": "HistoryStore.Add",
+          "params": [
+            "e"
+          ],
+          "exported": true,
+          "line": 61
+        },
+        {
+          "name": "HistoryStore.Update",
+          "params": [
+            "id",
+            "fn"
+          ],
+          "exported": true,
+          "line": 69
+        },
+        {
+          "name": "HistoryStore.Remove",
+          "params": [
+            "id"
+          ],
+          "exported": true,
+          "line": 82
+        },
+        {
+          "name": "HistoryStore.FindByOutputPath",
+          "params": [
+            "path"
+          ],
+          "exported": true,
+          "line": 95
+        },
+        {
+          "name": "HistoryStore.Stop",
+          "params": [],
+          "exported": true,
+          "line": 108
+        },
+        {
+          "name": "HistoryStore.requestSave",
+          "params": [],
+          "exported": false,
+          "line": 113
+        },
+        {
+          "name": "HistoryStore.saveLoop",
+          "params": [],
+          "exported": false,
+          "line": 121
+        },
+        {
+          "name": "HistoryStore.load",
+          "params": [],
+          "exported": false,
+          "line": 138
+        },
+        {
+          "name": "HistoryStore.save",
+          "params": [],
+          "exported": false,
+          "line": 148
+        }
+      ],
+      "classes": [
+        {
+          "name": "HistoryEntry",
+          "methods": [],
+          "exported": true
+        },
+        {
+          "name": "HistoryStore",
+          "methods": [],
+          "exported": true
+        }
+      ],
+      "imports": [
+        {
+          "source": "encoding/json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "path/filepath",
+          "specifiers": [
+            "filepath"
+          ]
+        },
+        {
+          "source": "sync",
+          "specifiers": [
+            "sync"
+          ]
+        },
+        {
+          "source": "time",
+          "specifiers": [
+            "time"
+          ]
+        }
+      ],
+      "exports": [
+        "HistoryEntry",
+        "HistoryStore",
+        "NewHistoryStore",
+        "Entries",
+        "Add",
+        "Update",
+        "Remove",
+        "FindByOutputPath",
+        "Stop"
+      ],
+      "totalLines": 159
+    },
+    "internal/gui/main_window.go": {
+      "filePath": "internal/gui/main_window.go",
+      "contentHash": "855fed00a415e539",
+      "functions": [
+        {
+          "name": "NewMainWindow",
+          "params": [
+            "a"
+          ],
+          "exported": true,
+          "line": 34
+        },
+        {
+          "name": "MainWindow.Show",
+          "params": [],
+          "exported": true,
+          "line": 109
+        },
+        {
+          "name": "MainWindow.AddDownloadRow",
+          "params": [
+            "row"
+          ],
+          "exported": true,
+          "line": 114
+        },
+        {
+          "name": "MainWindow.RemoveDownloadRow",
+          "params": [
+            "row"
+          ],
+          "exported": true,
+          "line": 123
+        },
+        {
+          "name": "MainWindow.pauseAll",
+          "params": [],
+          "exported": false,
+          "line": 136
+        },
+        {
+          "name": "MainWindow.resumeAll",
+          "params": [],
+          "exported": false,
+          "line": 144
+        },
+        {
+          "name": "MainWindow.cancelAll",
+          "params": [],
+          "exported": false,
+          "line": 152
+        },
+        {
+          "name": "MainWindow.updateStatusBar",
+          "params": [],
+          "exported": false,
+          "line": 160
+        },
+        {
+          "name": "MainWindow.refreshStatusBar",
+          "params": [],
+          "exported": false,
+          "line": 182
+        },
+        {
+          "name": "MainWindow.restoreHistory",
+          "params": [],
+          "exported": false,
+          "line": 189
+        },
+        {
+          "name": "MainWindow.checkForUpdateSilent",
+          "params": [],
+          "exported": false,
+          "line": 204
+        },
+        {
+          "name": "MainWindow.checkForUpdateManual",
+          "params": [],
+          "exported": false,
+          "line": 225
+        },
+        {
+          "name": "MainWindow.showUpdateBanner",
+          "params": [
+            "info"
+          ],
+          "exported": false,
+          "line": 247
+        },
+        {
+          "name": "ShowDeleteDialog",
+          "params": [
+            "mw",
+            "row"
+          ],
+          "exported": true,
+          "line": 271
+        },
+        {
+          "name": "MainWindow.startDownloadWithDuplicateCheck",
+          "params": [
+            "cfg"
+          ],
+          "exported": false,
+          "line": 316
+        },
+        {
+          "name": "MainWindow.removeRowByHistoryID",
+          "params": [
+            "id"
+          ],
+          "exported": false,
+          "line": 355
+        },
+        {
+          "name": "showAboutDialog",
+          "params": [
+            "mw"
+          ],
+          "exported": false,
+          "line": 370
+        },
+        {
+          "name": "deleteFileAndResume",
+          "params": [
+            "outputPath"
+          ],
+          "exported": false,
+          "line": 412
+        }
+      ],
+      "classes": [
+        {
+          "name": "MainWindow",
+          "methods": [],
+          "exported": true
+        }
+      ],
+      "imports": [
+        {
+          "source": "fmt",
+          "specifiers": [
+            "fmt"
+          ]
+        },
+        {
+          "source": "net/url",
+          "specifiers": [
+            "url"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "sync",
+          "specifiers": [
+            "sync"
+          ]
+        },
+        {
+          "source": "time",
+          "specifiers": [
+            "time"
+          ]
+        }
+      ],
+      "exports": [
+        "MainWindow",
+        "NewMainWindow",
+        "Show",
+        "AddDownloadRow",
+        "RemoveDownloadRow",
+        "ShowDeleteDialog"
+      ],
+      "totalLines": 416
+    },
+    "internal/gui/settings.go": {
+      "filePath": "internal/gui/settings.go",
+      "contentHash": "328b2437e1c328f1",
+      "functions": [
+        {
+          "name": "LoadSettings",
+          "params": [
+            "a"
+          ],
+          "exported": true,
+          "line": 38
+        },
+        {
+          "name": "SaveSettings",
+          "params": [
+            "a",
+            "s"
+          ],
+          "exported": true,
+          "line": 53
+        },
+        {
+          "name": "ApplyTheme",
+          "params": [
+            "a",
+            "themeName"
+          ],
+          "exported": true,
+          "line": 66
+        },
+        {
+          "name": "ShowSettingsDialog",
+          "params": [
+            "mw"
+          ],
+          "exported": true,
+          "line": 78
+        },
+        {
+          "name": "parseIntFallback",
+          "params": [
+            "s",
+            "fallback"
+          ],
+          "exported": false,
+          "line": 181
+        }
+      ],
+      "classes": [
+        {
+          "name": "AppSettings",
+          "methods": [],
+          "exported": true
+        }
+      ],
+      "imports": [
+        {
+          "source": "strconv",
+          "specifiers": [
+            "strconv"
+          ]
+        },
+        {
+          "source": "fyne.io/fyne/v2",
+          "specifiers": [
+            "v2"
+          ]
+        },
+        {
+          "source": "fyne.io/fyne/v2/container",
+          "specifiers": [
+            "container"
+          ]
+        },
+        {
+          "source": "fyne.io/fyne/v2/dialog",
+          "specifiers": [
+            "dialog"
+          ]
+        }
+      ],
+      "exports": [
+        "AppSettings",
+        "LoadSettings",
+        "SaveSettings",
+        "ApplyTheme",
+        "ShowSettingsDialog"
+      ],
+      "totalLines": 188
+    },
+    "internal/gui/updater.go": {
+      "filePath": "internal/gui/updater.go",
+      "contentHash": "90d83cd2dc8984d8",
+      "functions": [
+        {
+          "name": "CheckForUpdate",
+          "params": [
+            "currentVersion"
+          ],
+          "exported": true,
+          "line": 27
+        },
+        {
+          "name": "isNewer",
+          "params": [
+            "remoteTag",
+            "localVersion"
+          ],
+          "exported": false,
+          "line": 51
+        },
+        {
+          "name": "parseVersion",
+          "params": [
+            "v"
+          ],
+          "exported": false,
+          "line": 69
+        }
+      ],
+      "classes": [
+        {
+          "name": "ReleaseInfo",
+          "methods": [],
+          "exported": true
+        }
+      ],
+      "imports": [
+        {
+          "source": "encoding/json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "fmt",
+          "specifiers": [
+            "fmt"
+          ]
+        },
+        {
+          "source": "net/http",
+          "specifiers": [
+            "http"
+          ]
+        },
+        {
+          "source": "strconv",
+          "specifiers": [
+            "strconv"
+          ]
+        },
+        {
+          "source": "strings",
+          "specifiers": [
+            "strings"
+          ]
+        }
+      ],
+      "exports": [
+        "ReleaseInfo",
+        "CheckForUpdate"
+      ],
+      "totalLines": 89
+    },
+    "pkg/engine/chunk.go": {
+      "filePath": "pkg/engine/chunk.go",
+      "contentHash": "f22b6836409dec31",
+      "functions": [
+        {
+          "name": "httpStatusError.Error",
+          "params": [],
+          "exported": true,
+          "line": 125
+        },
+        {
+          "name": "httpStatusError.IsPermanent",
+          "params": [],
+          "exported": true,
+          "line": 130
+        }
+      ],
+      "classes": [
+        {
+          "name": "httpStatusError",
+          "methods": [],
+          "exported": false
+        }
+      ],
+      "imports": [
+        {
+          "source": "context",
+          "specifiers": [
+            "context"
+          ]
+        },
+        {
+          "source": "errors",
+          "specifiers": [
+            "errors"
+          ]
+        },
+        {
+          "source": "fmt",
+          "specifiers": [
+            "fmt"
+          ]
+        },
+        {
+          "source": "io",
+          "specifiers": [
+            "io"
+          ]
+        },
+        {
+          "source": "math",
+          "specifiers": [
+            "math"
+          ]
+        }
+      ],
+      "exports": [
+        "Error",
+        "IsPermanent"
+      ],
+      "totalLines": 133
+    },
+    "pkg/engine/config.go": {
+      "filePath": "pkg/engine/config.go",
+      "contentHash": "874e152316207f28",
+      "functions": [
+        {
+          "name": "DownloadStatus.String",
+          "params": [],
+          "exported": true,
+          "line": 43
+        },
+        {
+          "name": "DownloadConfig.Defaults",
+          "params": [],
+          "exported": true,
+          "line": 77
+        }
+      ],
+      "classes": [
+        {
+          "name": "DownloadConfig",
+          "methods": [],
+          "exported": true
+        },
+        {
+          "name": "ProgressInfo",
+          "methods": [],
+          "exported": true
+        }
+      ],
+      "imports": [
+        {
+          "source": "net/http",
+          "specifiers": [
+            "http"
+          ]
+        },
+        {
+          "source": "time",
+          "specifiers": [
+            "time"
+          ]
+        }
+      ],
+      "exports": [
+        "DownloadConfig",
+        "String",
+        "ProgressInfo",
+        "Defaults"
+      ],
+      "totalLines": 88
+    },
+    "pkg/engine/engine.go": {
+      "filePath": "pkg/engine/engine.go",
+      "contentHash": "221811acc2327f27",
+      "functions": [
+        {
+          "name": "NewDownload",
+          "params": [
+            "cfg"
+          ],
+          "exported": true,
+          "line": 37
+        },
+        {
+          "name": "headerTransport.RoundTrip",
+          "params": [
+            "req"
+          ],
+          "exported": true,
+          "line": 75
+        },
+        {
+          "name": "Download.OnProgress",
+          "params": [
+            "fn"
+          ],
+          "exported": true,
+          "line": 87
+        },
+        {
+          "name": "Download.Status",
+          "params": [],
+          "exported": true,
+          "line": 92
+        },
+        {
+          "name": "Download.Info",
+          "params": [],
+          "exported": true,
+          "line": 97
+        },
+        {
+          "name": "Download.Cancel",
+          "params": [],
+          "exported": true,
+          "line": 102
+        },
+        {
+          "name": "Download.Start",
+          "params": [
+            "ctx"
+          ],
+          "exported": true,
+          "line": 112
+        },
+        {
+          "name": "Download.parallelDownload",
+          "params": [
+            "ctx"
+          ],
+          "exported": false,
+          "line": 156
+        },
+        {
+          "name": "Download.verifyChecksum",
+          "params": [],
+          "exported": false,
+          "line": 306
+        },
+        {
+          "name": "ResumeDownload",
+          "params": [
+            "ctx",
+            "outputPath",
+            "onProgress"
+          ],
+          "exported": true,
+          "line": 335
+        }
+      ],
+      "classes": [
+        {
+          "name": "Download",
+          "methods": [],
+          "exported": true
+        },
+        {
+          "name": "headerTransport",
+          "methods": [],
+          "exported": false
+        }
+      ],
+      "imports": [
+        {
+          "source": "context",
+          "specifiers": [
+            "context"
+          ]
+        },
+        {
+          "source": "crypto/md5",
+          "specifiers": [
+            "md5"
+          ]
+        },
+        {
+          "source": "crypto/sha256",
+          "specifiers": [
+            "sha256"
+          ]
+        },
+        {
+          "source": "errors",
+          "specifiers": [
+            "errors"
+          ]
+        },
+        {
+          "source": "fmt",
+          "specifiers": [
+            "fmt"
+          ]
+        }
+      ],
+      "exports": [
+        "Download",
+        "NewDownload",
+        "RoundTrip",
+        "OnProgress",
+        "Status",
+        "Info",
+        "Cancel",
+        "Start",
+        "ResumeDownload"
+      ],
+      "totalLines": 361
+    },
+    "pkg/engine/progress.go": {
+      "filePath": "pkg/engine/progress.go",
+      "contentHash": "70c405953e67cf85",
+      "functions": [
+        {
+          "name": "newProgressTracker",
+          "params": [
+            "totalSize"
+          ],
+          "exported": false,
+          "line": 19
+        },
+        {
+          "name": "progressTracker.addCallback",
+          "params": [
+            "fn"
+          ],
+          "exported": false,
+          "line": 27
+        },
+        {
+          "name": "progressTracker.setStatus",
+          "params": [
+            "s"
+          ],
+          "exported": false,
+          "line": 33
+        },
+        {
+          "name": "progressTracker.getStatus",
+          "params": [],
+          "exported": false,
+          "line": 39
+        },
+        {
+          "name": "progressTracker.addBytes",
+          "params": [
+            "n"
+          ],
+          "exported": false,
+          "line": 45
+        },
+        {
+          "name": "progressTracker.getDownloaded",
+          "params": [],
+          "exported": false,
+          "line": 49
+        },
+        {
+          "name": "progressTracker.setDownloaded",
+          "params": [
+            "n"
+          ],
+          "exported": false,
+          "line": 53
+        },
+        {
+          "name": "progressTracker.info",
+          "params": [],
+          "exported": false,
+          "line": 57
+        },
+        {
+          "name": "progressTracker.notify",
+          "params": [],
+          "exported": false,
+          "line": 87
+        },
+        {
+          "name": "progressTracker.startTicker",
+          "params": [
+            "interval"
+          ],
+          "exported": false,
+          "line": 101
+        }
+      ],
+      "classes": [
+        {
+          "name": "progressTracker",
+          "methods": [],
+          "exported": false
+        }
+      ],
+      "imports": [
+        {
+          "source": "sync",
+          "specifiers": [
+            "sync"
+          ]
+        },
+        {
+          "source": "sync/atomic",
+          "specifiers": [
+            "atomic"
+          ]
+        },
+        {
+          "source": "time",
+          "specifiers": [
+            "time"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 117
+    },
+    "pkg/engine/resume.go": {
+      "filePath": "pkg/engine/resume.go",
+      "contentHash": "138d06d09b00b96b",
+      "functions": [
+        {
+          "name": "resumeFilePath",
+          "params": [
+            "outputPath"
+          ],
+          "exported": false,
+          "line": 39
+        },
+        {
+          "name": "saveResumeState",
+          "params": [
+            "state"
+          ],
+          "exported": false,
+          "line": 44
+        },
+        {
+          "name": "loadResumeState",
+          "params": [
+            "outputPath"
+          ],
+          "exported": false,
+          "line": 59
+        },
+        {
+          "name": "removeResumeState",
+          "params": [
+            "outputPath"
+          ],
+          "exported": false,
+          "line": 76
+        },
+        {
+          "name": "newResumeState",
+          "params": [
+            "url",
+            "outputFile",
+            "totalSize",
+            "etag",
+            "lastModified",
+            "chunks"
+          ],
+          "exported": false,
+          "line": 81
+        },
+        {
+          "name": "ResumeState.isResumable",
+          "params": [
+            "etag",
+            "lastModified",
+            "totalSize"
+          ],
+          "exported": false,
+          "line": 107
+        },
+        {
+          "name": "ResumeState.incompleteChunks",
+          "params": [],
+          "exported": false,
+          "line": 123
+        },
+        {
+          "name": "ResumeState.totalDownloaded",
+          "params": [],
+          "exported": false,
+          "line": 134
+        }
+      ],
+      "classes": [
+        {
+          "name": "ResumeState",
+          "methods": [],
+          "exported": true
+        },
+        {
+          "name": "ChunkState",
+          "methods": [],
+          "exported": true
+        },
+        {
+          "name": "ChecksumInfo",
+          "methods": [],
+          "exported": true
+        }
+      ],
+      "imports": [
+        {
+          "source": "encoding/json",
+          "specifiers": [
+            "json"
+          ]
+        },
+        {
+          "source": "fmt",
+          "specifiers": [
+            "fmt"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "time",
+          "specifiers": [
+            "time"
+          ]
+        }
+      ],
+      "exports": [
+        "ResumeState",
+        "ChunkState",
+        "ChecksumInfo"
+      ],
+      "totalLines": 141
+    },
+    "pkg/engine/serial.go": {
+      "filePath": "pkg/engine/serial.go",
+      "contentHash": "d83c0fced21ef518",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "context",
+          "specifiers": [
+            "context"
+          ]
+        },
+        {
+          "source": "fmt",
+          "specifiers": [
+            "fmt"
+          ]
+        },
+        {
+          "source": "io",
+          "specifiers": [
+            "io"
+          ]
+        },
+        {
+          "source": "net/http",
+          "specifiers": [
+            "http"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 77
+    },
+    "pkg/util/fileutil.go": {
+      "filePath": "pkg/util/fileutil.go",
+      "contentHash": "2d030d736ca62dab",
+      "functions": [
+        {
+          "name": "CreateOrOpenFile",
+          "params": [
+            "path"
+          ],
+          "exported": true,
+          "line": 10
+        },
+        {
+          "name": "PreallocateFile",
+          "params": [
+            "f",
+            "size"
+          ],
+          "exported": true,
+          "line": 19
+        },
+        {
+          "name": "SyncAndClose",
+          "params": [
+            "f"
+          ],
+          "exported": true,
+          "line": 27
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "fmt",
+          "specifiers": [
+            "fmt"
+          ]
+        },
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        }
+      ],
+      "exports": [
+        "CreateOrOpenFile",
+        "PreallocateFile",
+        "SyncAndClose"
+      ],
+      "totalLines": 33
+    },
+    "pkg/util/format.go": {
+      "filePath": "pkg/util/format.go",
+      "contentHash": "455a111b9cf023cc",
+      "functions": [
+        {
+          "name": "FormatBytes",
+          "params": [
+            "b"
+          ],
+          "exported": true,
+          "line": 9
+        },
+        {
+          "name": "FormatDuration",
+          "params": [
+            "d"
+          ],
+          "exported": true,
+          "line": 23
+        },
+        {
+          "name": "FormatSpeed",
+          "params": [
+            "bytesPerSec"
+          ],
+          "exported": true,
+          "line": 40
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "fmt",
+          "specifiers": [
+            "fmt"
+          ]
+        },
+        {
+          "source": "time",
+          "specifiers": [
+            "time"
+          ]
+        }
+      ],
+      "exports": [
+        "FormatBytes",
+        "FormatDuration",
+        "FormatSpeed"
+      ],
+      "totalLines": 48
+    },
+    "pkg/util/http.go": {
+      "filePath": "pkg/util/http.go",
+      "contentHash": "0abe5350e67b5dda",
+      "functions": [
+        {
+          "name": "NewTransport",
+          "params": [
+            "workers",
+            "bufBytes",
+            "useProxy",
+            "proxyURL"
+          ],
+          "exported": true,
+          "line": 13
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "crypto/tls",
+          "specifiers": [
+            "tls"
+          ]
+        },
+        {
+          "source": "net",
+          "specifiers": [
+            "net"
+          ]
+        },
+        {
+          "source": "net/http",
+          "specifiers": [
+            "http"
+          ]
+        },
+        {
+          "source": "net/url",
+          "specifiers": [
+            "url"
+          ]
+        },
+        {
+          "source": "time",
+          "specifiers": [
+            "time"
+          ]
+        }
+      ],
+      "exports": [
+        "NewTransport"
+      ],
+      "totalLines": 42
+    }
+  }
+}
